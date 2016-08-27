@@ -1,0 +1,991 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="系统权限," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="写在前面 APP开发避免不开系统权限的问题，如何在APP以更加友好的方式向用户展示系统权限，似乎也是开发过程中值得深思的一件事；
+那如何提高APP获取iOS系统权限的通过率呢？有以下几种方式:
+1.在用户打开APP时就向用户请求权限；
+2.告知用户授权权限后能够获得好处之后，再向用户请求权限；
+3.在绝对必要的情况下才向用户请求权限，例如：用户访问照片库时请求访问系统相册权限；
+4.在展示系统权">
+<meta property="og:type" content="article">
+<meta property="og:title" content="iOS开发中的这些权限，你搞懂了吗？">
+<meta property="og:url" content="http://yoursite.com/2016/08/27/iOS开发中的这些权限，你搞懂了吗？/index.html">
+<meta property="og:site_name" content="最晚的开始">
+<meta property="og:description" content="写在前面 APP开发避免不开系统权限的问题，如何在APP以更加友好的方式向用户展示系统权限，似乎也是开发过程中值得深思的一件事；
+那如何提高APP获取iOS系统权限的通过率呢？有以下几种方式:
+1.在用户打开APP时就向用户请求权限；
+2.告知用户授权权限后能够获得好处之后，再向用户请求权限；
+3.在绝对必要的情况下才向用户请求权限，例如：用户访问照片库时请求访问系统相册权限；
+4.在展示系统权">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1713024-d2415c3dda2b7b65.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1713024-8b429a1fb5acd8a2.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:updated_time" content="2016-08-27T15:52:53.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="iOS开发中的这些权限，你搞懂了吗？">
+<meta name="twitter:description" content="写在前面 APP开发避免不开系统权限的问题，如何在APP以更加友好的方式向用户展示系统权限，似乎也是开发过程中值得深思的一件事；
+那如何提高APP获取iOS系统权限的通过率呢？有以下几种方式:
+1.在用户打开APP时就向用户请求权限；
+2.告知用户授权权限后能够获得好处之后，再向用户请求权限；
+3.在绝对必要的情况下才向用户请求权限，例如：用户访问照片库时请求访问系统相册权限；
+4.在展示系统权">
+<meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/1713024-d2415c3dda2b7b65.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: 'Jack_lin'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2016/08/27/iOS开发中的这些权限，你搞懂了吗？/"/>
+
+  <title> iOS开发中的这些权限，你搞懂了吗？ | 最晚的开始 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">最晚的开始</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">所有的为时已晚都是开始的最好时候</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                iOS开发中的这些权限，你搞懂了吗？
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-08-27T19:32:34+08:00" content="2016-08-27">
+              2016-08-27
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/iOS学习记录/" itemprop="url" rel="index">
+                    <span itemprop="name">iOS学习记录</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+
+
+          
+          
+
+          
+              &nbsp; | &nbsp;
+              <span class="page-pv"><i class="fa fa-file-o"></i>
+              <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+              </span>
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><img src="http://upload-images.jianshu.io/upload_images/1713024-d2415c3dda2b7b65.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="懵懂也是一种美"></p>
+<h4 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h4><p> APP开发避免不开系统权限的问题，如何在APP以更加友好的方式向用户展示系统权限，似乎也是开发过程中值得深思的一件事；</p>
+<p>那如何提高APP获取iOS系统权限的通过率呢？有以下几种方式:</p>
+<p>1.在用户打开APP时就向用户请求权限；</p>
+<p>2.告知用户授权权限后能够获得好处之后，再向用户请求权限；</p>
+<p>3.在绝对必要的情况下才向用户请求权限，例如：用户访问照片库时请求访问系统相册权限；</p>
+<p>4.在展示系统权限的对话框前，先向用户显示自定义的对话框，若用户选择不允许，默认无操作，若用户选择允许，再展示系统对话框。</p>
+<p>上述情况在开发过程中是经常遇到的，不同方式的选择会影响最后用户交互体验。这一点感悟正是源于上一周工作遇到的问题：适配iOS10，如何获取应用联网权限用以管理系统对话框的显示管理。当我把这个问题解决后，感觉有必要将常用的iOS系统权限做一个总结，以便后用。</p>
+<h4 id="权限分类"><a href="#权限分类" class="headerlink" title="权限分类"></a>权限分类</h4><p> 联网权限</p>
+<p> 相册权限</p>
+<p> 相机、麦克风权限</p>
+<p> 定位权限</p>
+<p> 推送权限</p>
+<p>通讯录权限</p>
+<p> 日历、备忘录权限</p>
+<h4 id="联网权限"><a href="#联网权限" class="headerlink" title="联网权限"></a>联网权限</h4><p>引入头文件 <strong>@import CoreTelephony;</strong></p>
+<p> 应用启动后，检测应用中是否有联网权限</p>
+<pre><code>CTCellularData *cellularData = [[CTCellularData alloc]init];
+cellularData.cellularDataRestrictionDidUpdateNotifier =  ^(CTCellularDataRestrictedState state){
+  //获取联网状态
+  switch (state) {
+      case kCTCellularDataRestricted:
+          NSLog(@&quot;Restricrted&quot;);
+          break;
+      case kCTCellularDataNotRestricted:
+          NSLog(@&quot;Not Restricted&quot;);
+          break;
+      case kCTCellularDataRestrictedStateUnknown:
+          NSLog(@&quot;Unknown&quot;);
+          break;
+      default:
+          break;
+  };
+};
+</code></pre><p>查询应用是否有联网功能</p>
+<pre><code>CTCellularData *cellularData = [[CTCellularData alloc]init];
+CTCellularDataRestrictedState state = cellularData.restrictedState;
+ switch (state) {
+  case kCTCellularDataRestricted:
+      NSLog(@&quot;Restricrted&quot;);
+      break;
+  case kCTCellularDataNotRestricted:
+      NSLog(@&quot;Not Restricted&quot;);
+      break;
+  case kCTCellularDataRestrictedStateUnknown:
+      NSLog(@&quot;Unknown&quot;);
+      break;
+  default:
+      break;
+}
+</code></pre><h4 id="相册权限–iOS-9-0之前"><a href="#相册权限–iOS-9-0之前" class="headerlink" title="相册权限–iOS 9.0之前"></a>相册权限–iOS 9.0之前</h4><p>导入头文件<strong>@import AssetsLibrary;</strong></p>
+<p>检查是否有相册权限</p>
+<pre><code> ALAuthorizationStatus status = [ALAssetsLibrary authorizationStatus];
+switch (status) {
+  case ALAuthorizationStatusAuthorized:
+      NSLog(@&quot;Authorized&quot;);
+      break;
+  case ALAuthorizationStatusDenied:
+      NSLog(@&quot;Denied&quot;);
+      break;
+  case ALAuthorizationStatusNotDetermined:
+      NSLog(@&quot;not Determined&quot;);
+      break;
+  case ALAuthorizationStatusRestricted:
+      NSLog(@&quot;Restricted&quot;);
+      break;
+
+  default:
+      break;
+}
+</code></pre><h4 id="相册权限–iOS-8-0之后"><a href="#相册权限–iOS-8-0之后" class="headerlink" title="相册权限–iOS 8.0之后"></a>相册权限–iOS 8.0之后</h4><p>导入头文件<strong>@import Photos;</strong></p>
+<p> 检查是否有相册权限</p>
+<pre><code>PHAuthorizationStatus photoAuthorStatus = [PHPhotoLibrary authorizationStatus];
+switch (photoAuthorStatus) {
+  case PHAuthorizationStatusAuthorized:
+      NSLog(@&quot;Authorized&quot;);
+      break;
+  case PHAuthorizationStatusDenied:
+      NSLog(@&quot;Denied&quot;);
+      break;
+  case PHAuthorizationStatusNotDetermined:
+      NSLog(@&quot;not Determined&quot;);
+      break;
+  case PHAuthorizationStatusRestricted:
+      NSLog(@&quot;Restricted&quot;);
+      break;
+  default:
+      break;
+}
+</code></pre><p>获取用户权限：</p>
+<pre><code>[PHPhotoLibrary requestAuthorization:^(PHAuthorizationStatus status) {
+ if (status == PHAuthorizationStatusAuthorized) {
+     NSLog(@&quot;Authorized&quot;);
+ }else{
+     NSLog(@&quot;Denied or Restricted&quot;);
+ }
+ }];
+</code></pre><h4 id="相机和麦克风权限"><a href="#相机和麦克风权限" class="headerlink" title="相机和麦克风权限"></a>相机和麦克风权限</h4><p> 导入头文件<strong>@import AVFoundation;</strong></p>
+<p>检查是否有相机或麦克风权限</p>
+<pre><code>AVAuthorizationStatus AVstatus = [AVCaptureDevice authorizationStatusForMediaType:AVMediaTypeVideo];//相机权限
+AVAuthorizationStatus AVstatus = [AVCaptureDevice authorizationStatusForMediaType:AVMediaTypeAudio];//麦克风权限
+
+switch (AVstatus) {
+  case AVAuthorizationStatusAuthorized:
+      NSLog(@&quot;Authorized&quot;);
+      break;
+  case AVAuthorizationStatusDenied:
+      NSLog(@&quot;Denied&quot;);
+      break;
+  case AVAuthorizationStatusNotDetermined:
+      NSLog(@&quot;not Determined&quot;);
+      break;
+  case AVAuthorizationStatusRestricted:
+      NSLog(@&quot;Restricted&quot;);
+      break;
+  default:
+      break;
+}
+</code></pre><p>获取相机或麦克风权限</p>
+<pre><code>[AVCaptureDevice requestAccessForMediaType:AVMediaTypeVideo completionHandler:^(BOOL granted) {//相机权限
+  if (granted) {
+      NSLog(@&quot;Authorized&quot;);
+  }else{
+      NSLog(@&quot;Denied or Restricted&quot;);
+  }
+}];
+
+[AVCaptureDevice requestAccessForMediaType:AVMediaTypeAudio completionHandler:^(BOOL granted) {//麦克风权限
+  if (granted) {
+      NSLog(@&quot;Authorized&quot;);
+  }else{
+      NSLog(@&quot;Denied or Restricted&quot;);
+  }
+}];
+</code></pre><h4 id="定位权限"><a href="#定位权限" class="headerlink" title="定位权限"></a>定位权限</h4><p>导入头文件<strong>@import CoreLocation;</strong></p>
+<p>由于iOS8.0之后定位方法的改变，需要在info.plist中进行配置；</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1713024-8b429a1fb5acd8a2.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="配置文件"></p>
+<p> 检查是否有定位权限</p>
+<pre><code> BOOL isLocation = [CLLocationManager locationServicesEnabled];
+if (!isLocation) {
+  NSLog(@&quot;not turn on the location&quot;);
+}
+CLAuthorizationStatus CLstatus = [CLLocationManager authorizationStatus];
+switch (CLstatus) {
+  case kCLAuthorizationStatusAuthorizedAlways:
+      NSLog(@&quot;Always Authorized&quot;);
+      break;
+  case kCLAuthorizationStatusAuthorizedWhenInUse:
+      NSLog(@&quot;AuthorizedWhenInUse&quot;);
+      break;
+  case kCLAuthorizationStatusDenied:
+      NSLog(@&quot;Denied&quot;);
+      break;
+  case kCLAuthorizationStatusNotDetermined:
+      NSLog(@&quot;not Determined&quot;);
+      break;
+  case kCLAuthorizationStatusRestricted:
+      NSLog(@&quot;Restricted&quot;);
+      break;
+  default:
+      break;
+}
+</code></pre><p>获取定位权限</p>
+<pre><code>CLLocationManager *manager = [[CLLocationManager alloc] init];
+[manager requestAlwaysAuthorization];//一直获取定位信息
+[manager requestWhenInUseAuthorization];//使用的时候获取定位信息
+</code></pre><p>在代理方法中查看权限是否改变</p>
+<pre><code>- (void)locationManager:(CLLocationManager *)manager didChangeAuthorizationStatus:(CLAuthorizationStatus)status{
+ switch (status) {
+  case kCLAuthorizationStatusAuthorizedAlways:
+      NSLog(@&quot;Always Authorized&quot;);
+      break;
+  case kCLAuthorizationStatusAuthorizedWhenInUse:
+      NSLog(@&quot;AuthorizedWhenInUse&quot;);
+      break;
+  case kCLAuthorizationStatusDenied:
+      NSLog(@&quot;Denied&quot;);
+      break;
+  case kCLAuthorizationStatusNotDetermined:
+      NSLog(@&quot;not Determined&quot;);
+      break;
+  case kCLAuthorizationStatusRestricted:
+      NSLog(@&quot;Restricted&quot;);
+      break;
+  default:
+      break;
+  }
+
+}
+</code></pre><h4 id="推送权限"><a href="#推送权限" class="headerlink" title="推送权限"></a>推送权限</h4><p> 检查是否有通讯权限</p>
+<pre><code>  UIUserNotificationSettings *settings = [[UIApplication sharedApplication] currentUserNotificationSettings];
+switch (settings.types) {
+  case UIUserNotificationTypeNone:
+      NSLog(@&quot;None&quot;);
+      break;
+  case UIUserNotificationTypeAlert:
+      NSLog(@&quot;Alert Notification&quot;);
+      break;
+  case UIUserNotificationTypeBadge:
+      NSLog(@&quot;Badge Notification&quot;);
+      break;
+  case UIUserNotificationTypeSound:
+      NSLog(@&quot;sound Notification&apos;&quot;);
+      break;
+
+  default:
+      break;
+}
+</code></pre><p>获取推送权限</p>
+<pre><code>UIUserNotificationSettings *setting = [UIUserNotificationSettings settingsForTypes:UIUserNotificationTypeSound | UIUserNotificationTypeAlert | UIUserNotificationTypeBadge categories:nil];
+[[UIApplication sharedApplication] registerUserNotificationSettings:setting];
+</code></pre><h4 id="通讯录权限"><a href="#通讯录权限" class="headerlink" title="通讯录权限"></a>通讯录权限</h4><p>导入头文件 <strong>@import AddressBook;</strong></p>
+<p>检查是否有通讯录权限</p>
+<pre><code> ABAuthorizationStatus ABstatus = ABAddressBookGetAuthorizationStatus();
+switch (ABstatus) {
+  case kABAuthorizationStatusAuthorized:
+      NSLog(@&quot;Authorized&quot;);
+      break;
+  case kABAuthorizationStatusDenied:
+      NSLog(@&quot;Denied&apos;&quot;);
+      break;
+  case kABAuthorizationStatusNotDetermined:
+      NSLog(@&quot;not Determined&quot;);
+      break;
+  case kABAuthorizationStatusRestricted:
+      NSLog(@&quot;Restricted&quot;);
+      break;
+  default:
+      break;
+}
+</code></pre><p>获取通讯录权限</p>
+<pre><code>ABAddressBookRef addressBook = ABAddressBookCreateWithOptions(NULL, NULL);
+ABAddressBookRequestAccessWithCompletion(addressBook, ^(bool granted, CFErrorRef error) {
+  if (granted) {
+      NSLog(@&quot;Authorized&quot;);
+      CFRelease(addressBook);
+  }else{
+      NSLog(@&quot;Denied or Restricted&quot;);
+  }
+});
+</code></pre><h4 id="日历、备忘录权限"><a href="#日历、备忘录权限" class="headerlink" title="日历、备忘录权限"></a>日历、备忘录权限</h4><p>导入头文件</p>
+<p>检查是否有日历或者备忘录权限</p>
+<pre><code> typedef NS_ENUM(NSUInteger, EKEntityType) {
+  EKEntityTypeEvent,//日历
+  EKEntityTypeReminder //备忘
+ };
+
+
+EKAuthorizationStatus EKstatus = [EKEventStore  authorizationStatusForEntityType:EKEntityTypeEvent];
+switch (EKstatus) {
+  case EKAuthorizationStatusAuthorized:
+      NSLog(@&quot;Authorized&quot;);
+      break;
+  case EKAuthorizationStatusDenied:
+      NSLog(@&quot;Denied&apos;&quot;);
+      break;
+  case EKAuthorizationStatusNotDetermined:
+      NSLog(@&quot;not Determined&quot;);
+      break;
+  case EKAuthorizationStatusRestricted:
+      NSLog(@&quot;Restricted&quot;);
+      break;
+  default:
+      break;
+}
+</code></pre><p>获取日历或备忘录权限</p>
+<pre><code>EKEventStore *store = [[EKEventStore alloc]init];
+[store requestAccessToEntityType:EKEntityTypeEvent completion:^(BOOL granted, NSError * _Nullable error) {
+  if (granted) {
+      NSLog(@&quot;Authorized&quot;);
+  }else{
+      NSLog(@&quot;Denied or Restricted&quot;);
+  }
+}];
+</code></pre><h4 id="最后一点"><a href="#最后一点" class="headerlink" title="最后一点"></a>最后一点</h4><p>素有获取权限的方法，多用于用户第一次操作应用，iOS 8.0之后，将这些设置都整合在一起，并且可以开启或关闭相应的权限。所有的权限都可以通过下面的方法打开：</p>
+<pre><code>[[UIApplication sharedApplication] openURL:[NSURL URLWithString:UIApplicationOpenSettingsURLString]];
+</code></pre>
+      
+    </div>
+
+    <div>
+      
+        
+<div id="wechat_subscriber" style="display: block; padding: 10px 0; margin: 20px auto; width: 100%; text-align: center">
+    <img id="wechat_subscriber_qcode" src="/uploads/images/wechat-qcode.jpg" alt="Jack_lin wechat" style="width: 200px; max-width: 100%;"/>
+    <div>欢迎您扫一扫上面的微信公众号，订阅我的博客！</div>
+</div>
+
+
+      
+    </div>
+
+    <div>
+      
+        
+  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+    <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+      <span>赏</span>
+    </button>
+    <div id="QR" style="display: none;">
+      
+        <div id="wechat" style="display: inline-block">
+          <img id="wechat_qr" src="/uploads/images/wechat-reward-image.png" alt="Jack_lin WeChat Pay"/>
+          <p>微信打赏</p>
+        </div>
+      
+      
+        <div id="alipay" style="display: inline-block">
+          <img id="alipay_qr" src="/uploads/images/alipay-reward-image.png" alt="Jack_lin Alipay"/>
+          <p>支付宝打赏</p>
+        </div>
+      
+    </div>
+  </div>
+
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/系统权限/" rel="tag">#系统权限</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/08/27/徒手教你建自己的博客/" rel="next" title="徒手教你建自己的博客">
+                <i class="fa fa-chevron-left"></i> 徒手教你建自己的博客
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/08/27/开篇之谈/" rel="prev" title="开篇之谈">
+                开篇之谈 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="Jack_lin" />
+          <p class="site-author-name" itemprop="name">Jack_lin</p>
+          <p class="site-description motion-element" itemprop="description">My goal is not write code.if we could ship products and make all this money without writing any code,we could.Your job is ship products EXACTLY on time.It doesn’t matter whether you are a developer,tester,program manager,product manager whatever.Everybody’s job is the same.</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">8</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">7</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/123sunxiaolin" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/JacklinIOS/profile?rightmod=1&wvr=6&mod=personinfo" target="_blank" title="Weibo">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  Weibo
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              Links
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.jianshu.com/users/ef991f6d241c/latest_articles" title="Jack_lin简书" target="_blank">Jack_lin简书</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#写在前面"><span class="nav-number">1.</span> <span class="nav-text">写在前面</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#权限分类"><span class="nav-number">2.</span> <span class="nav-text">权限分类</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#联网权限"><span class="nav-number">3.</span> <span class="nav-text">联网权限</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#相册权限–iOS-9-0之前"><span class="nav-number">4.</span> <span class="nav-text">相册权限–iOS 9.0之前</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#相册权限–iOS-8-0之后"><span class="nav-number">5.</span> <span class="nav-text">相册权限–iOS 8.0之后</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#相机和麦克风权限"><span class="nav-number">6.</span> <span class="nav-text">相机和麦克风权限</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#定位权限"><span class="nav-number">7.</span> <span class="nav-text">定位权限</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#推送权限"><span class="nav-number">8.</span> <span class="nav-text">推送权限</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#通讯录权限"><span class="nav-number">9.</span> <span class="nav-text">通讯录权限</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#日历、备忘录权限"><span class="nav-number">10.</span> <span class="nav-text">日历、备忘录权限</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#最后一点"><span class="nav-number">11.</span> <span class="nav-text">最后一点</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Jack_lin</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+        
+
+<div class="busuanzi-count">
+
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv"><i class="fa fa-user"></i><span class="busuanzi-value" id="busuanzi_value_site_uv"></span></span>
+  
+
+  
+    <span class="site-pv"><i class="fa fa-eye"></i><span class="busuanzi-value" id="busuanzi_value_site_pv"></span></span>
+  
+  
+</div>
+
+
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+<script type="text/javascript" async src="//push.zhanzhang.baidu.com/push.js">
+</script>
+
+
+</body>
+</html>
