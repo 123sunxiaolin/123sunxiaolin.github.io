@@ -1,0 +1,901 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="系统相册," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="写在前面在手机APP日益增加的前提下，如何更好的提升用户的交互体验似乎成为衡量一个APP重要指标。上述的感悟源于实际工作的需求，就是在APP中添加一个更换用户头像的功能。
+也许别人会认为这样一个小功能不算什么，但从用户交互角度考虑，这样一个功能的设计有一定学问，待我慢慢道来。
+获取相册最直接的方式——UIImagePickerController功能介绍：可直接显示分组的相处的列表，用户选择不同">
+<meta property="og:type" content="article">
+<meta property="og:title" content="iOS中，系统相册的那些事">
+<meta property="og:url" content="http://yoursite.com/2016/08/27/iOS中，系统相册的那些事/index.html">
+<meta property="og:site_name" content="最晚的开始">
+<meta property="og:description" content="写在前面在手机APP日益增加的前提下，如何更好的提升用户的交互体验似乎成为衡量一个APP重要指标。上述的感悟源于实际工作的需求，就是在APP中添加一个更换用户头像的功能。
+也许别人会认为这样一个小功能不算什么，但从用户交互角度考虑，这样一个功能的设计有一定学问，待我慢慢道来。
+获取相册最直接的方式——UIImagePickerController功能介绍：可直接显示分组的相处的列表，用户选择不同">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1713024-ebc88609d6c93956.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:updated_time" content="2016-08-27T15:44:31.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="iOS中，系统相册的那些事">
+<meta name="twitter:description" content="写在前面在手机APP日益增加的前提下，如何更好的提升用户的交互体验似乎成为衡量一个APP重要指标。上述的感悟源于实际工作的需求，就是在APP中添加一个更换用户头像的功能。
+也许别人会认为这样一个小功能不算什么，但从用户交互角度考虑，这样一个功能的设计有一定学问，待我慢慢道来。
+获取相册最直接的方式——UIImagePickerController功能介绍：可直接显示分组的相处的列表，用户选择不同">
+<meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/1713024-ebc88609d6c93956.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: 'Jack_lin'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2016/08/27/iOS中，系统相册的那些事/"/>
+
+  <title> iOS中，系统相册的那些事 | 最晚的开始 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">最晚的开始</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">所有的为时已晚都是开始的最好时候</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                iOS中，系统相册的那些事
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-08-27T19:32:34+08:00" content="2016-08-27">
+              2016-08-27
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/iOS学习记录/" itemprop="url" rel="index">
+                    <span itemprop="name">iOS学习记录</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+
+
+          
+          
+
+          
+              &nbsp; | &nbsp;
+              <span class="page-pv"><i class="fa fa-file-o"></i>
+              <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+              </span>
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><img src="http://upload-images.jianshu.io/upload_images/1713024-ebc88609d6c93956.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="拍照也是一门技术"></p>
+<h4 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h4><p>在手机APP日益增加的前提下，如何更好的提升用户的交互体验似乎成为衡量一个APP重要指标。上述的感悟源于实际工作的需求，就是在APP中添加一个更换用户头像的功能。</p>
+<p>也许别人会认为这样一个小功能不算什么，但从用户交互角度考虑，这样一个功能的设计有一定学问，待我慢慢道来。</p>
+<h4 id="获取相册最直接的方式——UIImagePickerController"><a href="#获取相册最直接的方式——UIImagePickerController" class="headerlink" title="获取相册最直接的方式——UIImagePickerController"></a>获取相册最直接的方式——UIImagePickerController</h4><p>功能介绍：可直接显示分组的相处的列表，用户选择不同相册的照片后，可在委托方法中获得该图片对象；</p>
+<p>API提供三种数据源：</p>
+<pre><code>UIImagePickerControllerSourceTypeCamera: //拍照
+UIImagePickerControllerSourceTypePhotoLibrary: //相册
+UIImagePickerControllerSourceTypeSavedPhotosAlbum: //图片库
+</code></pre><p>基本使用</p>
+<pre><code>//UIImagePickerController 属于UIKit
+UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init];
+// 若设备支持相机，使用拍照功能；否则从照片库中选择
+if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
+ imagePicker.sourceType = UIImagePickerControllerSourceTypeCamera;
+} else {
+ imagePicker.sourceType = UIImagePickerControllerSourceTypeSavedPhotosAlbum;
+}
+imagePicker.delegate = self; //设置委托，
+</code></pre><p> 跳转到系统相册界面<br>        _imagePickerController.allowsEditing = YES;//允许拍照完对照片进行裁剪</p>
+<pre><code>[self presentViewController:_imagePickerController animated:YES completion:nil];
+</code></pre><p>写到这里，基本的调用系统相册的功能就实现了，唯一需要做的是参数配置</p>
+<p> 遵守的协议<br><strong>UINavigationControllerDelegate</strong>,<strong>UIImagePickerControllerDelegate</strong></p>
+<pre><code>代理方法
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary&lt;NSString *,id&gt; *)info{
+//成功获取照片
+}
+
+- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker{
+    //获取照片失败
+}
+</code></pre><p> 捕捉多媒体的的类型 UIImagePickerControllerCameraCaptureMode</p>
+<pre><code>UIImagePickerControllerCameraCaptureModePhoto,//照片
+UIImagePickerControllerCameraCaptureModeVideo//视频
+</code></pre><p> 摄像头的类型 UIImagePickerControllerCameraDevice</p>
+<pre><code>UIImagePickerControllerCameraDeviceRear,//后置摄像头
+  UIImagePickerControllerCameraDeviceFront //前置摄像头  
+</code></pre><p>设置闪光灯的模式  UIImagePickerControllerCameraFlashMode </p>
+<pre><code>UIImagePickerControllerCameraFlashModeOff  = -1,//关闭闪光灯
+   UIImagePickerControllerCameraFlashModeAuto = 0,//自动模式
+UIImagePickerControllerCameraFlashModeOn   = 1//开启闪光灯
+</code></pre><h4 id="自定义相册方式之一-ALAssetsibrary"><a href="#自定义相册方式之一-ALAssetsibrary" class="headerlink" title="自定义相册方式之一 ALAssetsibrary"></a>自定义相册方式之一 ALAssetsibrary</h4><p>基本介绍：该框架可实现自定义相册，实现定制的图片选择器，可支持多选、自定义界面，只不过API在iOS9.0版本被标记废弃，即iOS9.0之前的版本可以使用ALAssetsLibrary实现自定义，iOS9.0之后的版本需要使用Photos.fraework。</p>
+<p> 成员介绍：</p>
+<pre><code>1.ALAssetsGroup:映射照片库（ALAssetsLibrary）中的一个相册，通过ALAssetsGroup可以获取相册相应的信息，以及获取到对应相册下的所有图片资源； 
+
+2.ALAsset:对应相册中的一张图片或者一个视频，并且包含对应图片和视频的详细信息，可获取图片对应的缩略图，还可通过ALAsset的实例方法保存图片和视频；
+
+3.ALAssetRepresentation:可简单理解为对ALAsset的封装，对于给定的ALAsset都至少会对应一个ALAssetRepresentation，通过ALAsset的实例方法
+
+defaultRepresentation获得对应的ALAssetRepresentation，例如使用系统相机的拍摄的RAW＋JPEG照片，则会有两个ALAssetRepresentation，一个封装了RAW信息，另一个封装了JPEG的信息。通过ALAssetRepresentation可以获取ALAsset的原图、全屏图、文件名等信息；
+</code></pre><p>自定义行相册的思路</p>
+<pre><code>1.实例化照片库，获取所有的相册；
+2.展示相册中的所有照片，可自义展示样式，多以集合视图的形式展现；
+3.选择照片后返回上级界面或者进入预览图。
+</code></pre><p> 具体实现</p>
+<pre><code>  1.导入头文件** #import &lt;AssetsLibrary/ALAssetsLibrary.h&gt;** 或者 ** @import AssetsLibrary;**
+
+  2.实例化AssetsLibrary
+  **ALAssetsLibrary *assertLibray = [[ALAssetsLibrary alloc]init];**
+
+ 3.**遍历照片库所有的相册**
+
+     groups = [NSMutableArray array];
+        //遍历相册
+        [assetLibrary enumerateGroupsWithTypes:ALAssetsGroupSavedPhotos usingBlock:^(ALAssetsGroup *group, BOOL *stop) {
+    if (group) {//遍历相册未结束
+        //设置过滤器
+        [group setAssetsFilter:[ALAssetsFilter allPhotos]];
+        if (group.numberOfAssets) {
+            [groups addObject:group];
+        }
+    }else{//遍历结束
+        if (groups.count) {
+            //当相册个数不为零时，开始遍历相册
+            [self enumenumerateAssets];
+        }else{
+            NSLog(@&quot;no group&quot;);
+        }
+
+    }
+        } failureBlock:^(NSError *error) {
+    if (error) {
+        NSLog(@&quot;error = %@&quot;, [error description]);
+    }
+    }];
+
+4.**遍历相册中的照片**
+
+    - (void)enumerateAssets{
+
+        NSMutableArray *assetArray = [NSMutableArray new];
+      for (ALAssetsGroup *group in  groups) {
+    //遍历所有的照片-方式一
+    [group enumerateAssetsWithOptions:NSEnumerationReverse usingBlock:^(ALAsset *result, NSUInteger index, BOOL *stop) {
+        if (result) {
+            [assetArray addObject:result];
+        }else{
+            NSLog(@&quot;here is no photos&quot;);
+        }
+    }];
+
+    //遍历指定索引的照片-方式二
+    NSInteger fromIndex = 0;
+    NSInteger toIndex = 5;
+    [group enumerateAssetsAtIndexes:[NSIndexSet indexSetWithIndex:toIndex] options:NSEnumerationReverse usingBlock:^(ALAsset *result, NSUInteger index, BOOL *stop) {
+        if (index &gt; toIndex) {
+            *stop = YES;//遍历到最后一张，停止遍历
+        }else{
+            if (result) {
+                [assetArray addObject:result];//存储照片
+            }else{
+                NSLog(@&quot;enumeration has ended!&quot;);
+            }
+        }
+    }];
+    }}
+
+5 **完成上述步骤后，就能获得所有相册和相册中对应的所有照片，接下来就可以根据自己的需求自定义显示界面了，这里就不再一一赘述了。**
+</code></pre><h4 id="自定义相册方式之二Photos-framework"><a href="#自定义相册方式之二Photos-framework" class="headerlink" title="自定义相册方式之二Photos.framework"></a>自定义相册方式之二Photos.framework</h4><p> 基本介绍：Photos是苹果在iOS8.0提出的API，是目前，苹果推荐的照片框架，学习一下还是很有必要的；</p>
+<p>主要成员介绍：</p>
+<pre><code>1.PHAsset：代表照片库中的一个资源，与ALAsset类似，通过PHAsset可以获取和保存资源；
+2.PHFetchOptions：获取资源时的参数；
+3.PHAssetCollection：PHCollection的子类，表示一个相册或者一个时刻，也可以是一个【智能相册】（系统提供的一系列相册集合，包括最近删除、相机相册、最爱相册等等）中的一个；
+4.PHFetchResult：表示一系列资源结果的集合，也可以是相册资源集合，一般情况下，可以从PHCollection或PHAsset的类方法中获取；
+5.PHImageManager：用于处理资源的加载，图片加载的过程带有缓存处理；
+6.PHImageRequestOptions：控制加载资源的时一系列参数。
+</code></pre><p> 具体使用</p>
+<pre><code>   1.导入框架**@import Photos;**
+
+   2.**获取系统相册,系统提供下列三种获取不同分类相册的方法。**
+
+    //获得所有智能相册
+    PHFetchResult *smartAlbums = [PHAssetCollection fetchAssetCollectionsWithType:PHAssetCollectionTypeSmartAlbum subtype:PHAssetCollectionSubtypeAlbumRegular options:nil];
+
+    //获取所有用户创建的相册
+  PHFetchResult *topLevelUserCollections = [PHCollectionList fetchTopLevelUserCollectionsWithOptions:nil];
+
+  //获取所有资源的集合，并按资源的创建时间排序
+  PHFetchOptions *allPhotoOptions = [[PHFetchOptions alloc] init];
+  allPhotoOptions.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@&quot;creationDate&quot; ascending:YES]];
+  PHFetchResult *allphotos = [PHAsset fetchAssetsWithOptions:allPhotoOptions];
+
+3 获取对应的照片资源
+
+     //列出所有智能相册，此时smartAlbums保存是各个智能相册对应的PHAssetCollection
+    PHFetchResult *smartAlbums = [PHAssetCollection fetchAssetCollectionsWithType:PHAssetCollectionTypeSmartAlbum subtype:PHAssetCollectionSubtypeAlbumRegular options:nil];
+
+     for (NSInteger i = 0; i &lt; smartAlbums.count; i ++) {
+    //从中获取一相册
+    PHCollection *collection = smartAlbums[i];
+    if ([collection isKindOfClass:[PHAssetCollection class]]) {
+        //判断是否是PHAssetCollection类
+        PHAssetCollection *assetCollection = (PHAssetCollection *)collection;
+        //从每个智能相册中获取资源集合,可以看做是PHAsset的集合
+        PHFetchResult *photoSet = [PHAsset fetchAssetsInAssetCollection:assetCollection options:nil];
+       for (NSInteger j = 0; j &lt; photoSet.count; i ++) {
+            //获取其中一个资源
+            PHAsset *asset = photoSet[i];
+        }     
+        }else{
+        NSLog(@&quot;not PHAssetCollection&quot;);
+    }
+  }
+
+  //获取所有资源的集合，并按资源的创建时间排序
+  PHFetchOptions *allPhotoOptions = [[PHFetchOptions alloc] init];
+  allPhotoOptions.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@&quot;creationDate&quot; ascending:YES]];
+  PHFetchResult *allphotos = [PHAsset fetchAssetsWithOptions:allPhotoOptions];
+  for (NSInteger i = 0; i &lt; allphotos.count ; i ++) {
+    //获取一个资源
+    PHAsset *asset = allphotos[i];
+  }
+
+ 4 显示图片资源，需要用到PHImageManager类
+
+   PHImageManager *imageManager = [[PHImageManager alloc]init];
+  //获取第一张照片资源
+  PHAsset *asset = allphotos[0];
+  //设定显示照片的尺寸
+  CGFloat width = _showImageView.frame.size.width;
+  CGFloat height = _showImageView.frame.size.height;
+  CGSize imageSize = CGSizeMake(width, height);
+
+  [imageManager requestImageForAsset:asset
+                        targetSize:imageSize
+                       contentMode:PHImageContentModeAspectFill
+                           options:nil
+                     resultHandler:^(UIImage * _Nullable result, NSDictionary * _Nullable info) {
+                         //显示照片
+                         _showImageView.image = result;
+                     }];
+</code></pre><h4 id="ALAssetsibrary与Photos的对比"><a href="#ALAssetsibrary与Photos的对比" class="headerlink" title="ALAssetsibrary与Photos的对比"></a>ALAssetsibrary与Photos的对比</h4><p><strong>适用的iOS版本不同</strong>，ALAssetsibrary适用于iOS9.0之前，Photos适用于iOS9.0之后；</p>
+<p><strong>获取资源的方式不同：</strong>ALAssetsibrary都是以<strong>枚举</strong>的方式获取资源的，遍历照片库（ALAssetsibrary）获得相册（ALAssetsGroup），通过遍历相册获得具体资源（ALAsset），枚举方式获取资源，存在效率低且不灵活的缺点；Photos采用<strong>拉取</strong>的方式获取资源；</p>
+<p>由上述方法可知，多使用<strong>PHFetchResult</strong>获取对应资源，不采用枚举方式获取资源，在效率上会有所提高；</p>
+<blockquote>
+<p>以上内容均来自工作学习中的心得，有不足的地方欢迎大家前来讨论，共同提高。</p>
+</blockquote>
+
+      
+    </div>
+
+    <div>
+      
+        
+<div id="wechat_subscriber" style="display: block; padding: 10px 0; margin: 20px auto; width: 100%; text-align: center">
+    <img id="wechat_subscriber_qcode" src="/uploads/images/wechat-qcode.jpg" alt="Jack_lin wechat" style="width: 200px; max-width: 100%;"/>
+    <div>欢迎您扫一扫上面的微信公众号，订阅我的博客！</div>
+</div>
+
+
+      
+    </div>
+
+    <div>
+      
+        
+  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+    <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+      <span>赏</span>
+    </button>
+    <div id="QR" style="display: none;">
+      
+        <div id="wechat" style="display: inline-block">
+          <img id="wechat_qr" src="/uploads/images/wechat-reward-image.png" alt="Jack_lin WeChat Pay"/>
+          <p>微信打赏</p>
+        </div>
+      
+      
+        <div id="alipay" style="display: inline-block">
+          <img id="alipay_qr" src="/uploads/images/alipay-reward-image.png" alt="Jack_lin Alipay"/>
+          <p>支付宝打赏</p>
+        </div>
+      
+    </div>
+  </div>
+
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/系统相册/" rel="tag">#系统相册</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/08/27/走上社会，你的任性还能保持几分？/" rel="next" title="走上社会，你的任性还能保持几分？">
+                <i class="fa fa-chevron-left"></i> 走上社会，你的任性还能保持几分？
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/08/27/翻译_iOS视图编程指南(View-Programming-Guide-for-iOS)之视图和窗口体系/" rel="prev" title="翻译_iOS视图编程指南之视图和窗口体系">
+                翻译_iOS视图编程指南之视图和窗口体系 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="Jack_lin" />
+          <p class="site-author-name" itemprop="name">Jack_lin</p>
+          <p class="site-description motion-element" itemprop="description">My goal is not write code.if we could ship products and make all this money without writing any code,we could.Your job is ship products EXACTLY on time.It doesn’t matter whether you are a developer,tester,program manager,product manager whatever.Everybody’s job is the same.</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">7</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/123sunxiaolin" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/JacklinIOS/profile?rightmod=1&wvr=6&mod=personinfo" target="_blank" title="Weibo">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  Weibo
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              Links
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.jianshu.com/users/ef991f6d241c/latest_articles" title="Jack_lin简书" target="_blank">Jack_lin简书</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#写在前面"><span class="nav-number">1.</span> <span class="nav-text">写在前面</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#获取相册最直接的方式——UIImagePickerController"><span class="nav-number">2.</span> <span class="nav-text">获取相册最直接的方式——UIImagePickerController</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#自定义相册方式之一-ALAssetsibrary"><span class="nav-number">3.</span> <span class="nav-text">自定义相册方式之一 ALAssetsibrary</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#自定义相册方式之二Photos-framework"><span class="nav-number">4.</span> <span class="nav-text">自定义相册方式之二Photos.framework</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ALAssetsibrary与Photos的对比"><span class="nav-number">5.</span> <span class="nav-text">ALAssetsibrary与Photos的对比</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Jack_lin</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+        
+
+<div class="busuanzi-count">
+
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv"><i class="fa fa-user"></i><span class="busuanzi-value" id="busuanzi_value_site_uv"></span></span>
+  
+
+  
+    <span class="site-pv"><i class="fa fa-eye"></i><span class="busuanzi-value" id="busuanzi_value_site_pv"></span></span>
+  
+  
+</div>
+
+
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+<script type="text/javascript" async src="//push.zhanzhang.baidu.com/push.js">
+</script>
+
+
+</body>
+</html>
