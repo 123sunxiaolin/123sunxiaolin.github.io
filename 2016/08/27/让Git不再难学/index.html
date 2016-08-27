@@ -1,0 +1,1193 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Git,代码托管," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="写在前面在团队做过软件开发的，版本控制必是不可或缺的一项。目前，版本控制主要分为集中式版本控制系统和分布式版本控制系统 ，即大家熟知的SVN和Git。Git是当下最流行的分布式版本控制系统，故，今天，我们就来研究一下Git的神奇之处。
+浅析SVN与Git的不同 最基本：SVN是集中式，Git是分布式的。集中式，版本库集中存放在中央服务器，工作时，每个人需要先从中央服务器获取最新的版本，然后在属于">
+<meta property="og:type" content="article">
+<meta property="og:title" content="让Git不再难学">
+<meta property="og:url" content="http://yoursite.com/2016/08/27/让Git不再难学/index.html">
+<meta property="og:site_name" content="最晚的开始">
+<meta property="og:description" content="写在前面在团队做过软件开发的，版本控制必是不可或缺的一项。目前，版本控制主要分为集中式版本控制系统和分布式版本控制系统 ，即大家熟知的SVN和Git。Git是当下最流行的分布式版本控制系统，故，今天，我们就来研究一下Git的神奇之处。
+浅析SVN与Git的不同 最基本：SVN是集中式，Git是分布式的。集中式，版本库集中存放在中央服务器，工作时，每个人需要先从中央服务器获取最新的版本，然后在属于">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1713024-70a42fc075a289ac.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1713024-61c1e2461cf2357a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1713024-7db763b6bbdcba78.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1713024-5b20da8be8429b28.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1713024-c3cac05145e88a64.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1713024-676f79e6b1c4d24f.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1713024-eb792a2cf15550ff.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1713024-afbe3632091ffb71.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1713024-8ae9fa00dc331953.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1713024-0c3a77e3ed6fdbe7.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1713024-8b48163cfae58a04.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1713024-72fd2e5f8cf6cdeb.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1713024-e9f198b3615c3a86.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1713024-ab90e2c57ca94762.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1713024-7e93afc14041f61b.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1713024-16323958e6414664.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1713024-ff765f970a25b2b7.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1713024-4bb65fa97c1f30db.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1713024-b814e5673239c2de.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1713024-453cb9e7a4ca5b61.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1713024-3c19e76829859bc9.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1713024-0cb17f37a9c278b1.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1713024-62cc7cee096a0633.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1713024-0d0b5ac998f986de.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1713024-3b1072a46526173e.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1713024-e067cfd435ed52d3.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1713024-f2ed63357044b9e9.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1713024-ff1b5fdeed97512d.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1713024-1a9a648937c3ca6b.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1713024-349504c5da95e507.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1713024-6d275ce8fb545465.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1713024-cab16d821cd81432.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1713024-af76476fc398423e.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1713024-a5678bad8d1e5284.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1713024-45be91b4679df8c4.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1713024-602cf111d8bcd855.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1713024-a6d409480f1a31cf.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1713024-2019740a98b2d1a6.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1713024-1b2103cc7d25103f.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1713024-ae937c53205e6223.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1713024-a6f8f74788081750.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1713024-ae4e819b08a38d90.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1713024-b0b53c41c0c8b85a.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:updated_time" content="2016-08-27T16:17:01.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="让Git不再难学">
+<meta name="twitter:description" content="写在前面在团队做过软件开发的，版本控制必是不可或缺的一项。目前，版本控制主要分为集中式版本控制系统和分布式版本控制系统 ，即大家熟知的SVN和Git。Git是当下最流行的分布式版本控制系统，故，今天，我们就来研究一下Git的神奇之处。
+浅析SVN与Git的不同 最基本：SVN是集中式，Git是分布式的。集中式，版本库集中存放在中央服务器，工作时，每个人需要先从中央服务器获取最新的版本，然后在属于">
+<meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/1713024-70a42fc075a289ac.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: 'Jack_lin'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2016/08/27/让Git不再难学/"/>
+
+  <title> 让Git不再难学 | 最晚的开始 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">最晚的开始</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">所有的为时已晚都是开始的最好时候</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                让Git不再难学
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-08-27T19:32:34+08:00" content="2016-08-27">
+              2016-08-27
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/iOS学习记录/" itemprop="url" rel="index">
+                    <span itemprop="name">iOS学习记录</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+
+
+          
+          
+
+          
+              &nbsp; | &nbsp;
+              <span class="page-pv"><i class="fa fa-file-o"></i>
+              <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+              </span>
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><img src="http://upload-images.jianshu.io/upload_images/1713024-70a42fc075a289ac.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="放手"></p>
+<h3 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h3><p>在团队做过软件开发的，版本控制必是不可或缺的一项。目前，版本控制主要分为集中式版本控制系统和分布式版本控制系统 ，即大家熟知的SVN和Git。Git是当下最流行的分布式版本控制系统，故，今天，我们就来研究一下Git的神奇之处。</p>
+<h3 id="浅析SVN与Git的不同"><a href="#浅析SVN与Git的不同" class="headerlink" title="浅析SVN与Git的不同"></a>浅析SVN与Git的不同</h3><p> 最基本：SVN是集中式，Git是分布式的。集中式，版本库集中存放在中央服务器，工作时，每个人需要先从中央服务器获取最新的版本，然后在属于自己的分支下工作，完成工作后，再提交到中央服务器；分布式，每一个电脑都是一个完整的版本库，可以减少中央服务器挂掉所带来的严重后果。也可以这样理解，Git相当于SVN服务端和客户端的集合；</p>
+<p>联网需求不同：Git中，不必联网就能看到版本迭代的信息和创建分支，而，SVN需要在联网的情况下才能满足上述要求；</p>
+<p>分支管理难易程度不同：在SVN中，分支作为版本库中一个目录，若需要查看是否合并，还需要运行<code>svn propget svn:mergeinfo</code>指令；而在Git中，可以快速在几个分支中切换和快速合并；</p>
+<p>存储方式不同：SVN是按文件存储，Git是按元数据方式存储；</p>
+<p>权限问题：在SVN中，可以设定每个账号的权限，比如只读、读写权限等，而Git就没有相应的权限控制。这也许就是一些公司至今仍保留SVN的原因吧。</p>
+<p>汇总：工具总有其侧重点，没有好与坏，只有各取所需。</p>
+<h3 id="安装Git"><a href="#安装Git" class="headerlink" title="安装Git"></a>安装Git</h3><p>第一种方法：安装Git图形管理工具——SourceTree，不必记那么多命令，了解基本流程就可以放心使用了，下载<a href="https://www.sourcetreeapp.com" target="_blank" rel="external">点这</a>;</p>
+<p>第二种方法：在Mac上安装Git，可通过HomeBrew安装，具体方法请参考<a href="http://brew.sh/" target="_blank" rel="external">HomeBrew的文档</a>;</p>
+<p>补充其他平台的安装方法，<a href="http://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000/00137396287703354d8c6c01c904c7d9ff056ae23da865a000" target="_blank" rel="external">请参考这</a>。</p>
+<p>如果大家对Mac终端的命令还不太了解的话，可以参考我的上篇文章：<a href="http://www.jianshu.com/p/d9ec00d28237" target="_blank" rel="external">学好Mac常用命令，助力iOS开发</a></p>
+<h3 id="Git的使用"><a href="#Git的使用" class="headerlink" title="Git的使用"></a>Git的使用</h3><blockquote>
+<p>有两种Git的使用方法，一种是通过终端命令控制，另一种是使用Git的图形管理工具——SourceTree。具体两者哪一种更好用，更有效率，那还得因人而异。笔者下面将会分别介绍这两种方法的基本操作，希望读者能边读边动手操作一下，受益匪浅。</p>
+</blockquote>
+<h5 id="一-命令下的Git"><a href="#一-命令下的Git" class="headerlink" title="一.命令下的Git"></a>一.命令下的Git</h5><h6 id="1-创建版本库："><a href="#1-创建版本库：" class="headerlink" title="1.创建版本库："></a>1.创建版本库：</h6><p>首先，选择一个合适的地方，创建一个空目录：</p>
+<pre><code>Mac-Pro:~ kys-1$ mkdir gitTest
+Mac-Pro:~ kys-1$ cd gitTest
+</code></pre><p>或者直接在相应目录下，自己手动创建一个文件夹；</p>
+<p>其次，在终端上输入<code>git init</code>命令，如下：</p>
+<pre><code>Mac-Pro:~ kys-1$ cd /Users/kys-1/Desktop/gitTest
+Mac-Pro:gitTest kys-1$ git init
+Initialized empty Git repository in /Users/kys-1/Desktop/gitTest/.git/
+</code></pre><p>这样，一个本地仓库就顺利地建好了。</p>
+<p>最后，每创建一个仓库时，当前目录都会多一个<code>.git</code>目录，若是没有看到，只需要使用<code>ls -ah</code>命令即可：</p>
+<pre><code>Mac-Pro:gitTest kys-1$ ls -ah
+.        ..        .DS_Store    .git
+</code></pre><p>很清楚可以看到，笔者的当前目录有两个隐藏的。</p>
+<h6 id="2-添加文件到版本库"><a href="#2-添加文件到版本库" class="headerlink" title="2.添加文件到版本库"></a>2.添加文件到版本库</h6><p>首先，创建一个<code>GitTest.md</code>文件，内容如下：</p>
+<pre><code>git is a strong software
+Let&apos;s start with a good mood!
+</code></pre><p>将该文件放到仓库<code>gitTest</code>所在的目录下;</p>
+<p>其次，使用<code>git add</code>命令添加文件，如下：</p>
+<pre><code>Mac-Pro:gitTest kys-1$ git add GitTest.md
+</code></pre><p>然后执行，如果不显示任何信息，那就是运行无误；</p>
+<p>最后，使用命令<code>git commit</code>将文件提交到仓库，如下：</p>
+<pre><code>Mac-Pro:gitTest kys-1$ git commit -m &quot;wrote a README&quot;
+[master (root-commit) dfaeb43] wrote a README
+   1 file changed, 1 insertion(+)
+   create mode 100644 GitTest.md
+</code></pre><p>其中，<code>-m</code>后面输入的是本次提交的详细信息，比如，完成了哪个功能或者修复了哪个bug。</p>
+<h6 id="3-查看仓库状态"><a href="#3-查看仓库状态" class="headerlink" title="3.查看仓库状态"></a>3.查看仓库状态</h6><p>首先，先对提交的<code>GitTest.md</code>中的信息进行修改，然后运行<code>git status</code>,效果如下：</p>
+<pre><code>Mac-Pro:gitTest kys-1$ git status
+On branch master
+ Changes not staged for commit:
+(use &quot;git add &lt;file&gt;...&quot; to update what will be committed)
+ (use &quot;git checkout -- &lt;file&gt;...&quot; to discard changes in working  directory)
+
+    modified:   GitTest.md
+
+no changes added to commit (use &quot;git add&quot; and/or &quot;git commit -a&quot;)
+</code></pre><h6 id="4-查看修改内容"><a href="#4-查看修改内容" class="headerlink" title="4.查看修改内容"></a>4.查看修改内容</h6><p>使用命令<code>git diff</code>可以查看具体修改了哪些内容，如下：</p>
+<pre><code>Mac-Pro:gitTest kys-1$ git diff
+diff --git a/GitTest.md b/GitTest.md
+index 00ad777..64590e1 100644
+--- a/GitTest.md
++++ b/GitTest.md
+@@ -1 +1,2 @@
+-git is a strong software
+\ No newline at end of file
++git is a strong software
++Let&apos;s start with a good mood!
+\ No newline at end of file
+</code></pre><h6 id="5-版本回退"><a href="#5-版本回退" class="headerlink" title="5.版本回退"></a>5.版本回退</h6><p>首先，使用<code>git log</code>命令查看历史记录，如下：</p>
+<pre><code>Mac-Pro:gitTest kys-1$ git log
+//版本一
+commit 988f92f1f5cf959d491ad63462e0c90372bb4b0b
+Author: XiaolinSun &lt;401788217@qq.com&gt;
+Date:   Fri Apr 8 11:15:08 2016 +0800
+
+    add new
+//版本二
+commit dfaeb438504942d09e7f4282bd93b560d2ee68e2
+Author: XiaolinSun &lt;401788217@qq.com&gt;
+Date:   Fri Apr 8 11:12:02 2016 +0800
+
+  wrote a README
+Mac-Pro:gitTest kys-1$ git reset --hard HEAD^
+HEAD is now at dfaeb43 wrote a README
+Mac-Pro:gitTest kys-1$ git log
+ //版本三
+commit dfaeb438504942d09e7f4282bd93b560d2ee68e2
+Author: XiaolinSun &lt;401788217@qq.com&gt;
+Date:   Fri Apr 8 11:12:02 2016 +0800
+
+  wrote a README
+</code></pre><p>很清晰，共有三次提交历史。其中，<code>988f92f1f5cf959d491ad63462e0c90372bb4b0b</code>这样一串字符表示提交的版本号<code>commit id</code>；</p>
+<p>使用<code>git reset</code>命令可以回退到上一个版本，输入<code>git reset --hard commit id</code>,如下：</p>
+<pre><code>Mac-Pro:gitTest kys-1$ git reset --hard 988f92f
+HEAD is now at 988f92f add new
+</code></pre><p>如果开发过程中，一不小心，回退错了地方，可以使用<code>git reflog</code>命令查看命令历史，如下：</p>
+<pre><code>Mac-Pro:gitTest kys-1$ git reflog
+dfaeb43 HEAD@{0}: reset: moving to HEAD^
+988f92f HEAD@{1}: commit: add new
+dfaeb43 HEAD@{2}: commit (initial): wrote a README
+</code></pre><p>从而，可以选择要回到的那个版本即可。</p>
+<h6 id="6-工作区与暂存区"><a href="#6-工作区与暂存区" class="headerlink" title="6.工作区与暂存区"></a>6.工作区与暂存区</h6><p>工作区：上几步中在电脑创建的文件目录就是工作区，如下图：<br><img src="http://upload-images.jianshu.io/upload_images/1713024-61c1e2461cf2357a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="工作区"></p>
+<p>版本库就是隐藏目录<code>.git</code>;</p>
+<p>添加文件时，首先，用<code>git add</code>把文件添加进去,实际上是把文件修改添加到暂存区；然后，用<code>git commit</code>提交更改，是把暂存区的内容提交到当前分支；最后，每次文件修改后，如果不<code>add</code>到暂存区，那是不会加入到<code>commit</code>。</p>
+<h6 id="7-撤销修改"><a href="#7-撤销修改" class="headerlink" title="7.撤销修改"></a>7.撤销修改</h6><p>当你修改文件<code>GitTest.md</code>时，在你准备提交前，忽然发现一个错误,如图：</p>
+<pre><code>git is a strong software
+Let&apos;s start with a good mood!
+Start up now!
+Fight for future! //新添加的内容
+</code></pre><p>这时候，必须要查看一下状态：输入<code>git status</code>,如下：</p>
+<pre><code>  Mac-Pro:gitTest kys-1$ git status
+  On branch master
+  Changes not staged for commit:
+    (use &quot;git add &lt;file&gt;...&quot; to update what will be committed)
+    (use &quot;git checkout -- &lt;file&gt;...&quot; to discard changes in working directory)
+
+  modified:   GitTest.md
+
+no changes added to commit (use &quot;git add&quot; and/or &quot;git commit -a&quot;)
+</code></pre><p>使用<code>git checkout -- file</code>命令就会丢弃工作区的修改，如下：</p>
+<pre><code>Mac-Pro:gitTest kys-1$ git checkout -- GitTest.md
+</code></pre><p>然后再查看工作区的内容：</p>
+<pre><code>git is a strong software
+Let&apos;s start with a good mood!
+Start up now!
+</code></pre><p>这个时候内容就恢复了。</p>
+<h6 id="8-删除文件"><a href="#8-删除文件" class="headerlink" title="8.删除文件"></a>8.删除文件</h6><p>使用<code>git rm</code>和<code>`git commit</code>命令就可以从版本库删除相应的文件，例如：我们新建一个<code>newFile.md</code>文件，然后将其加入工作区，如下所示：<br><img src="http://upload-images.jianshu.io/upload_images/1713024-7db763b6bbdcba78.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="新工作区"></p>
+<pre><code>Mac-Pro:gitTest kys-1$ git add newFile.md
+Mac-Pro:gitTest kys-1$ git commit -m &quot;add newFile&quot;
+[master e278be1] add newFile
+ 1 file changed, 1 insertion(+)
+ create mode 100644 newFile.md
+Mac-Pro:gitTest kys-1$ git rm newFile.md
+rm &apos;newFile.md&apos;
+Mac-Pro:gitTest kys-1$ git commit -m &quot;delete newFile&quot;
+[master 9c28795] delete newFile
+ 1 file changed, 1 deletion(-)
+ delete mode 100644 newFile.md
+</code></pre><p>执行完这些命令后，文件就从版本库中删除了。</p>
+<h6 id="小结一下"><a href="#小结一下" class="headerlink" title="小结一下"></a>小结一下</h6><p>以上操作都是在本地仓库进行的一些操作，如果感觉上面讲的有些许啰嗦，那么只需记住下面几个命令即可：</p>
+<pre><code>1.git init      -------创建空的版本库；
+2.git add       -------添加文件到暂存区；
+3.git commit      -------提交文件到版本库(仓库)；
+4.git status      -------查看相关状态；
+5.git diff      -------查看具体修改的内容；
+6.git log      -------查看提交历史记录；
+7.git reset      -------回到上一版本；
+8.git reflog      -------查看命令历史记录；
+9.git checkout      -------丢弃工作区的修改；
+10.git rm      -------删除文件；
+</code></pre><h5 id="二-SourceTree的使用"><a href="#二-SourceTree的使用" class="headerlink" title="二.SourceTree的使用"></a>二.SourceTree的使用</h5><p>使用SourceTree客户端来执行上述与本地仓库相关的操作。</p>
+<p> 安装并打开SourceTree：</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1713024-5b20da8be8429b28.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="SourceTree"></p>
+<p>选择<code>本地</code>按钮，后点击<code>新仓库</code>，选择<code>创建本地仓库</code>,填入自己的地址，点击<code>创建</code>就OK了（是不是很方便？）：</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1713024-c3cac05145e88a64.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="创建流程1"></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1713024-676f79e6b1c4d24f.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="创建流程2"></p>
+<p>我先创建一个名字<code>TTest</code>本地仓库，演示一下后面的相关操作，点击新建仓库的导航条：<br><img src="http://upload-images.jianshu.io/upload_images/1713024-eb792a2cf15550ff.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="点击"></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1713024-afbe3632091ffb71.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="仓库状态"></p>
+<p>在工作区添加文件<code>README.md</code>：</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1713024-8ae9fa00dc331953.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="显示未暂存文件"></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1713024-0c3a77e3ed6fdbe7.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="已暂存"></p>
+<p>解释一下，<code>已暂存</code>就是相当于<code>git add</code>操作。</p>
+<p>提交操作，对比<code>git commit -m &quot;add new info&quot;</code>命令：<br><img src="http://upload-images.jianshu.io/upload_images/1713024-8b48163cfae58a04.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="提交"></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1713024-72fd2e5f8cf6cdeb.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="提交后"></p>
+<p>查看具体内容修改、查看相关状态都可以直接看到，就不在一一赘述了；</p>
+<p>回到上一版本可以<code>回滚操作</code>，选择具体的提交记录，点击右键，选择<code>提交回滚</code>即可；</p>
+<p>对比一下，发现<code>SourceTree</code>是如此的方便快捷！</p>
+<h6 id="远程仓库"><a href="#远程仓库" class="headerlink" title="远程仓库"></a>远程仓库</h6><p>概念：远程仓库可以用一台电脑当做服务器，团队其他成员可以从这个服务器克隆一份完整过程到自己的本地仓库，同时，可以将完成的部分推送到远程仓库，以实现项目的跟进。由于是演示，咱就暂且使用现成的远程仓库——<a href="https://github.com" target="_blank" rel="external">Github</a>;</p>
+<p>作为开发人员，github账号是必备的，如果还没有，那就得立即注册一个。</p>
+<p> 创建SSH Key，因为本地的Git仓库与Github远程仓库之间是通过SSH加密的。首先，需要到主目录上查看是否有<code>.ssh</code>目录，再查看<code>.ssh</code>目录下有没有<code>id_rsa</code>和<code>id_rsa.pub</code>文件，如下，<br><img src="http://upload-images.jianshu.io/upload_images/1713024-e9f198b3615c3a86.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="查找.ssh目录"></p>
+<p>发现没有上述的两个文件，这时需要创建：</p>
+<pre><code>Mac-Pro:~ kys-1 $ ssh-keygen -t rsa -C &quot;youremail@example.com&quot;  
+</code></pre><p>需要将邮件地址换成自己的地址，如下：</p>
+<pre><code>Mac-Pro:~ kys-1$ ssh-keygen -t rsa -C &quot;40178217@qq.com&quot;
+Generating public/private rsa key pair.
+Enter file in which to save the key (/Users/kys-1/.ssh/id_rsa): 
+Created directory &apos;/Users/kys-1/.ssh&apos;.
+Enter passphrase (empty for no passphrase): 
+Enter same passphrase again: 
+Your identification has been saved in /Users/kys-1/.ssh/id_rsa.
+Your public key has been saved in /Users/kys-1/.ssh/id_rsa.pub.
+</code></pre><p>出现上述描述，就证明你成功了，然后到主目录下找到<code>.ssh</code>目录，查看<code>id_rsa</code>和<code>id_rsa.pub</code>文件，<code>id_rsa</code>是私钥，需要自己保留好，<code>id_rsa.pub</code>是公钥，别人知道也无妨。</p>
+<p>登录Github账户，打开<code>Account settings</code>，<code>SSH Keys</code>页面,添加<code>id_rsa.pub</code>文件的内容：<br><img src="http://upload-images.jianshu.io/upload_images/1713024-ab90e2c57ca94762.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="添加公钥"></p>
+<p>添加SSH key的作用，是保证推送到远程仓库的提交确实是你提交的而不是别人代替，以确保项目被他人修改；</p>
+<p>添加远程库：首先登陆github账号，点击“New repository ”按钮，创建新仓库，如下：<br><img src="http://upload-images.jianshu.io/upload_images/1713024-7e93afc14041f61b.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="New repository "></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1713024-16323958e6414664.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="填写信息"><br>需要填写仓库名，描述以及是否勾选创建初始化文件等。</p>
+<p>在本地仓库下运行命令：</p>
+<pre><code>Mac-Pro:~ kys-1$ git remote add origin yourGitAddress
+</code></pre><p>然后，将本地库的所有内容推送到远程库：</p>
+<pre><code>Mac-Pro:~ kys-1$ git push -u origin master
+</code></pre><p>到这一步，只要本地作了提交。就可以通过命令：</p>
+<pre><code>Mac-Pro:~ kys-1$ git push origin master
+</code></pre><p>把本地<code>master</code>分支的最新修改推送到GitHub上去。</p>
+<p>使用<code>git clone</code>命令将远程库克隆到本地：</p>
+<pre><code>Mac-Pro:~ kys-1$ git clone yourLocalGitAddress1
+</code></pre><p>在SourceTree下克隆远程仓库到本地的操作：</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1713024-ff765f970a25b2b7.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="操作流程"><br>源URL就是远程仓库的地址，目标路径是本地存储的路径。</p>
+<h6 id="创建与合并分支（与SourceTree同步对照）"><a href="#创建与合并分支（与SourceTree同步对照）" class="headerlink" title="创建与合并分支（与SourceTree同步对照）"></a>创建与合并分支（与SourceTree同步对照）</h6><p>概念：创建分支的目的是让你的工作变得更灵活更有效率，当你开发新功能时，你创建了一个分支，你可以在在原来分支继续工作，也可以在新建的分支上工作，两者之间不会干预，当你完成了新功能，只需将新分支合并到原来分支上即可。最吸引人的是Git创建和切换分支是非常速度的。</p>
+<p>创建<code>dev</code>分支，然后切换到<code>dev</code>分支，使用<code>git checkout</code>命令：</p>
+<pre><code>Mac-Pro:gitTest kys-1$ git checkout -b dev
+Switched to a new branch &apos;dev&apos;
+</code></pre><p><code>-b</code>参数表示创建并切换.</p>
+<p>使用<code>git branch</code>命令查看当前分支：</p>
+<pre><code>Mac-Pro:gitTest kys-1$ git branch
+  * dev
+  master
+</code></pre><p>SourceTree操作：<br><img src="http://upload-images.jianshu.io/upload_images/1713024-4bb65fa97c1f30db.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="选择分支按钮"></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1713024-b814e5673239c2de.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="创建分支"></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1713024-453cb9e7a4ca5b61.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="切换到dev分支"></p>
+<p>我们在dev分支进行操作，修改<code>README.md</code> 文件内容然后提交：</p>
+<pre><code>Mac-Pro:gitTest kys-1$ git add README.md
+Mac-Pro:gitTest kys-1$ git commit -m &quot;dev branch&quot;
+[dev 9be4a38] dev branch
+ 1 file changed, 2 insertions(+), 1 deletion(-)
+</code></pre><p>SourceTree操作：</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1713024-3c19e76829859bc9.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="提交"></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1713024-0cb17f37a9c278b1.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="提交后"></p>
+<p><code>dev</code>分支工作结束，切换到<code>master</code>分支，</p>
+<pre><code>Mac-Pro:gitTest kys-1$ git checkout master
+Switched to branch &apos;master&apos;
+Your branch is up-to-date with &apos;origin/master&apos;.
+</code></pre><p>SourceTree操作：</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1713024-62cc7cee096a0633.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="切换到master分支"><br>点击右键，选择<code>检出master</code>分支即可。</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1713024-0d0b5ac998f986de.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="检出成功"></p>
+<p>使用<code>git merge</code> 指令把<code>dev</code>分支的工作成果合并到<code>master</code>分支上：</p>
+<pre><code>Mac-Pro:gitTest kys-1$ git merge dev
+Updating 2269ea8..9be4a38
+    Fast-forward
+   README.md | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
+</code></pre><p>SourceTree操作：选中<code>dev</code>分支，右击选择<code>合并dev至master</code>即可，</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1713024-3b1072a46526173e.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="合并后"></p>
+<p>使用<code>git branch -d dev</code>命令删除<code>dev</code>分支：</p>
+<pre><code>Mac-Pro:gitTest kys-1$ git branch -d dev
+Deleted branch dev (was 9be4a38).
+</code></pre><p>SourceTree操作：选中<code>dev</code>分支，右击选择<code>删除dev</code>即可。</p>
+<h6 id="小结一下-1"><a href="#小结一下-1" class="headerlink" title="小结一下"></a>小结一下</h6><pre><code>查看分支：git branch
+创建分支：git branch &lt;name&gt;
+切换分支：git checkout &lt;name&gt;
+创建+切换分支：git checkout -b &lt;name&gt;
+合并某分支到当前分支：git merge &lt;name&gt;
+删除分支：git branch -d &lt;name&gt;
+</code></pre><h6 id="冲突解决"><a href="#冲突解决" class="headerlink" title="冲突解决"></a>冲突解决</h6><p>制造冲突：先创建一个新的分子<code>conflict</code>，并在新分支上工作,修改<code>README.md</code>内容,操作如下：</p>
+<pre><code>Mac-Pro:gitTest kys-1$ git checkout -b conflict
+Switched to a new branch &apos;conflict&apos;
+Mac-Pro:gitTest kys-1$ git add README.md
+Mac-Pro:gitTest kys-1$ git commit -m &quot;make a conflict&quot;
+[conflict 1bc6611] make a conflict
+ 1 file changed, 2 insertions(+), 1 deletion(-)
+</code></pre><p><img src="http://upload-images.jianshu.io/upload_images/1713024-e067cfd435ed52d3.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="SourceTree显示状态"></p>
+<p>切换到<code>master</code>，继续修改<code>README.md</code>内容,并提交修改：</p>
+<pre><code>Mac-Pro:gitTest kys-1$ git checkout master
+Switched to branch &apos;master&apos;
+ Your branch is up-to-date with &apos;origin/master&apos;.
+Mac-Pro:gitTest kys-1$ git add README.md
+Mac-Pro:gitTest kys-1$ git commit -m &quot;add two conflicts&quot;
+[master f43d5d1] add two conflicts
+ 1 file changed, 2 insertions(+), 1 deletion(-)
+</code></pre><p>合并分支，就会出现冲突：</p>
+<pre><code>Mac-Pro:gitTest kys-1$ git merge conflict
+Auto-merging README.md
+CONFLICT (content): Merge conflict in README.md
+Automatic merge failed; fix conflicts and then commit the result.
+Mac-Pro:gitTest kys-1$ git status
+On branch master
+Your branch is ahead of &apos;origin/master&apos; by 1 commit.
+(use &quot;git push&quot; to publish your local commits)
+You have unmerged paths.
+(fix conflicts and run &quot;git commit&quot;)
+Unmerged paths:
+  (use &quot;git add &lt;file&gt;...&quot; to mark resolution)
+
+  both modified:   README.md
+
+no changes added to commit (use &quot;git add&quot; and/or &quot;git commit -a&quot;)
+</code></pre><p>查看文件<code>README.md</code>就能看到冲突信息的提示了，红色标记的内容就是用来标注不同分支的内容：</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1713024-f2ed63357044b9e9.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="冲突信息"></p>
+<p>将内容改为以下内容就行了，然后重新提交就可以了。</p>
+<blockquote>
+<p>We will make a conflict!</p>
+</blockquote>
+<pre><code>Mac-Pro:gitTest kys-1$ git add README.md
+Mac-Pro:gitTest kys-1$ git commit -m &quot;comflict fixed&quot;
+[master dad373b] comflict fixed
+</code></pre><p><img src="http://upload-images.jianshu.io/upload_images/1713024-ff1b5fdeed97512d.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="SourceTree的内容"></p>
+<p>使用<code>git log --graph</code>可以看到分支合并图;</p>
+<p>小憩一下：做到这一步是不是感觉自己好有成就感啊，下面的内容更精彩，继续…</p>
+<h6 id="分支管理策略"><a href="#分支管理策略" class="headerlink" title="分支管理策略"></a>分支管理策略</h6><p>上述合并分支，一大部分是在用<code>Fast forward</code>模式，这种模式又优点也有缺点，就是删除分支后会丢掉分支信息，这时，我们需要使用一下普通模式，即使用带有<code>--no-ff</code>的<code>git merge</code>,继续上述流程：新建分支dev-&gt;修改提交-&gt;切换分支-&gt;合并分支:</p>
+<pre><code>Mac-Pro:gitTest kys-1$ git checkout -b dev  //***
+Switched to a new branch &apos;dev&apos;
+Mac-Pro:gitTest kys-1$ git add README.md //***
+Mac-Pro:gitTest kys-1$ git commit -m &quot;add new content&quot; //***
+[dev 97676b7] add new content
+ 1 file changed, 1 insertion(+)
+Mac-Pro:gitTest kys-1$ git checkout master  //***
+Switched to branch &apos;master&apos;
+Your branch is up-to-date with &apos;origin/master&apos;.
+Mac-Pro:gitTest kys-1$ git merge --no-ff -m&quot;merge with --no-ff&quot;  dev   //***
+Merge made by the &apos;recursive&apos; strategy.
+ README.md | 1 +
+ 1 file changed, 1 insertion(+)
+</code></pre><p>当然你也可以使用<code>git log --graph --pretty=oneline --abbrev-commit</code>命令查看分支历史：</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1713024-1a9a648937c3ca6b.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="截图"></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1713024-349504c5da95e507.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="分支情况"></p>
+<p>补充几点：首先，在实践开发中，<code>master</code>分支是非常稳定的，仅用来发布新版本，但不在上面开发；其次，创建dev分支开发，等到版本发布的时候在合并到<code>master</code>分支即可；团队中每个人都有自己的分支，及时合并即可。</p>
+<h5 id="添加Bug分支"><a href="#添加Bug分支" class="headerlink" title="添加Bug分支"></a>添加Bug分支</h5><p>前述：修复Bug在所难免，修复Bug可以通过创建一个新的临时分支修复，合并分支，删除临时分支。</p>
+<p>情形：当你在<code>dev</code>分支上工作还没有完成，正赶上有<code>Bug</code>需要修复，这时你需要将手头上工作暂存一下，抓紧时间修复Bug；</p>
+<pre><code>  Mac-Pro:gitTest kys-1$ git status
+    On branch dev
+    Changes not staged for commit:
+    (use &quot;git add &lt;file&gt;...&quot; to update what will be committed)
+      (use &quot;git checkout -- &lt;file&gt;...&quot; to discard changes in working   directory)
+
+    modified:   README.md
+
+no changes added to commit (use &quot;git add&quot; and/or &quot;git commit -a&quot;)
+</code></pre><p>使用<code>git stash</code>暂存当前工作区：</p>
+<pre><code>Mac-Pro:gitTest kys-1$ git stash
+Saved working directory and index state WIP on dev: 40be6d0   merge with --no-ff
+HEAD is now at 40be6d0 merge with --no-ff
+</code></pre><p>使用SourceTree操作：</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1713024-6d275ce8fb545465.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="暂存"></p>
+<p>这时，可以<code>git status</code>查看工作区，并可以创建Bug分支了；</p>
+<p> 确定好在<code>master</code>分支修复Bug:</p>
+<pre><code>Mac-Pro:gitTest kys-1$ git checkout master
+Switched to branch &apos;master&apos;
+Your branch is up-to-date with &apos;origin/master&apos;.
+Mac-Pro:gitTest kys-1$ git checkout -b bug
+Switched to a new branch &apos;bug&apos;
+Mac-Pro:gitTest kys-1$ git add README.md
+Mac-Pro:gitTest kys-1$ git commit -m &quot;fix bug&quot;
+  [bug 2c013d1] fix bug
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+</code></pre><p><img src="http://upload-images.jianshu.io/upload_images/1713024-cab16d821cd81432.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="创建bug分支"></p>
+<p> 在<code>bug</code>分支上修复完bug提交，就可以合并删除<code>bug</code>分支，如下：</p>
+<pre><code> Mac-Pro:gitTest kys-1$ git checkout master
+ Switched to branch &apos;master&apos;
+ Your branch is up-to-date with &apos;origin/master&apos;.
+ Mac-Pro:gitTest kys-1$ git merge --no-ff -m &quot;merge bug&quot; bug
+ Merge made by the &apos;recursive&apos; strategy.
+README.md | 2 +-
+1 file changed, 1 insertion(+), 1 deletion(-)
+ Mac-Pro:gitTest kys-1$ git branch -d bug
+ Deleted branch bug (was 2c013d1).
+</code></pre><p> SourceTree操作：</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1713024-af76476fc398423e.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="合并分支"></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1713024-a5678bad8d1e5284.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="bug修复完成"></p>
+<p>Bug修复完，我们需要将暂存区的分支拿出来了，切换到<code>dev</code>分支，使用<code>git stash list</code>命令查看：</p>
+<pre><code>Mac-Pro:gitTest kys-1$ git stash list
+stash@{0}: WIP on dev: 40be6d0 merge with --no-ff
+</code></pre><p>工作区还在，可以使用两个命令恢复：一个是<code>git stash apply</code>（恢复后，stash内容不删除）还需用<code>git stash drop</code>删除；另一个是使用<code>git stash pop</code>恢复的同时将stash内容也删除了：</p>
+<pre><code>Mac-Pro:gitTest kys-1$ git stash pop
+  On branch dev
+  Changes not staged for commit:
+(use &quot;git add &lt;file&gt;...&quot; to update what will be committed)
+(use &quot;git checkout -- &lt;file&gt;...&quot; to discard changes in working   directory)
+
+  modified:   README.md
+
+no changes added to commit (use &quot;git add&quot; and/or &quot;git commit -a&quot;)
+</code></pre><p>SourceTree操作： </p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1713024-45be91b4679df8c4.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="暂存区恢复"></p>
+<h5 id="Feature分支"><a href="#Feature分支" class="headerlink" title="Feature分支"></a>Feature分支</h5><p>开发过程中，每需要开发一个新功能都需要添加一个分支，最后合并删除，流程同上述<code>bug</code>分支相同，不再赘述。</p>
+<p>强行删除分支，例如：你在新的分支下开发功能，后期开会取消这个功能，你只能将这个分支上的内容全强制删除，如下：</p>
+<pre><code>Mac-Pro:gitTest kys-1$ git branch -d feature
+ error: The branch &apos;feature&apos; is not fully merged.
+If you are sure you want to delete it, run &apos;git branch -D feature&apos;.
+</code></pre><p>接下来使用<code>git branch -D feature</code>命令强制删除：</p>
+<pre><code>Mac-Pro:gitTest kys-1$ git branch -D feature
+Deleted branch feature (was 5f7e86c).
+</code></pre><p> SourceTree操作：</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1713024-602cf111d8bcd855.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="正常删除提示"></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1713024-a6d409480f1a31cf.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="强制删除"></p>
+<h5 id="标签管理"><a href="#标签管理" class="headerlink" title="标签管理"></a>标签管理</h5><p>作用：标签作为版本库的快照，能够在需要的时候很快找到对应的版本库；</p>
+<p>在指定提交节点上添加标签，默认的标签是打在最新提交的节点上的,使用<code>git tag</code>命令添加标签，使用<code>git show</code>命令查看标签信息:</p>
+<pre><code>Mac-Pro:gitTest kys-1$ git tag V1.0  //***
+Mac-Pro:gitTest kys-1$ git tag    //***
+  V1.0
+Mac-Pro:gitTest kys-1$ git show V1.0  //***
+commit d0fc2232015ae6737273fa5e94310bcfd4ef231c
+Author:  &lt;40188217@qq.com&gt;
+Date:   Wed Apr 13 07:45:48 2016 +0800
+
+  add a tag
+
+diff --git a/README.md b/README.md
+index 9082c3c..52ef851 100644
+--- a/README.md
++++ b/README.md
+@@ -9,4 +9,4 @@ Try a new way!
+ Try doing a different thing!
+ Try again!
+ I am developing!!!
+-
++I want to make a tag!
+</code></pre><p>SourceTree操作：</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1713024-2019740a98b2d1a6.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="创建标签"></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1713024-1b2103cc7d25103f.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="标签显示"></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1713024-ae937c53205e6223.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="打开标签"></p>
+<p>使用<code>git tag -d &lt;tagname&gt;</code>命令删除本地标签，使用<code>git push origin &lt;tagname&gt;</code>命令可以推送一个本地标签，使用<code>git push origin --tags</code>命令可以推送全部未推送过的本地标签，使用<code>git push origin :refs/tags/&lt;tagname&gt;</code>命令可以删除一个远程标签,操作如下：</p>
+<pre><code>  Mac-Pro:gitTest kys-1$ git tag -d V1.0
+  Deleted tag &apos;V1.0&apos; (was 6462641)
+推送标签到远程：
+  Mac-Pro:gitTest kys-1$ git push origin V1.0  //***
+  Counting objects: 5, done.
+  Delta compression using up to 8 threads.
+  Compressing objects: 100% (4/4), done.
+  Writing objects: 100% (5/5), 497 bytes | 0 bytes/s, done.
+  Total 5 (delta 2), reused 0 (delta 0)
+  To https://github.com/123sunxiaolin/gitTest.git
+   * [new tag]         V1.0 -&gt; V1.0
+</code></pre><p>推送本地未推送的标签：</p>
+<pre><code>Mac-Pro:gitTest kys-1$ git push origin --tags  //***
+ Counting objects: 1, done.
+ Writing objects: 100% (1/1), 154 bytes | 0 bytes/s, done.
+ Total 1 (delta 0), reused 0 (delta 0)
+To https://github.com/123sunxiaolin/gitTest.git
+ * [new tag]         V0.1 -&gt; V0.1
+</code></pre><p>删除已推送的标签，首先，删除本地的标签,其次，删除远程的标签：</p>
+<pre><code>Mac-Pro:gitTest kys-1$ git tag -d V0.1  //***
+Deleted tag &apos;V0.1&apos; (was 98817ff)
+Mac-Pro:gitTest kys-1$ git push origin :refs/tags/V0.1  //***
+To https://github.com/123sunxiaolin/gitTest.git
+ - [deleted]         V0.1
+</code></pre><p>SourceTree操作：点击标签，右击选择删除即可，勾选<code>删除所有远程标签</code>可以删除远程标签，操作非常直观：</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1713024-a6f8f74788081750.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="删除本地标签"></p>
+<h6 id="忽略特殊文件"><a href="#忽略特殊文件" class="headerlink" title="忽略特殊文件"></a>忽略特殊文件</h6><p>在Git工作目录下，有一些配置文件我们不想提交到远程仓库，这时我们可以使用Git提供的<code>.gitignore</code>文件；</p>
+<p>忽略文件的原则是：忽略操作系统自动生成的文件，比如缩略图等，<br>忽略编译生成的中间文件、可执行文件等，忽略你自己的带有敏感信息的配置文件，比如存放口令的配置文件。</p>
+<p>首先，在Git目录下，使用<code>git touch .gitignore</code>创建<code>. gitignore</code>文件，然后编辑：</p>
+<pre><code>Mac-Pro:gitTest kys-1$ touch .gitignore
+Mac-Pro:gitTest kys-1$ ls -ah
+.        .DS_Store    .gitignore
+..        .git        README.md
+</code></pre><p><img src="http://upload-images.jianshu.io/upload_images/1713024-ae4e819b08a38d90.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="忽略文件"></p>
+<p>如果你对配置文件还不甚了解，就看一下<a href="https://github.com/github/gitignore" target="_blank" rel="external">现成配置列表</a>;</p>
+<p>常用规则：</p>
+<blockquote>
+<p>/mtk/ 过滤整个文件夹<br>*.zip 过滤所有.zip文件<br>/mtk/do.c 过滤某个具体文件</p>
+</blockquote>
+<p>gitignore还可以指定要将哪些文件添加到版本管理中,只是在文件前加一个<code>!</code>即可：</p>
+<blockquote>
+<p>!*.zip<br>!/mtk/one.txt         </p>
+</blockquote>
+<p>其中，<code>!/mtk/one.txt</code>只需要管理/mtk/目录中的one.txt文件，这个目录中的其他文件都不需要管理，说到这想必大家都明白了。</p>
+<p>唯一的区别就是规则开头多了一个感叹号，Git会将满足这类规则的文件添加到版本管理中。</p>
+<p>最后一步就是将<code>. gitignore</code>文件推送到远程仓库即可。</p>
+<h5 id="写在最后"><a href="#写在最后" class="headerlink" title="写在最后"></a>写在最后</h5><p>在开发过程中，很多人纠结版本管理使用Git命令好呢，还是SourceTree客户端好呢，其实这没有明确的答案，完全取决于自己来，可以说两种方式各有利弊，大家可以尝试两者结合使用，效果应该会更好。</p>
+<p> 写到这，终于可以舒一口气了，最后，附上自己写文章时的截图，希望大家给点掌声以资鼓励。</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1713024-b0b53c41c0c8b85a.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="截图集"></p>
+<blockquote>
+<p>从4月8日开始写，到今天才写完，将近耗时一周，中途遇见不少问题，还好，都坚持下来了，做程序猿就得拼啊，不然怎么能攻城狮啊！</p>
+</blockquote>
+
+      
+    </div>
+
+    <div>
+      
+        
+<div id="wechat_subscriber" style="display: block; padding: 10px 0; margin: 20px auto; width: 100%; text-align: center">
+    <img id="wechat_subscriber_qcode" src="/uploads/images/wechat-qcode.jpg" alt="Jack_lin wechat" style="width: 200px; max-width: 100%;"/>
+    <div>欢迎您扫一扫上面的微信公众号，订阅我的博客！</div>
+</div>
+
+
+      
+    </div>
+
+    <div>
+      
+        
+  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+    <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+      <span>赏</span>
+    </button>
+    <div id="QR" style="display: none;">
+      
+        <div id="wechat" style="display: inline-block">
+          <img id="wechat_qr" src="/uploads/images/wechat-reward-image.png" alt="Jack_lin WeChat Pay"/>
+          <p>微信打赏</p>
+        </div>
+      
+      
+        <div id="alipay" style="display: inline-block">
+          <img id="alipay_qr" src="/uploads/images/alipay-reward-image.png" alt="Jack_lin Alipay"/>
+          <p>支付宝打赏</p>
+        </div>
+      
+    </div>
+  </div>
+
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Git/" rel="tag">#Git</a>
+          
+            <a href="/tags/代码托管/" rel="tag">#代码托管</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/08/27/徒手教你建自己的博客/" rel="next" title="徒手教你建自己的博客">
+                <i class="fa fa-chevron-left"></i> 徒手教你建自己的博客
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/08/27/翻译_iOS视图编程指南(View-Programming-Guide-for-iOS)之介绍/" rel="prev" title="翻译_iOS视图编程指南之介绍">
+                翻译_iOS视图编程指南之介绍 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="Jack_lin" />
+          <p class="site-author-name" itemprop="name">Jack_lin</p>
+          <p class="site-description motion-element" itemprop="description">My goal is not write code.if we could ship products and make all this money without writing any code,we could.Your job is ship products EXACTLY on time.It doesn’t matter whether you are a developer,tester,program manager,product manager whatever.Everybody’s job is the same.</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">10</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">10</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/123sunxiaolin" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/JacklinIOS/profile?rightmod=1&wvr=6&mod=personinfo" target="_blank" title="Weibo">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  Weibo
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              Links
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.jianshu.com/users/ef991f6d241c/latest_articles" title="Jack_lin简书" target="_blank">Jack_lin简书</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#写在前面"><span class="nav-number">1.</span> <span class="nav-text">写在前面</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#浅析SVN与Git的不同"><span class="nav-number">2.</span> <span class="nav-text">浅析SVN与Git的不同</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安装Git"><span class="nav-number">3.</span> <span class="nav-text">安装Git</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Git的使用"><span class="nav-number">4.</span> <span class="nav-text">Git的使用</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#一-命令下的Git"><span class="nav-number">4.0.1.</span> <span class="nav-text">一.命令下的Git</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#1-创建版本库："><span class="nav-number">4.0.1.1.</span> <span class="nav-text">1.创建版本库：</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#2-添加文件到版本库"><span class="nav-number">4.0.1.2.</span> <span class="nav-text">2.添加文件到版本库</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#3-查看仓库状态"><span class="nav-number">4.0.1.3.</span> <span class="nav-text">3.查看仓库状态</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#4-查看修改内容"><span class="nav-number">4.0.1.4.</span> <span class="nav-text">4.查看修改内容</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#5-版本回退"><span class="nav-number">4.0.1.5.</span> <span class="nav-text">5.版本回退</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#6-工作区与暂存区"><span class="nav-number">4.0.1.6.</span> <span class="nav-text">6.工作区与暂存区</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#7-撤销修改"><span class="nav-number">4.0.1.7.</span> <span class="nav-text">7.撤销修改</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#8-删除文件"><span class="nav-number">4.0.1.8.</span> <span class="nav-text">8.删除文件</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#小结一下"><span class="nav-number">4.0.1.9.</span> <span class="nav-text">小结一下</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#二-SourceTree的使用"><span class="nav-number">4.0.2.</span> <span class="nav-text">二.SourceTree的使用</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#远程仓库"><span class="nav-number">4.0.2.1.</span> <span class="nav-text">远程仓库</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#创建与合并分支（与SourceTree同步对照）"><span class="nav-number">4.0.2.2.</span> <span class="nav-text">创建与合并分支（与SourceTree同步对照）</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#小结一下-1"><span class="nav-number">4.0.2.3.</span> <span class="nav-text">小结一下</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#冲突解决"><span class="nav-number">4.0.2.4.</span> <span class="nav-text">冲突解决</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#分支管理策略"><span class="nav-number">4.0.2.5.</span> <span class="nav-text">分支管理策略</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#添加Bug分支"><span class="nav-number">4.0.3.</span> <span class="nav-text">添加Bug分支</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Feature分支"><span class="nav-number">4.0.4.</span> <span class="nav-text">Feature分支</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#标签管理"><span class="nav-number">4.0.5.</span> <span class="nav-text">标签管理</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#忽略特殊文件"><span class="nav-number">4.0.5.1.</span> <span class="nav-text">忽略特殊文件</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#写在最后"><span class="nav-number">4.0.6.</span> <span class="nav-text">写在最后</span></a></li></ol></li></ol></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Jack_lin</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+        
+
+<div class="busuanzi-count">
+
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv"><i class="fa fa-user"></i><span class="busuanzi-value" id="busuanzi_value_site_uv"></span></span>
+  
+
+  
+    <span class="site-pv"><i class="fa fa-eye"></i><span class="busuanzi-value" id="busuanzi_value_site_pv"></span></span>
+  
+  
+</div>
+
+
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+<script type="text/javascript" async src="//push.zhanzhang.baidu.com/push.js">
+</script>
+
+
+</body>
+</html>
