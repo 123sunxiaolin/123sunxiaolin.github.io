@@ -29,7 +29,7 @@
 
   
   
-  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
 
 
 
@@ -63,7 +63,7 @@
 
 
 
-<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
 
 <link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
 
@@ -379,8 +379,8 @@ yyyy-MM-dd HHmmss转换成yyyyMMddHHmmss的方法 方法一：利用字符串替
             
               
                 
-                <a class="post-title-link" href="/2016/08/27/开篇之谈/" itemprop="url">
-                  开篇之谈
+                <a class="post-title-link" href="/2016/08/27/翻译_iOS视图编程指南(View-Programming-Guide-for-iOS)之介绍/" itemprop="url">
+                  翻译_iOS视图编程指南之介绍
                 </a>
               
             
@@ -407,8 +407,8 @@ yyyy-MM-dd HHmmss转换成yyyyMMddHHmmss的方法 方法一：利用字符串替
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/悟·生活/" itemprop="url" rel="index">
-                    <span itemprop="name">悟·生活</span>
+                  <a href="/categories/翻译/" itemprop="url" rel="index">
+                    <span itemprop="name">翻译</span>
                   </a>
                 </span>
 
@@ -444,12 +444,258 @@ yyyy-MM-dd HHmmss转换成yyyyMMddHHmmss的方法 方法一：利用字符串替
       
         
           
-          心中的碎碎念 此刻，值得高兴的一件事是我拥有属于自己的博客了，我可以感谢自由的事了。
- 其实，我本可以更早一些来记录学习iOS的这些事儿，以前都是被各种学校项目缠身，没有时间更没有太多精力来梳理自己的学习经历。现在这一段时间算是悠闲一点，上午可以多睡一会儿，下午溜达溜达，剩下的时间就可以认真地写一写
+          官方最新：View Programming Guide for iOS
+介绍关于窗口和视图在iOS中，你可以使用窗口和视图将你应用的内容呈现在屏幕上。窗口本身是不具备呈现可视化内容的功能的，但它可以用作装有应用视图的容器。视图可以规定在窗口的某一部分显示特定的内容。例如，你可能需要显示图片、文本、图
           ...
 
           <div class="post-more-link text-center">
-            <a class="btn" href="/2016/08/27/开篇之谈/#more" rel="contents">
+            <a class="btn" href="/2016/08/27/翻译_iOS视图编程指南(View-Programming-Guide-for-iOS)之介绍/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/08/27/iOS中，系统相册的那些事/" itemprop="url">
+                  iOS中，系统相册的那些事
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-08-27T19:32:34+08:00" content="2016-08-27">
+              2016-08-27
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/iOS学习记录/" itemprop="url" rel="index">
+                    <span itemprop="name">iOS学习记录</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+          
+写在前面在手机APP日益增加的前提下，如何更好的提升用户的交互体验似乎成为衡量一个APP重要指标。上述的感悟源于实际工作的需求，就是在APP中添加一个更换用户头像的功能。
+也许别人会认为这样一个小功能不算什么，但从用户交互角度考虑，这样一个功能的设计有一定学问，待我慢慢道来。
+获取相册最直接的方式
+          ...
+
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/08/27/iOS中，系统相册的那些事/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/08/27/徒手教你建自己的博客/" itemprop="url">
+                  徒手教你建自己的博客
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-08-27T19:32:34+08:00" content="2016-08-27">
+              2016-08-27
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/实用工具/" itemprop="url" rel="index">
+                    <span itemprop="name">实用工具</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+          
+前言周末用了不到一天时间搭建了属于自己的博客，欣喜之余，就想着提笔将个人博客搭建的详细过程记录下来，以便分享给众读者使用；
+搭建之前，笔者看过其他博客的搭建教程，上面都提到可以在短短几分钟搭建好自己的博客。
+从搭建到博客访问确实只需要几分钟的时间，但几分钟的工作并未达到我们的预期，需要优化的时间可
+          ...
+
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/08/27/徒手教你建自己的博客/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -747,129 +993,6 @@ Mac OS X的文件系统 Mac OS X本身是Unix内核的，采用Unix的多用户�
             
               
                 
-                <a class="post-title-link" href="/2016/08/27/徒手教你建自己的博客/" itemprop="url">
-                  徒手教你建自己的博客
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-08-27T19:32:34+08:00" content="2016-08-27">
-              2016-08-27
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/实用工具/" itemprop="url" rel="index">
-                    <span itemprop="name">实用工具</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-
-
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-          
-前言周末用了不到一天时间搭建了属于自己的博客，欣喜之余，就想着提笔将个人博客搭建的详细过程记录下来，以便分享给众读者使用；
-搭建之前，笔者看过其他博客的搭建教程，上面都提到可以在短短几分钟搭建好自己的博客。
-从搭建到博客访问确实只需要几分钟的时间，但几分钟的工作并未达到我们的预期，需要优化的时间可
-          ...
-
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/08/27/徒手教你建自己的博客/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
                 <a class="post-title-link" href="/2016/08/27/iOS,面试必看，最全梳理/" itemprop="url">
                   iOS,面试必看，最全梳理
                 </a>
@@ -992,8 +1115,8 @@ OC的理解与
             
               
                 
-                <a class="post-title-link" href="/2016/08/27/iOS中，系统相册的那些事/" itemprop="url">
-                  iOS中，系统相册的那些事
+                <a class="post-title-link" href="/2016/08/27/开篇之谈/" itemprop="url">
+                  开篇之谈
                 </a>
               
             
@@ -1020,8 +1143,8 @@ OC的理解与
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/iOS学习记录/" itemprop="url" rel="index">
-                    <span itemprop="name">iOS学习记录</span>
+                  <a href="/categories/悟·生活/" itemprop="url" rel="index">
+                    <span itemprop="name">悟·生活</span>
                   </a>
                 </span>
 
@@ -1057,14 +1180,12 @@ OC的理解与
       
         
           
-          
-写在前面在手机APP日益增加的前提下，如何更好的提升用户的交互体验似乎成为衡量一个APP重要指标。上述的感悟源于实际工作的需求，就是在APP中添加一个更换用户头像的功能。
-也许别人会认为这样一个小功能不算什么，但从用户交互角度考虑，这样一个功能的设计有一定学问，待我慢慢道来。
-获取相册最直接的方式
+          心中的碎碎念 此刻，值得高兴的一件事是我拥有属于自己的博客了，我可以感谢自由的事了。
+ 其实，我本可以更早一些来记录学习iOS的这些事儿，以前都是被各种学校项目缠身，没有时间更没有太多精力来梳理自己的学习经历。现在这一段时间算是悠闲一点，上午可以多睡一会儿，下午溜达溜达，剩下的时间就可以认真地写一写
           ...
 
           <div class="post-more-link text-center">
-            <a class="btn" href="/2016/08/27/iOS中，系统相册的那些事/#more" rel="contents">
+            <a class="btn" href="/2016/08/27/开篇之谈/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1188,127 +1309,6 @@ OC的理解与
 
           <div class="post-more-link text-center">
             <a class="btn" href="/2016/08/27/翻译_iOS视图编程指南(View-Programming-Guide-for-iOS)之视图和窗口体系/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/08/27/翻译_iOS视图编程指南(View-Programming-Guide-for-iOS)之介绍/" itemprop="url">
-                  翻译_iOS视图编程指南之介绍
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-08-27T19:32:34+08:00" content="2016-08-27">
-              2016-08-27
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/翻译/" itemprop="url" rel="index">
-                    <span itemprop="name">翻译</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-
-
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-          官方最新：View Programming Guide for iOS
-介绍关于窗口和视图在iOS中，你可以使用窗口和视图将你应用的内容呈现在屏幕上。窗口本身是不具备呈现可视化内容的功能的，但它可以用作装有应用视图的容器。视图可以规定在窗口的某一部分显示特定的内容。例如，你可能需要显示图片、文本、图
-          ...
-
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/08/27/翻译_iOS视图编程指南(View-Programming-Guide-for-iOS)之介绍/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1659,22 +1659,22 @@ OC的理解与
 
 
   
-  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
 
   
-  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
 
   
-  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
 
   
-  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
 
   
-  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
 
   
-  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
 
 
   
