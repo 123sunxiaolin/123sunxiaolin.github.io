@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="随记," />
+  <meta name="keywords" content="iOS开发常用小技巧," />
 
 
 
@@ -84,22 +84,22 @@
 
 
 
-<meta name="description" content="心中的碎碎念 此刻，值得高兴的一件事是我拥有属于自己的博客了，我可以感谢自由的事了。
- 其实，我本可以更早一些来记录学习iOS的这些事儿，以前都是被各种学校项目缠身，没有时间更没有太多精力来梳理自己的学习经历。现在这一段时间算是悠闲一点，上午可以多睡一会儿，下午溜达溜达，剩下的时间就可以认真地写一写我和iOS的事。
-理性认识自己 首先声明一下，我不是一个技术大咖，我学iOS也不是很好，我写这些文章">
+<meta name="description" content="写在开头在开发过程中，经常要用到日期格式的转换，加之，网上博客对于日期格式转换的方法国语冗杂，小编特此总结一下，分享给各位读者，如有问题可以在公众号后台留言。
+yyyy-MM-dd HHmmss转换成yyyyMMddHHmmss的方法 方法一：利用字符串替换方法生成指定的样式，此方法很暴力但不是最好：
+12345678- (NSString *)getConvertDateToSameStrle:">
 <meta property="og:type" content="article">
-<meta property="og:title" content="开篇之谈">
-<meta property="og:url" content="http://yoursite.com/2016/08/27/开篇之谈/index.html">
+<meta property="og:title" content="开发小技巧-日期格式转换">
+<meta property="og:url" content="http://yoursite.com/2016/11/12/开发小技巧-日期格式转换/index.html">
 <meta property="og:site_name" content="最晚的开始">
-<meta property="og:description" content="心中的碎碎念 此刻，值得高兴的一件事是我拥有属于自己的博客了，我可以感谢自由的事了。
- 其实，我本可以更早一些来记录学习iOS的这些事儿，以前都是被各种学校项目缠身，没有时间更没有太多精力来梳理自己的学习经历。现在这一段时间算是悠闲一点，上午可以多睡一会儿，下午溜达溜达，剩下的时间就可以认真地写一写我和iOS的事。
-理性认识自己 首先声明一下，我不是一个技术大咖，我学iOS也不是很好，我写这些文章">
-<meta property="og:updated_time" content="2016-08-27T11:54:43.000Z">
+<meta property="og:description" content="写在开头在开发过程中，经常要用到日期格式的转换，加之，网上博客对于日期格式转换的方法国语冗杂，小编特此总结一下，分享给各位读者，如有问题可以在公众号后台留言。
+yyyy-MM-dd HHmmss转换成yyyyMMddHHmmss的方法 方法一：利用字符串替换方法生成指定的样式，此方法很暴力但不是最好：
+12345678- (NSString *)getConvertDateToSameStrle:">
+<meta property="og:updated_time" content="2016-11-12T03:24:52.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="开篇之谈">
-<meta name="twitter:description" content="心中的碎碎念 此刻，值得高兴的一件事是我拥有属于自己的博客了，我可以感谢自由的事了。
- 其实，我本可以更早一些来记录学习iOS的这些事儿，以前都是被各种学校项目缠身，没有时间更没有太多精力来梳理自己的学习经历。现在这一段时间算是悠闲一点，上午可以多睡一会儿，下午溜达溜达，剩下的时间就可以认真地写一写我和iOS的事。
-理性认识自己 首先声明一下，我不是一个技术大咖，我学iOS也不是很好，我写这些文章">
+<meta name="twitter:title" content="开发小技巧-日期格式转换">
+<meta name="twitter:description" content="写在开头在开发过程中，经常要用到日期格式的转换，加之，网上博客对于日期格式转换的方法国语冗杂，小编特此总结一下，分享给各位读者，如有问题可以在公众号后台留言。
+yyyy-MM-dd HHmmss转换成yyyyMMddHHmmss的方法 方法一：利用字符串替换方法生成指定的样式，此方法很暴力但不是最好：
+12345678- (NSString *)getConvertDateToSameStrle:">
 
 
 
@@ -120,9 +120,9 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2016/08/27/开篇之谈/"/>
+  <link rel="canonical" href="http://yoursite.com/2016/11/12/开发小技巧-日期格式转换/"/>
 
-  <title> 开篇之谈 | 最晚的开始 </title>
+  <title> 开发小技巧-日期格式转换 | 最晚的开始 </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -262,7 +262,7 @@
             
             
               
-                开篇之谈
+                开发小技巧-日期格式转换
               
             
           </h1>
@@ -274,8 +274,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-08-27T19:32:34+08:00" content="2016-08-27">
-              2016-08-27
+            <time itemprop="dateCreated" datetime="2016-11-12T11:14:34+08:00" content="2016-11-12">
+              2016-11-12
             </time>
           </span>
 
@@ -288,8 +288,8 @@
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/悟·生活/" itemprop="url" rel="index">
-                    <span itemprop="name">悟·生活</span>
+                  <a href="/categories/iOS学习记录/" itemprop="url" rel="index">
+                    <span itemprop="name">iOS学习记录</span>
                   </a>
                 </span>
 
@@ -328,12 +328,32 @@
       
 
       
-        <h3 id="心中的碎碎念"><a href="#心中的碎碎念" class="headerlink" title="心中的碎碎念"></a>心中的碎碎念</h3><p> 此刻，值得高兴的一件事是我拥有属于自己的博客了，我可以感谢自由的事了。</p>
-<p> 其实，我本可以更早一些来记录学习iOS的这些事儿，以前都是被各种学校项目缠身，没有时间更没有太多精力来梳理自己的学习经历。现在这一段时间算是悠闲一点，上午可以多睡一会儿，下午溜达溜达，剩下的时间就可以认真地写一写我和iOS的事。</p>
-<h3 id="理性认识自己"><a href="#理性认识自己" class="headerlink" title="理性认识自己"></a>理性认识自己</h3><p> 首先声明一下，我不是一个技术大咖，我学iOS也不是很好，我写这些文章单纯是为了记录我学习iOS的方法和心得体会。现在是移动互联网的天下，更是分享的时代，我愿意把我所知道所理解分享给大家，一方面可以为要走这条路的人增加点经验，另一方面也希望各路技术大咖路过的时候给提一点建议。</p>
-<p> 在这个文集中我不以时间为序去编排，我更多的采用插叙或倒叙。因为我早在2013年就开始学习iOS开发了，从那时到现在，iOS更新迭代了好多版本，可以说三年前iOS的知识体系都或多或少的有些改变。因此，我在写的时候更多的参照最新的官方文档，必要的时候我会以对比的方式呈现出来。</p>
-<h3 id="呐喊"><a href="#呐喊" class="headerlink" title="呐喊"></a>呐喊</h3><p> 写这一篇文章最主要的原因是我迷茫了，我去应聘iOS开发工程师的时候，感觉我学的好多都没有用到，感觉到自己的认识很肤浅，内心那种自卑感难以排遣，借此机会好好提升自己，有一句话叫做“不想当将军的不是好士兵”，你想当将军吗？那就跟我一起再次踏上iOS学习的征程！！！<br> ———-坚持到无能为力，拼搏到感动自己——-</p>
-<h3 id="是因为努力了才有希望，而不是因为有希望才去努力"><a href="#是因为努力了才有希望，而不是因为有希望才去努力" class="headerlink" title="是因为努力了才有希望，而不是因为有希望才去努力"></a>是因为努力了才有希望，而不是因为有希望才去努力</h3><h3 id="加油吧，骚年！牛人用的都是最笨的办法！"><a href="#加油吧，骚年！牛人用的都是最笨的办法！" class="headerlink" title="加油吧，骚年！牛人用的都是最笨的办法！"></a>加油吧，骚年！牛人用的都是最笨的办法！</h3>
+        <h4 id="写在开头"><a href="#写在开头" class="headerlink" title="写在开头"></a>写在开头</h4><p>在开发过程中，经常要用到日期格式的转换，加之，网上博客对于日期格式转换的方法国语冗杂，小编特此总结一下，分享给各位读者，如有问题可以在公众号后台留言。</p>
+<h3 id="yyyy-MM-dd-HHmmss转换成yyyyMMddHHmmss的方法"><a href="#yyyy-MM-dd-HHmmss转换成yyyyMMddHHmmss的方法" class="headerlink" title="yyyy-MM-dd HHmmss转换成yyyyMMddHHmmss的方法"></a>yyyy-MM-dd HHmmss转换成yyyyMMddHHmmss的方法</h3><p> 方法一：利用字符串替换方法生成指定的样式，此方法很暴力但不是最好：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">- (NSString *)getConvertDateToSameStrle:(NSString *)dateStr&#123;</div><div class="line">    </div><div class="line">    dateStr = [dateStr stringByReplacingOccurrencesOfString:@&quot; &quot; withString:@&quot;&quot;];//去除空格</div><div class="line">    NSString *symbolStr = [dateStr stringByReplacingOccurrencesOfString:@&quot;-&quot; withString:@&quot;&quot;];//去除‘—’</div><div class="line">    symbolStr = [symbolStr stringByReplacingOccurrencesOfString:@&quot;:&quot; withString:@&quot;&quot;];//去除&apos;:&apos;</div><div class="line">    return symbolStr;</div><div class="line">    </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p> 方法二：利用NSDateFormatter类对日期格式进行规范，建议将该方法写在NSString分类里：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">- (NSString *)dateString&#123;</div><div class="line">    </div><div class="line">    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];</div><div class="line">    [formatter setDateFormat:@&quot;yyyy-MM-dd HH:mm:ss&quot;];</div><div class="line">    NSDate *tempDate = [formatter dateFromString:self];</div><div class="line">    NSDateFormatter *formatter2 = [[NSDateFormatter alloc] init];</div><div class="line">    [formatter2 setDateFormat:@&quot;yyyyMMddHHmmss&quot;];</div><div class="line">    return [formatter2 stringFromDate:tempDate];</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h4 id="方法二可以适用多种日期格式转换的场景，使用基本步骤如下："><a href="#方法二可以适用多种日期格式转换的场景，使用基本步骤如下：" class="headerlink" title="方法二可以适用多种日期格式转换的场景，使用基本步骤如下："></a>方法二可以适用多种日期格式转换的场景，使用基本步骤如下：</h4><p> 1、创建一个NSDateFormatter实例，指定日期当前格式，生成对应的NSDate对象；<br> 2、再次创建一个NSDateFormatter实例，指定要转换的日期格式，调用下面的方法就可以完成转换；</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">- (NSString *)stringFromDate:(NSDate *)date;</div></pre></td></tr></table></figure>
+<h4 id="最后，我把有关日期格式转换的方法上传至我的Github库-具体包含内容如下："><a href="#最后，我把有关日期格式转换的方法上传至我的Github库-具体包含内容如下：" class="headerlink" title="最后，我把有关日期格式转换的方法上传至我的Github库,具体包含内容如下："></a>最后，我把有关日期格式转换的方法上传至我的<a href="https://github.com/123sunxiaolin/Jack_Utils" target="_blank" rel="external">Github库</a>,具体包含内容如下：</h4><h5 id="NSDictionary-Utils"><a href="#NSDictionary-Utils" class="headerlink" title="NSDictionary+Utils"></a>NSDictionary+Utils</h5><p><code>- (NSString *)jsonString;</code> //<strong>转换成Json字符串</strong></p>
+<p><code>- (NSData *)jsonData;</code> //<strong>转换成Json数据</strong></p>
+<h5 id="NSData-Utils"><a href="#NSData-Utils" class="headerlink" title="NSData+Utils"></a>NSData+Utils</h5><p> <code>- (NSDictionary *)toDictionary;</code> //<strong>转换成字典</strong></p>
+<p> <code>- (NSString *)string;</code> //<strong>转换成字符串</strong></p>
+<h5 id="NSString-Utils"><a href="#NSString-Utils" class="headerlink" title="NSString+Utils"></a>NSString+Utils</h5><p> <code>- (NSData *)data;</code> //<strong>转换成数据</strong></p>
+<p> <code>- (NSDictionary *)dictionary;</code> //<strong>转换成对应的字典</strong></p>
+<p> <code>- (NSString *)dateString;</code> //<strong>转换日期字符串显示格式，如：2016-03-12 10:20:30转换为 20160312102030的方法</strong></p>
+<p> <code>- (NSDate *)date;</code> //<strong>转换成对应时间对象的方法</strong></p>
+<p> <code>- (NSString *)dateStringFromTimeStamp;</code> //<strong>将时间戳转换成日期字符串</strong></p>
+<p> <code>- (NSDate *)dateFromTimeStamp;</code> //<strong>将时间戳转换成日期对象</strong></p>
+<h5 id="NSDate-Utils"><a href="#NSDate-Utils" class="headerlink" title="NSDate+Utils"></a>NSDate+Utils</h5><p> <code>+ (NSString *)CurrentTime;</code> //<strong>获取当前时间的字符串</strong></p>
+<p> <code>+ (NSString *)CurrentTimeAll;</code> //<strong>获取指定日期的字符串</strong></p>
+<p> <code>- (NSString *)dueDateTime;</code> //<strong>获取指定日期的时间戳:yyyyMMddHHmmss</strong></p>
+<p> <code>- (NSString *)unixTimeStamp;</code> //<strong>获取指定日期的Unix时间戳</strong></p>
+<p><code>- (long long)timeStamp;</code> //<strong>返回数字类型的时间戳</strong></p>
+<h5 id="UIView-Utils"><a href="#UIView-Utils" class="headerlink" title="UIView+Utils"></a>UIView+Utils</h5><p><code>- (UIImage *)screenShootWithScale:(CGFloat)scale targetImageSize:(CGSize)imageSize;</code> //<strong>进行截图</strong></p>
+<h5 id="Tools：通用工具类"><a href="#Tools：通用工具类" class="headerlink" title="Tools：通用工具类"></a>Tools：通用工具类</h5><p> <code>+ (UIImage *)screenImageWithSize:(CGSize)imageSize;</code> // <strong>获取当前屏幕的截图，包含整个屏幕</strong></p>
+<p> <code>+ (UIImage *)screenImageWithView:(UIView *)targetView Size:(CGSize)imageSize isOpaque:(BOOL)isOpaque scale:(CGFloat)scale;</code> // <strong>获取当前屏幕的截图，包含整个屏幕</strong></p>
+<h5 id="BaseObject：内部实现JSON解析的model基类"><a href="#BaseObject：内部实现JSON解析的model基类" class="headerlink" title="BaseObject：内部实现JSON解析的model基类"></a>BaseObject：内部实现JSON解析的model基类</h5>
       
     </div>
 
@@ -381,7 +401,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/随记/" rel="tag">#随记</a>
+            <a href="/tags/iOS开发常用小技巧/" rel="tag">#iOS开发常用小技巧</a>
           
         </div>
       
@@ -390,17 +410,13 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/08/27/iOS开发中的这些权限，你搞懂了吗？/" rel="next" title="iOS开发中的这些权限，你搞懂了吗？">
-                <i class="fa fa-chevron-left"></i> iOS开发中的这些权限，你搞懂了吗？
+              <a href="/2016/08/27/开篇之谈/" rel="next" title="开篇之谈">
+                <i class="fa fa-chevron-left"></i> 开篇之谈
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/11/12/开发小技巧-日期格式转换/" rel="prev" title="开发小技巧-日期格式转换">
-                开发小技巧-日期格式转换 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -548,7 +564,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#心中的碎碎念"><span class="nav-number">1.</span> <span class="nav-text">心中的碎碎念</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#理性认识自己"><span class="nav-number">2.</span> <span class="nav-text">理性认识自己</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#呐喊"><span class="nav-number">3.</span> <span class="nav-text">呐喊</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#是因为努力了才有希望，而不是因为有希望才去努力"><span class="nav-number">4.</span> <span class="nav-text">是因为努力了才有希望，而不是因为有希望才去努力</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#加油吧，骚年！牛人用的都是最笨的办法！"><span class="nav-number">5.</span> <span class="nav-text">加油吧，骚年！牛人用的都是最笨的办法！</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#写在开头"><span class="nav-number">1.</span> <span class="nav-text">写在开头</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#yyyy-MM-dd-HHmmss转换成yyyyMMddHHmmss的方法"><span class="nav-number"></span> <span class="nav-text">yyyy-MM-dd HHmmss转换成yyyyMMddHHmmss的方法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#方法二可以适用多种日期格式转换的场景，使用基本步骤如下："><span class="nav-number">1.</span> <span class="nav-text">方法二可以适用多种日期格式转换的场景，使用基本步骤如下：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#最后，我把有关日期格式转换的方法上传至我的Github库-具体包含内容如下："><span class="nav-number">2.</span> <span class="nav-text">最后，我把有关日期格式转换的方法上传至我的Github库,具体包含内容如下：</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#NSDictionary-Utils"><span class="nav-number">2.1.</span> <span class="nav-text">NSDictionary+Utils</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#NSData-Utils"><span class="nav-number">2.2.</span> <span class="nav-text">NSData+Utils</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#NSString-Utils"><span class="nav-number">2.3.</span> <span class="nav-text">NSString+Utils</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#NSDate-Utils"><span class="nav-number">2.4.</span> <span class="nav-text">NSDate+Utils</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#UIView-Utils"><span class="nav-number">2.5.</span> <span class="nav-text">UIView+Utils</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Tools：通用工具类"><span class="nav-number">2.6.</span> <span class="nav-text">Tools：通用工具类</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#BaseObject：内部实现JSON解析的model基类"><span class="nav-number">2.7.</span> <span class="nav-text">BaseObject：内部实现JSON解析的model基类</span></a></li></ol></li></ol></div>
             
           </div>
         </section>
