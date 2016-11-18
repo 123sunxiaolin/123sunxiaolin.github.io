@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="随记," />
+  <meta name="keywords" content="系统权限," />
 
 
 
@@ -84,22 +84,45 @@
 
 
 
-<meta name="description" content="一我和iOS相识在2013年，那一年我在上大二。一次信息基础课上，授课老师向我们展示了他在研究生期间所做的iOS项目，那华丽丽的界面让人瞬间怦然心动，也是在那一刻，我与iOS结下了缘。
-二   我是自学的iOS，那时候感觉特别难，找不到学习的突破口，自然学习的效率很低，再加上iOS在那几年也是刚刚兴起，有关iOS开发资源也是相对匮乏的，入门前的那段日子身心煎熬，多少次想放弃，就是不服输。
-三201">
+<meta name="description" content="问题描述在iOS 10下 ，首次进入应用时，会有询问是否允许网络连接权限的的弹窗，为更好进行用户交互，需要在打开应用时获取应用禁用网络权限状态（状态分为：未知、限制网络、未限制网络），客户端根据不同的权限状态定制相应的人机交互。
+问题调研针对请求应用网络权限可能存在的几种情形，操作与对应的状态都是笔者测试得到的，具体如下所示：
+
+
+
+可能操作
+关闭
+无线局域网
+无线局域网&amp;amp;蜂窝
+不进行操">
 <meta property="og:type" content="article">
-<meta property="og:title" content="重新认识iOS">
-<meta property="og:url" content="http://yoursite.com/2016/08/27/重新认识iOS/index.html">
+<meta property="og:title" content="如何获取iOS应用网络权限？">
+<meta property="og:url" content="http://yoursite.com/2016/11/18/如何获取iOS应用网络权限？/index.html">
 <meta property="og:site_name" content="最晚的开始">
-<meta property="og:description" content="一我和iOS相识在2013年，那一年我在上大二。一次信息基础课上，授课老师向我们展示了他在研究生期间所做的iOS项目，那华丽丽的界面让人瞬间怦然心动，也是在那一刻，我与iOS结下了缘。
-二   我是自学的iOS，那时候感觉特别难，找不到学习的突破口，自然学习的效率很低，再加上iOS在那几年也是刚刚兴起，有关iOS开发资源也是相对匮乏的，入门前的那段日子身心煎熬，多少次想放弃，就是不服输。
-三201">
-<meta property="og:updated_time" content="2016-08-27T15:22:46.000Z">
+<meta property="og:description" content="问题描述在iOS 10下 ，首次进入应用时，会有询问是否允许网络连接权限的的弹窗，为更好进行用户交互，需要在打开应用时获取应用禁用网络权限状态（状态分为：未知、限制网络、未限制网络），客户端根据不同的权限状态定制相应的人机交互。
+问题调研针对请求应用网络权限可能存在的几种情形，操作与对应的状态都是笔者测试得到的，具体如下所示：
+
+
+
+可能操作
+关闭
+无线局域网
+无线局域网&amp;amp;蜂窝
+不进行操">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1713024-83437bc2f696a82c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:updated_time" content="2016-11-18T14:44:46.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="重新认识iOS">
-<meta name="twitter:description" content="一我和iOS相识在2013年，那一年我在上大二。一次信息基础课上，授课老师向我们展示了他在研究生期间所做的iOS项目，那华丽丽的界面让人瞬间怦然心动，也是在那一刻，我与iOS结下了缘。
-二   我是自学的iOS，那时候感觉特别难，找不到学习的突破口，自然学习的效率很低，再加上iOS在那几年也是刚刚兴起，有关iOS开发资源也是相对匮乏的，入门前的那段日子身心煎熬，多少次想放弃，就是不服输。
-三201">
+<meta name="twitter:title" content="如何获取iOS应用网络权限？">
+<meta name="twitter:description" content="问题描述在iOS 10下 ，首次进入应用时，会有询问是否允许网络连接权限的的弹窗，为更好进行用户交互，需要在打开应用时获取应用禁用网络权限状态（状态分为：未知、限制网络、未限制网络），客户端根据不同的权限状态定制相应的人机交互。
+问题调研针对请求应用网络权限可能存在的几种情形，操作与对应的状态都是笔者测试得到的，具体如下所示：
+
+
+
+可能操作
+关闭
+无线局域网
+无线局域网&amp;amp;蜂窝
+不进行操">
+<meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/1713024-83437bc2f696a82c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 
 
 
@@ -120,9 +143,9 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2016/08/27/重新认识iOS/"/>
+  <link rel="canonical" href="http://yoursite.com/2016/11/18/如何获取iOS应用网络权限？/"/>
 
-  <title> 重新认识iOS | 最晚的开始 </title>
+  <title> 如何获取iOS应用网络权限？ | 最晚的开始 </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -262,7 +285,7 @@
             
             
               
-                重新认识iOS
+                如何获取iOS应用网络权限？
               
             
           </h1>
@@ -274,8 +297,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-08-27T19:32:34+08:00" content="2016-08-27">
-              2016-08-27
+            <time itemprop="dateCreated" datetime="2016-11-18T22:44:46+08:00" content="2016-11-18">
+              2016-11-18
             </time>
           </span>
 
@@ -288,8 +311,8 @@
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/悟·生活/" itemprop="url" rel="index">
-                    <span itemprop="name">悟·生活</span>
+                  <a href="/categories/iOS学习记录/" itemprop="url" rel="index">
+                    <span itemprop="name">iOS学习记录</span>
                   </a>
                 </span>
 
@@ -304,8 +327,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2016/08/27/重新认识iOS/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/08/27/重新认识iOS/" itemprop="commentsCount"></span>
+                <a href="/2016/11/18/如何获取iOS应用网络权限？/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/11/18/如何获取iOS应用网络权限？/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -335,14 +358,42 @@
       
 
       
-        <h3 id="一"><a href="#一" class="headerlink" title="一"></a>一</h3><p>我和iOS相识在2013年，那一年我在上大二。一次信息基础课上，授课老师向我们展示了他在研究生期间所做的iOS项目，那华丽丽的界面让人瞬间怦然心动，也是在那一刻，我与iOS结下了缘。</p>
-<h3 id="二"><a href="#二" class="headerlink" title="二"></a>二</h3><p>   我是自学的iOS，那时候感觉特别难，找不到学习的突破口，自然学习的效率很低，再加上iOS在那几年也是刚刚兴起，有关iOS开发资源也是相对匮乏的，入门前的那段日子身心煎熬，多少次想放弃，就是不服输。</p>
-<h3 id="三"><a href="#三" class="headerlink" title="三"></a>三</h3><p>2013年暑假，我跟指导老师借了一本关于iOS开发的书籍，我又利用课余时间在淘宝上找人给装上黑苹果系统，万事俱备了，我用了两个月的时间将那本书上的代码从头到尾敲了一遍，对iOS开发有了基本的认识，慢慢地开始接触一些小型的应用。跟着指导老师参加几个大学生软件大赛，虽然成绩不怎么样，但自己有了很大的进步。</p>
-<h3 id="四"><a href="#四" class="headerlink" title="四"></a>四</h3><p> 当时我是学校里第一个学习iOS开发的，做了几个应用，有两个已上传到<a href="https://itunes.apple.com/cn/app/he-bei-bei-fang-xue-yuan-yu/id931726608?mt=8" target="_blank" rel="external">AppStore</a>,在学生当中算是有成就的，再加上老师常说有一两个上线的应用找工作不愁，当时的我沾沾自喜，但我没有放弃继续学习，我学习各种自定义控件，把目光都局限在搭建<a href="http://baike.baidu.com/link?url=Wbegv2CsOTAxtsVKO2WbqZAPjwaCXIE4Wv_O4n3TKqDmGQqXtzftYjmHYOwrCBVihATZ28WMe0-NMSHzlxO5bK" target="_blank" rel="external">UI</a>界面上。</p>
-<h3 id="五"><a href="#五" class="headerlink" title="五"></a>五</h3><p> 老师一给项目我就利用手底下现有的框架去搭建应用界面，界面布局和逻辑跳转都需要根据自己的理解去设计，有时候就会违背<a href="http://developer.apple.com/library/ios/#documentation/UserExperience/Conceptual/MobileHIG/" target="_blank" rel="external">iOS人机界面指南</a>，甚至造成内存泄露,可我当时并没有考虑这些，也没有人对应用提过这方面的要求，成了纯粹的代码搬运工。</p>
-<h3 id="六"><a href="#六" class="headerlink" title="六"></a>六</h3><p> 可见，我当时的学习方法是有问题的，正应了那句话<code>付出和收获是不成正比的</code>。可是，最悲哀的是我那个时候根本没有意识到这严重的错误，就这样学习到了2015年6月份，我开始考研了，就放下对iOS学习。</p>
-<h3 id="七"><a href="#七" class="headerlink" title="七"></a>七</h3><p>一放就是半年，好多常用的方法都已然忘却，就连基本的Auto Layout常用操作都忘了（不可原谅）。多亏了前几天去北京参加面试，让我重新认识到自己的错误，但愿亡羊补牢，为时不晚。特撰写此文以重新认识iOS开发，重新梳理学习思路，为以后的职业生涯做好铺垫。</p>
-<h3 id="八"><a href="#八" class="headerlink" title="八"></a>八</h3><p>愿迷茫的我们重新找回自信！</p>
+        <p><img src="http://upload-images.jianshu.io/upload_images/1713024-83437bc2f696a82c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="疯狂"></p>
+<h4 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h4><p>在iOS 10下 ，首次进入应用时，会有询问是否允许网络连接权限的的弹窗，为更好进行用户交互，需要在打开应用时获取应用禁用网络权限状态（状态分为：未知、限制网络、未限制网络），客户端根据不同的权限状态定制相应的人机交互。</p>
+<h4 id="问题调研"><a href="#问题调研" class="headerlink" title="问题调研"></a>问题调研</h4><p>针对请求应用网络权限可能存在的几种情形，操作与对应的状态都是笔者测试得到的，具体如下所示：</p>
+<table>
+<thead>
+<tr>
+<th>可能操作</th>
+<th>关闭</th>
+<th>无线局域网</th>
+<th>无线局域网&amp;蜂窝</th>
+<th>不进行操作</th>
+<th>锁屏</th>
+<th>解锁</th>
+<th>按Home键</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>权限状态</td>
+<td>Restricted</td>
+<td>NotRestricted</td>
+<td>NotRestricted</td>
+<td>Unknown</td>
+<td>Unknown</td>
+<td>恢复原始状态</td>
+<td>保持原有状态</td>
+</tr>
+</tbody>
+</table>
+<h4 id="解决问题"><a href="#解决问题" class="headerlink" title="解决问题"></a>解决问题</h4><p> 使用<code>CoreTelephony.framework</code>框架下的<code>CTCellularData</code>类中的方法和属性进行解决,具体如下：</p>
+<p>当联网权限的状态发生改变时，会在上述方法中捕捉到改变后的状态，可根据更新后的状态执行相应的操作。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">CTCellularData *cellularData = [[CTCellularData alloc]init];</div><div class="line">cellularData.cellularDataRestrictionDidUpdateNotifier =  ^(CTCellularDataRestrictedState state)&#123;</div><div class="line">        //状态改变时进行相关操作</div><div class="line">    &#125;;</div></pre></td></tr></table></figure>
+<p> 当查询应用联网权限时可以使用下面的方法：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">CTCellularData *cellularData = [[CTCellularData alloc]init];</div><div class="line">CTCellularDataRestrictedState state = cellularData.restrictedState;</div><div class="line">    switch (state) &#123;</div><div class="line">        case kCTCellularDataRestricted:</div><div class="line">            NSLog(@&quot;Restricrted&quot;);</div><div class="line">            break;</div><div class="line">        case kCTCellularDataNotRestricted:</div><div class="line">            NSLog(@&quot;Not Restricted&quot;);</div><div class="line">            break;</div><div class="line">        case kCTCellularDataRestrictedStateUnknown:</div><div class="line">            NSLog(@&quot;Unknown&quot;);</div><div class="line">            break;</div><div class="line">        default:</div><div class="line">            break;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h4 id="补充一下"><a href="#补充一下" class="headerlink" title="补充一下"></a>补充一下</h4><p> <code>CoreTelephony.framework</code>iOS7之前还是私有框架，框架内部提供还是私有API,但在iOS7之后该框架就成为公开的框架，大家可以尽情的使用了。</p>
+<p>写这篇博客一方面是为了弥补前些日子写的博客<a href="http://www.jianshu.com/p/27e57922232b" target="_blank" rel="external">iOS开发中的这些权限，你搞懂了吗？</a>中的不足之处，另一方面是为了解决部分读者的疑惑，希望读者大人们多多支持！</p>
 
       
     </div>
@@ -391,7 +442,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/随记/" rel="tag">#随记</a>
+            <a href="/tags/系统权限/" rel="tag">#系统权限</a>
           
         </div>
       
@@ -400,13 +451,13 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
+              <a href="/2016/11/12/为Next主题添加多说评论系统 /" rel="next" title="为Next主题添加多说评论系统">
+                <i class="fa fa-chevron-left"></i> 为Next主题添加多说评论系统
+              </a>
+            
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/08/27/走上社会，你的任性还能保持几分？/" rel="prev" title="走上社会，你的任性还能保持几分？">
-                走上社会，你的任性还能保持几分？ <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -435,7 +486,7 @@
 
       <section id="comments">
    <!-- 多说评论框 start -->
-<div id="ds-thread" class="ds-thread" data-thread-key="2016/08/27/重新认识iOS/" data-title="重新认识iOS" data-url="http://yoursite.com/2016/08/27/重新认识iOS/" data-author-key="1"></div>
+<div id="ds-thread" class="ds-thread" data-thread-key="2016/11/18/如何获取iOS应用网络权限？/" data-title="如何获取iOS应用网络权限？" data-url="http://yoursite.com/2016/11/18/如何获取iOS应用网络权限？/" data-author-key="1"></div>
 <!-- 多说评论框 end -->
 <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 <script type="text/javascript">
@@ -575,7 +626,7 @@ var duoshuoQuery = {short_name:"jacklin"};
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#一"><span class="nav-number">1.</span> <span class="nav-text">一</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二"><span class="nav-number">2.</span> <span class="nav-text">二</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#三"><span class="nav-number">3.</span> <span class="nav-text">三</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#四"><span class="nav-number">4.</span> <span class="nav-text">四</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#五"><span class="nav-number">5.</span> <span class="nav-text">五</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#六"><span class="nav-number">6.</span> <span class="nav-text">六</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#七"><span class="nav-number">7.</span> <span class="nav-text">七</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#八"><span class="nav-number">8.</span> <span class="nav-text">八</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#问题描述"><span class="nav-number">1.</span> <span class="nav-text">问题描述</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#问题调研"><span class="nav-number">2.</span> <span class="nav-text">问题调研</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#解决问题"><span class="nav-number">3.</span> <span class="nav-text">解决问题</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#补充一下"><span class="nav-number">4.</span> <span class="nav-text">补充一下</span></a></li></ol></div>
             
           </div>
         </section>
