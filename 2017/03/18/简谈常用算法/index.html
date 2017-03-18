@@ -1,0 +1,805 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="算法," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="写在前面算法，对于iOS开发者来说，既熟悉又陌生。首先，在iOS开发过程中，对算法要求不高，用到算法时候也是少之甚少，除非是一些接近底层开发需要用到一些算法。但是，算法作为基础，又是开发者的必备技能，尤其是求职面试中一项重要考察指标。
+遂，笔者在此整理一下常用的算法，以供后用。
+算法中的概念排序算法稳定性：假定在待排序的记录序列中，存在多个具有相同的关键字的记录，若经过排序，这些记录的相对次序保">
+<meta property="og:type" content="article">
+<meta property="og:title" content="简谈常用算法">
+<meta property="og:url" content="http://yoursite.com/2017/03/18/简谈常用算法/index.html">
+<meta property="og:site_name" content="最晚的开始">
+<meta property="og:description" content="写在前面算法，对于iOS开发者来说，既熟悉又陌生。首先，在iOS开发过程中，对算法要求不高，用到算法时候也是少之甚少，除非是一些接近底层开发需要用到一些算法。但是，算法作为基础，又是开发者的必备技能，尤其是求职面试中一项重要考察指标。
+遂，笔者在此整理一下常用的算法，以供后用。
+算法中的概念排序算法稳定性：假定在待排序的记录序列中，存在多个具有相同的关键字的记录，若经过排序，这些记录的相对次序保">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1713024-f412b241fd1db3e4.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:updated_time" content="2017-03-18T13:36:27.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="简谈常用算法">
+<meta name="twitter:description" content="写在前面算法，对于iOS开发者来说，既熟悉又陌生。首先，在iOS开发过程中，对算法要求不高，用到算法时候也是少之甚少，除非是一些接近底层开发需要用到一些算法。但是，算法作为基础，又是开发者的必备技能，尤其是求职面试中一项重要考察指标。
+遂，笔者在此整理一下常用的算法，以供后用。
+算法中的概念排序算法稳定性：假定在待排序的记录序列中，存在多个具有相同的关键字的记录，若经过排序，这些记录的相对次序保">
+<meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/1713024-f412b241fd1db3e4.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: 'Jack_lin'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/03/18/简谈常用算法/"/>
+
+  <title> 简谈常用算法 | 最晚的开始 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">最晚的开始</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">所有的为时已晚都是开始的最好时候</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                简谈常用算法
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2017-03-18T20:27:42+08:00" content="2017-03-18">
+              2017-03-18
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/iOS面试题/" itemprop="url" rel="index">
+                    <span itemprop="name">iOS面试题</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2017/03/18/简谈常用算法/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/03/18/简谈常用算法/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+
+
+          
+          
+
+          
+              &nbsp; | &nbsp;
+              <span class="page-pv"><i class="fa fa-file-o"></i>
+              <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+              </span>
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><img src="http://upload-images.jianshu.io/upload_images/1713024-f412b241fd1db3e4.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="生活木有捷径"></p>
+<h4 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h4><p><strong>算法</strong>，对于iOS开发者来说，既熟悉又陌生。首先，在iOS开发过程中，对算法要求不高，用到算法时候也是少之甚少，除非是一些接近底层开发需要用到一些算法。但是，算法作为基础，又是开发者的必备技能，尤其是求职面试中一项重要考察指标。</p>
+<p>遂，笔者在此整理一下常用的算法，以供后用。</p>
+<h4 id="算法中的概念"><a href="#算法中的概念" class="headerlink" title="算法中的概念"></a>算法中的概念</h4><p><strong>排序算法稳定性</strong>：假定在待排序的记录序列中，存在多个具有相同的关键字的记录，若经过排序，这些记录的相对次序保持不变，即在原序列中，ri=rj，且ri在rj之前，而在排序后的序列中，ri仍在rj之前，则称这种排序算法是稳定的；否则称为不稳定的。（算法的稳定性与不稳定性是可以相互转化的）<a href="http://baike.baidu.com/link?url=GL6ZJH_bm0g6_eA3FwNW4GMcKoD_b3XTvy5qgUQHRPDmCq6qXQU3kTtQ3gDmpgeI8FNogPELdirISrrPQ3z865TiQg3NI_bC6OHo6MrqCiXv3pcYfe-T7SDWhkXGhMNA8Rq93yE-4uIdukBUTeTkE1tIWj05MQ5Q6778m6xOea7" target="_blank" rel="external">脑补一下</a></p>
+<p>时间复杂度、空间复杂度，自行搜索，不再赘述。</p>
+<h4 id="需要讲解的算法"><a href="#需要讲解的算法" class="headerlink" title="需要讲解的算法"></a>需要讲解的算法</h4><p><strong> 冒泡排序算法 </strong> <br><br><strong>  选择排序算法 </strong> <br><br><strong>  快速排序算法 </strong> <br><br><strong>  归并排序算法 </strong> <br><br><strong>  翻转二叉树（递归实现）</strong> <br></p>
+<h4 id="冒泡排序算法"><a href="#冒泡排序算法" class="headerlink" title="冒泡排序算法"></a>冒泡排序算法</h4><p><strong>算法实现思想</strong>：<br><br> 1、比较相邻的元素，若第一个比第二个大，就交换这两个元素的位置；<br><br>2、对每一对相邻元素做同样的工作，从开始第一对到结尾的最后一对，但除了最后一个元素；<br><br>3、持续每次对越来越少的元素重复上面的步骤，直到没有任何一对数字需要比较。</p>
+<p><strong>时间复杂度</strong>：min = O(n),max =O(n^2);</p>
+<p><strong>算法稳定性</strong>：稳定，判断标准：相同值的两个元素不会更换位置；（将冒泡排序算法的稳定性转化为不稳定性的方式：<strong>array[j] &lt; array[j+1]改为array[j] &lt;= array[j+1]</strong>）</p>
+<p><strong>算法实现</strong>：（<strong>降序排序</strong>）</p>
+<p><strong>C语言实现:</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">int algorithm()&#123;</div><div class="line">    int array[] = &#123;24, 17, 85, 13, 9, 54, 76, 45, 5, 63&#125;;</div><div class="line">    int count = sizeof(array)/sizeof(int);</div><div class="line">    for (int i = 0; i &lt; count - 1; i ++) &#123;</div><div class="line">      for (int j = 0; j &lt; count - 1 - i; j ++) &#123;</div><div class="line">          if (array[j] &lt; array[j+1]) &#123;</div><div class="line">            int temp = array[j];</div><div class="line">            array[j] = array[j+1];</div><div class="line">            array[j+1] = temp;</div><div class="line">        &#125;</div><div class="line">     &#125;</div><div class="line">  &#125;</div><div class="line">    for (int index = 0; index &lt; count; index ++) &#123;</div><div class="line">      printf(&quot;%d&quot;, array[index]);</div><div class="line">    &#125;</div><div class="line">    return 0;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><strong>swift语言实现:</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">func testBubbling() &#123;</div><div class="line">    //冒泡排序</div><div class="line">    var dataArray = [24, 17, 85, 13, 9, 54, 76, 45, 5, 63]</div><div class="line">    let count = dataArray.count</div><div class="line">    for i in 0..&lt;count-1 &#123;</div><div class="line">      for j in 0..&lt;count-1-i &#123;</div><div class="line">            print(&quot;i:\(i) j:\(j)&quot;)</div><div class="line">        if dataArray[j] &lt; dataArray[j+1] &#123;</div><div class="line">                let temp = dataArray[j]</div><div class="line">                dataArray[j] = dataArray[j+1]</div><div class="line">                dataArray[j+1] = temp</div><div class="line">        &#125;</div><div class="line">      &#125;</div><div class="line">    &#125;</div><div class="line">      for index in 0..&lt;count &#123;</div><div class="line">          print(&quot;result:\(dataArray[index])&quot;)</div><div class="line">      &#125;</div><div class="line">  &#125;</div></pre></td></tr></table></figure>
+<p><strong>Objective-C语言实现：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">- (NSArray *)bubbleAlforithm:(NSArray *)array&#123;</div><div class="line">  NSMutableArray *dataArray = [NSMutableArray arrayWithArray:array];</div><div class="line">  NSInteger count = dataArray.count;</div><div class="line">  for (int i = 0; i &lt; count - 1; i ++) &#123;</div><div class="line">      for (int j = 0; j &lt; count - 1 - i; j ++) &#123;</div><div class="line">              if (dataArray[j] &lt; dataArray[j + 1]) &#123;</div><div class="line">                  id temp = dataArray[j];</div><div class="line">                  [dataArray replaceObjectAtIndex:j withObject:dataArray[j+1]];</div><div class="line">                  [dataArray replaceObjectAtIndex:j+1 withObject:temp];</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">   &#125;</div><div class="line">  return dataArray;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h4 id="选择排序算法"><a href="#选择排序算法" class="headerlink" title="选择排序算法"></a>选择排序算法</h4><p><strong>算法实现思想</strong>：<br><br>1、n个记录的文件的直接选择排序可经过n-1趟直接选择排序得到有序结果：<br><br>2、<strong>初始状态</strong>：无序区为R[1..n]，有序区为空；<br><br>3、<strong>第1趟排序</strong>： 在无序区R[1..n]中选出关键字最小的记录R[k]，将它与无序区的第1个记录R[1]交换，使R[1..1]和R[2..n]分别变为记录个数增加1个的新有序区和记录个数减少1个的新无序区；<br><br>4、<strong>第i趟排序</strong>：第i趟排序开始时，当前有序区和无序区分别为R[1..i-1]和R(i..n）。该趟排序从当前无序区中选出关键字最小的记录 R[k]，将它与无序区的第1个记录R交换，使R[1..i]和R分别变为记录个数增加1个的新有序区和记录个数减少1个的新无序区。</p>
+<p><strong>时间复杂度</strong>：min = O(n),max =O(n^2);</p>
+<p><strong>算法稳定性</strong>：不稳定；（<strong>不稳定的原因举例</strong>：5 5 3  变为 3 5 5，第一趟排序，第一个<code>5</code>会和<code>3</code>的位置互换，从而破坏该算法的稳定性）</p>
+<p><strong>算法实现：</strong>（<strong>升序排序</strong>）</p>
+<p><strong>C语言实现：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">void selectAlgorithm(int array[])&#123;</div><div class="line">  int count = sizeof(array)/sizeof(int);</div><div class="line">  int index;</div><div class="line">  for (int i = 0; i &lt; count - 1; i ++) &#123;</div><div class="line">      index = i;</div><div class="line">      for (int j = i + 1; j &lt; count; j ++) &#123;</div><div class="line">          if (array[index] &gt; array[j]) &#123;</div><div class="line">          index = j;</div><div class="line">      &#125;</div><div class="line">  &#125;</div><div class="line">  if (index != i) &#123;</div><div class="line">      int temp = array[i];</div><div class="line">      array[i] = array[index];</div><div class="line">      array[index] = temp;</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><strong>swift语言实现</strong>：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">func selectorMethods(array: [Int]) -&gt; [Int] &#123;</div><div class="line">  var dataArray = array</div><div class="line">  let count = dataArray.count</div><div class="line">  var index: Int</div><div class="line"></div><div class="line">  for i in 0..&lt;count-1 &#123;</div><div class="line">      index = i</div><div class="line">      for j in i+1..&lt;count &#123;</div><div class="line">      if dataArray[index] &gt; dataArray[j] &#123;</div><div class="line">          index = j</div><div class="line">      &#125;</div><div class="line">  &#125;</div><div class="line"></div><div class="line">      if index != i &#123;</div><div class="line">        let temp = dataArray[i]</div><div class="line">        dataArray[i] = dataArray[index]</div><div class="line">        dataArray[index] = temp</div><div class="line">     &#125;</div><div class="line">    &#125;</div><div class="line">  return dataArray</div><div class="line">  &#125;</div></pre></td></tr></table></figure>
+<p><strong>OC语言实现：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">- (NSArray *)selectAlgorithm:(NSArray *)array&#123;</div><div class="line">    NSMutableArray *tempArray = [NSMutableArray arrayWithArray:array];</div><div class="line">    NSInteger count = tempArray.count;</div><div class="line">    int index;</div><div class="line">    for (int i = 0; i &lt; count - 1; i ++) &#123;</div><div class="line">      index = i;</div><div class="line">      for (int j = i + 1; j &lt; count; j ++) &#123;</div><div class="line">          if (tempArray[index] &gt; tempArray[j]) &#123;</div><div class="line">              index = j;</div><div class="line">      &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">        if (index != i) &#123;</div><div class="line">              id temp = tempArray[i];</div><div class="line">              [tempArray replaceObjectAtIndex:i withObject:tempArray[index]];</div><div class="line">              [tempArray replaceObjectAtIndex:index withObject:temp];</div><div class="line">      &#125;</div><div class="line">    &#125;</div><div class="line">  return tempArray;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h4 id="快速排序算法"><a href="#快速排序算法" class="headerlink" title="快速排序算法"></a>快速排序算法</h4><p><strong>算法实现思想</strong>：<br><br> 1、设置两个变量i、j，排序开始的时候：i=0，j=N-1；<br><br> 2、以第一个数组元素作为关键数据，赋值给key，即key=A[0]；<br><br> 3、从j开始向前搜索，即由后开始向前搜索(j–)，找到第一个小于key的值A[j]，将A[j]和A[i]互换；<br><br> 4、从i开始向后搜索，即由前开始向后搜索(i++)，找到第一个大于key的A[i]，将A[i]和A[j]互换；<br><br> 5、重复第3、4步，直到i=j； (3,4步中，没找到符合条件的值，即3中A[j]不小于key,4中A[i]不大于key的时候改变j、i的值，使得j=j-1，i=i+1，直至找到为止。找到符合条件的值，进行交换的时候i， j指针位置不变。另外，i==j这一过程一定正好是i+或j-完成的时候，此时令循环结束）。</p>
+<p><strong>时间复杂度</strong>：max = O(n^2) 、 average = O(n*log2n)；</p>
+<p><strong>算法稳定性</strong>：不稳定；</p>
+<p><strong>算法实现</strong> （<strong>升序排序</strong>）</p>
+<p><strong>C语言实现</strong>：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div></pre></td><td class="code"><pre><div class="line">void algorithm(int *array, int left, int right)&#123;</div><div class="line">    </div><div class="line">    if (left &gt;= right) &#123;/*如果左边索引大于或者等于右边的索引就代表已经整理完成一个组了*/</div><div class="line">        return ;</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    int i = left;</div><div class="line">    int j = right;</div><div class="line">    int key = array[left];</div><div class="line">    </div><div class="line">    while (i &lt; j) &#123; /*控制在当组内寻找一遍*/</div><div class="line">        </div><div class="line">        while (i &lt; j &amp;&amp; array[j] &gt;= key) &#123;/*而寻找结束的条件就是，1，找到一个小于或者大于key的数（大于或小于取决于你想升</div><div class="line">                                           序还是降序）2，没有符合条件1的，并且i与j的大小没有反转*/</div><div class="line">            j --;</div><div class="line">        &#125;</div><div class="line">        array[i] = array[j];/*找到一个这样的数后就把它赋给前面的被拿走的i的值（如果第一次循环且key是</div><div class="line">                             a[left]，那么就是给key）*/</div><div class="line">        </div><div class="line">        while (i &lt; j &amp;&amp; array[i] &lt;= key) &#123;/*这是i在当组内向前寻找，同上，不过注意与key的大小关系停止循环和上面相反，</div><div class="line">                                           因为排序思想是把数往两边扔，所以左右两边的数大小与key的关系相反*/</div><div class="line">            i ++;</div><div class="line">        &#125;</div><div class="line">        </div><div class="line">        array[j] = array[i];</div><div class="line">        </div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    array[i] = key;/*当在当组内找完一遍以后就把中间数key回归*/</div><div class="line">    //递归</div><div class="line">    algorithm(array, left, i - 1);/*最后用同样的方式对分出来的左边的小组进行同上的做法*/</div><div class="line">    algorithm(array, i + 1, right);/*用同样的方式对分出来的右边的小组进行同上的做法*/</div><div class="line">                                    /*当然最后可能会出现很多分左右，直到每一组的i = j 为止*/</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><strong>Swift语言实现：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line">func fastAlgorithm(array:[Int], left:Int, right:Int) -&gt;Void&#123;</div><div class="line">        </div><div class="line">        if left &gt;= right&#123;</div><div class="line">            return</div><div class="line">        &#125;</div><div class="line">        var tempArray = array</div><div class="line">        var i = left</div><div class="line">        var j = right</div><div class="line">        let key = tempArray[left]</div><div class="line">        </div><div class="line">        while(i &lt; j)&#123;</div><div class="line">            while(i &lt; j &amp;&amp; tempArray[j] &gt;= key)&#123;</div><div class="line">                j--</div><div class="line">            &#125;</div><div class="line">            </div><div class="line">            tempArray[i] = tempArray[j]</div><div class="line">            </div><div class="line">            while(i &lt; j &amp;&amp; tempArray[i] &lt;= key)&#123;</div><div class="line">                i++</div><div class="line">            &#125;</div><div class="line">            tempArray[j] = tempArray[i]</div><div class="line">        &#125;</div><div class="line">        </div><div class="line">        tempArray[i] = key</div><div class="line">        fastAlgorithm(tempArray, left: left, right: i - 1)</div><div class="line">        fastAlgorithm(tempArray, left: i + 1, right: right)</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
+<p><strong>Objective-C语言实现：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line">- (void )fast:(NSArray *)array left:(int)left right:(int)right&#123;</div><div class="line">    </div><div class="line">    if (left &gt;= right) &#123;</div><div class="line">        return ;</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    NSMutableArray *tempArray = [NSMutableArray arrayWithArray:array];</div><div class="line">    int i = left;</div><div class="line">    int j = right;</div><div class="line">    int key = [tempArray[left] intValue];</div><div class="line">    </div><div class="line">    while (i &lt; j) &#123;</div><div class="line">        while (i &lt; j &amp;&amp; [tempArray[j] intValue] &gt;= key) &#123;</div><div class="line">            j --;</div><div class="line">        &#125;</div><div class="line">        tempArray[i] = tempArray[j];</div><div class="line">        </div><div class="line">        while (i &lt; j &amp;&amp; [tempArray[i] intValue] &lt;= key) &#123;</div><div class="line">            i ++;</div><div class="line">        &#125;</div><div class="line">        tempArray[j] = tempArray[i];</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    tempArray[i] = [NSNumber numberWithInt:key];</div><div class="line">    </div><div class="line">    [self fast:tempArray left:left right:i - 1];</div><div class="line">    [self fast:tempArray left:i + 1 right:right];</div><div class="line">    </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h4 id="归并排序算法"><a href="#归并排序算法" class="headerlink" title="归并排序算法"></a>归并排序算法</h4><p><strong> 算法实现思想</strong>：<br><br>1、申请空间，使其大小为两个已经排序序列之和，该空间用来存放合并后的序列；<br><br>2、设定两个指针，最初位置分别为两个已经排序序列的起始位置；<br><br>3、比较两个指针所指向的元素，选择相对小的元素放入到合并空间，并移动指针到下一位置；<br><br>4、 重复步骤3直到某一指针超出序列尾；<br><br>5、将另一序列剩下的所有元素直接复制到合并序列尾。<br></p>
+<p><strong> 举例说明</strong>：假设存在数列：{4，189，80，290，35，8，2}<br><br>1、初始状态：4，189，80，290，35，8，2 <br><br>2、第一次归并后：{4，189}，{80，290}，{35，8}，{2} 比较次数：3 <br><br>3、第二次归并后：{4，80，189，290}，{2，8，35} 比较次数：4 <br><br>4、第三次归并后：{2，4，8，35，80，189，290} 比较次数：4 <br><br>5、总比较次数：3+4+4 = 11</p>
+<p><strong> 时间复杂度</strong>:<strong> O(n log n)</strong>;</p>
+<p><strong>算法稳定性</strong> ： 稳定;</p>
+<p><strong>算法实现</strong>:</p>
+<p><strong> C语言实现</strong>：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div></pre></td><td class="code"><pre><div class="line">void Merge(int sourceArr[], int tempArr[], int startIndex, int midIndex, int endIndex)&#123;</div><div class="line">    </div><div class="line">    int i = startIndex;</div><div class="line">    int j = midIndex + 1;</div><div class="line">    int k = startIndex;</div><div class="line">    while (i != midIndex &amp;&amp; j != endIndex) &#123;</div><div class="line">        if (sourceArr[i] &gt; sourceArr[j]) &#123;</div><div class="line">            tempArr[k++] = sourceArr[j ++];</div><div class="line">        &#125;else&#123;</div><div class="line">            tempArr[k++] = sourceArr[i ++];</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    while (i != midIndex + 1) &#123;</div><div class="line">        tempArr[k++] = sourceArr[i++];</div><div class="line">    &#125;</div><div class="line">    while (j != endIndex + 1) &#123;</div><div class="line">        tempArr[k ++] = sourceArr[j++];</div><div class="line">    &#125;</div><div class="line">    for (i = startIndex; i &lt; endIndex; i ++) &#123;</div><div class="line">        sourceArr[i] = tempArr[i];</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">//recursion operation</div><div class="line">void MergeSort(int sourceArr[], int tempArr[], int startIndex, int endIndex)&#123;</div><div class="line">    </div><div class="line">    int midIndex;</div><div class="line">    if (startIndex &lt; endIndex) &#123;</div><div class="line">        midIndex = (startIndex + endIndex)/2;</div><div class="line">        MergeSort(sourceArr, tempArr, startIndex, midIndex);</div><div class="line">        MergeSort(sourceArr, tempArr, midIndex + 1, endIndex);</div><div class="line">        Merge(sourceArr, tempArr, startIndex, midIndex, endIndex);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><strong>Objective-C语言实现</strong>：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div></pre></td><td class="code"><pre><div class="line">- (NSArray *)mergeWithArray:(NSArray *)sourceArray</div><div class="line">            startIndex:(NSInteger)startIndex</div><div class="line">              midIndex:(NSInteger)midIndex</div><div class="line">              endIndex:(NSInteger)endIndex&#123;</div><div class="line">    NSMutableArray *sourceMutableArray = [NSMutableArray arrayWithArray:sourceArray];</div><div class="line">    NSMutableArray *tempMutableArray = [[NSMutableArray alloc] init];</div><div class="line">    </div><div class="line">    NSInteger i = startIndex;</div><div class="line">    NSInteger j = midIndex + 1;</div><div class="line">    NSInteger k = startIndex;</div><div class="line">    while (i != midIndex &amp;&amp; j != endIndex)&#123;</div><div class="line">        if (sourceMutableArray[i] &gt; sourceMutableArray[j]) &#123;</div><div class="line">            //tempMutableArray[k] = sourceMutableArray[j];</div><div class="line">            [tempMutableArray replaceObjectAtIndex:k withObject:sourceMutableArray[j]];</div><div class="line">            k ++;</div><div class="line">            j ++;</div><div class="line">        &#125;else&#123;</div><div class="line">            //tempMutableArray[k] = sourceMutableArray[i];</div><div class="line">            [tempMutableArray replaceObjectAtIndex:k withObject:sourceMutableArray[i]];</div><div class="line">            k ++;</div><div class="line">            i ++;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    while (i != midIndex + 1) &#123;</div><div class="line">        [tempMutableArray replaceObjectAtIndex:k withObject:sourceMutableArray[i]];</div><div class="line">        k ++;</div><div class="line">        i ++;</div><div class="line">    &#125;</div><div class="line">    while (j != endIndex + 1) &#123;</div><div class="line">        [tempMutableArray replaceObjectAtIndex:k withObject:sourceMutableArray[j]];</div><div class="line">        k ++;</div><div class="line">        j ++;</div><div class="line">    &#125;</div><div class="line">    for (i = startIndex; i &lt; endIndex; i ++) &#123;</div><div class="line">        [sourceMutableArray replaceObjectAtIndex:i withObject:tempMutableArray[i]];</div><div class="line">    &#125;</div><div class="line">    return sourceMutableArray;</div><div class="line">&#125;</div><div class="line"></div><div class="line">- (NSArray *)mergeSortWithArray:(NSArray *)sourceArray</div><div class="line">                     startIndex:(NSInteger)startIndex</div><div class="line">                       endIndex:(NSInteger)endIndex&#123;</div><div class="line">    if (startIndex &lt; endIndex) &#123;</div><div class="line">        NSInteger midIndex = (startIndex + endIndex)/2;</div><div class="line">        NSArray *tempArray =  [self mergeSortWithArray:sourceArray</div><div class="line">                                            startIndex:startIndex</div><div class="line">                                              endIndex:endIndex];</div><div class="line">        NSArray *tempArray2 = [self mergeSortWithArray:tempArray</div><div class="line">                                            startIndex:midIndex + 1</div><div class="line">                                              endIndex:endIndex];</div><div class="line">        return [self mergeWithArray:tempArray2</div><div class="line">                         startIndex:startIndex</div><div class="line">                           midIndex:midIndex</div><div class="line">                           endIndex:endIndex];</div><div class="line">       </div><div class="line">    &#125;</div><div class="line">    return nil;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><strong>Swift语言实现：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div></pre></td><td class="code"><pre><div class="line"> func mergeSort(array: [Int])-&gt; [Int]&#123;</div><div class="line">    var helper = Array(count: array.count, repeatedValue: 0)</div><div class="line">    var array = array</div><div class="line">    mergeSort(&amp;array, helper: &amp;helper, low: 0, high: array.count - 1)</div><div class="line">    return array</div><div class="line">    </div><div class="line">&#125;</div><div class="line"></div><div class="line">func mergeSort(inout array: [Int], inout helper:[Int], low: Int, high: Int)&#123;</div><div class="line">    guard low &lt; high else&#123;</div><div class="line">        return</div><div class="line">    &#125;</div><div class="line">    let middle = (high + low)/2 + low</div><div class="line">    mergeSort(&amp;array, helper: &amp;helper, low: low, high: middle)</div><div class="line">    mergeSort(&amp;array, helper: &amp;helper, low: middle + 1, high: high)</div><div class="line">    merge(&amp;array, helper: &amp;helper, low: low, middle: middle, high: high)</div><div class="line">    </div><div class="line">&#125;</div><div class="line"></div><div class="line">func merge(inout array: [Int], inout helper: [Int], low: Int, middle:Int, high:Int)&#123;</div><div class="line">    for i in low...high&#123;</div><div class="line">        helper[i] = array[i]</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    var helperLeft = low</div><div class="line">    var helpeRight = middle + 1</div><div class="line">    var current = low</div><div class="line">    </div><div class="line">    while helperLeft &lt;= middle &amp;&amp; helpeRight &lt;= high&#123;</div><div class="line">        if helperLeft &lt;= helpeRight&#123;</div><div class="line">            array[current] = helper[helperLeft]</div><div class="line">            helperLeft++</div><div class="line">        &#125;else&#123;</div><div class="line">            array[current] = helper[helpeRight]</div><div class="line">            helpeRight++</div><div class="line">        &#125;</div><div class="line">        current++</div><div class="line">    &#125;</div><div class="line">    guard middle - helperLeft &gt;= 0 else&#123;</div><div class="line">        return</div><div class="line">    &#125;</div><div class="line">    for i in 0...middle - helperLeft&#123;</div><div class="line">        array[current+i] = helper[helperLeft + i]</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h4 id="归并排序算法-1"><a href="#归并排序算法-1" class="headerlink" title="归并排序算法"></a>归并排序算法</h4><p><strong>算法实现（递归）</strong>：</p>
+<p><strong>.h文件</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line">@interface TreeNode : NSObject</div><div class="line">/**</div><div class="line"> *  左节点</div><div class="line"> */</div><div class="line">@property (nonatomic, strong) TreeNode *left;</div><div class="line">/**</div><div class="line"> *  右节点</div><div class="line"> */</div><div class="line">@property (nonatomic, strong) TreeNode *right;</div><div class="line"></div><div class="line">@end</div><div class="line"></div><div class="line">@class TreeNode;</div><div class="line">@interface InvertTreeNode : NSObject</div><div class="line"></div><div class="line">/**</div><div class="line"> *  翻转二叉树算法</div><div class="line"> *</div><div class="line"> *  @param node 二叉树</div><div class="line"> *</div><div class="line"> *  @return 翻转后的二叉树</div><div class="line"> */</div><div class="line">- (TreeNode *)invertTree:(TreeNode *)node;</div><div class="line"></div><div class="line">@end</div></pre></td></tr></table></figure>
+<p><strong>.m文件</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">@implementation TreeNode</div><div class="line">@end</div><div class="line"></div><div class="line">@implementation InvertTreeNode</div><div class="line"></div><div class="line">- (TreeNode *)invertTree:(TreeNode *)node&#123;</div><div class="line">    </div><div class="line">    if (!node) &#123;</div><div class="line">        return nil;</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    node.left = [self invertTree:node.left];</div><div class="line">    node.right = [self invertTree:node.right];</div><div class="line">    </div><div class="line">    TreeNode *temp = node.left;</div><div class="line">    node.left = node.right;</div><div class="line">    node.right = temp;</div><div class="line">    </div><div class="line">    return node;</div><div class="line">&#125;</div><div class="line"></div><div class="line">@end</div></pre></td></tr></table></figure>
+<h4 id="写到最后"><a href="#写到最后" class="headerlink" title="写到最后"></a>写到最后</h4><blockquote>
+<p><strong>以上内容，就是我对常用算法的简单总结。大家如有其他意见欢迎评论。</strong></p>
+</blockquote>
+
+      
+    </div>
+
+    <div>
+      
+        
+<div id="wechat_subscriber" style="display: block; padding: 10px 0; margin: 20px auto; width: 100%; text-align: center">
+    <img id="wechat_subscriber_qcode" src="/uploads/images/wechat-qcode.jpg" alt="Jack_lin wechat" style="width: 200px; max-width: 100%;"/>
+    <div>欢迎您扫一扫上面的微信公众号，订阅我的博客！</div>
+</div>
+
+
+      
+    </div>
+
+    <div>
+      
+        
+  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+    <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+      <span>赏</span>
+    </button>
+    <div id="QR" style="display: none;">
+      
+        <div id="wechat" style="display: inline-block">
+          <img id="wechat_qr" src="/uploads/images/wechat-reward-image.png" alt="Jack_lin WeChat Pay"/>
+          <p>微信打赏</p>
+        </div>
+      
+      
+        <div id="alipay" style="display: inline-block">
+          <img id="alipay_qr" src="/uploads/images/alipay-reward-image.png" alt="Jack_lin Alipay"/>
+          <p>支付宝打赏</p>
+        </div>
+      
+    </div>
+  </div>
+
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/算法/" rel="tag">#算法</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/11/18/如何获取iOS应用网络权限？/" rel="next" title="如何获取iOS应用网络权限？">
+                <i class="fa fa-chevron-left"></i> 如何获取iOS应用网络权限？
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+
+      <section id="comments">
+   <!-- 多说评论框 start -->
+<div id="ds-thread" class="ds-thread" data-thread-key="2017/03/18/简谈常用算法/" data-title="简谈常用算法" data-url="http://yoursite.com/2017/03/18/简谈常用算法/" data-author-key="1"></div>
+<!-- 多说评论框 end -->
+<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"jacklin"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+     || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+  </script>
+<!-- 多说公共JS代码 end -->
+  </section>
+
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="Jack_lin" />
+          <p class="site-author-name" itemprop="name">Jack_lin</p>
+          <p class="site-description motion-element" itemprop="description">My goal is not write code.if we could ship products and make all this money without writing any code,we could.Your job is ship products EXACTLY on time.It doesn’t matter whether you are a developer,tester,program manager,product manager whatever.Everybody’s job is the same.</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">16</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">5</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">14</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/123sunxiaolin" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/JacklinIOS/profile?rightmod=1&wvr=6&mod=personinfo" target="_blank" title="Weibo">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  Weibo
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              Links
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.jianshu.com/users/ef991f6d241c/latest_articles" title="Jack_lin简书" target="_blank">Jack_lin简书</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#写在前面"><span class="nav-number">1.</span> <span class="nav-text">写在前面</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#算法中的概念"><span class="nav-number">2.</span> <span class="nav-text">算法中的概念</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#需要讲解的算法"><span class="nav-number">3.</span> <span class="nav-text">需要讲解的算法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#冒泡排序算法"><span class="nav-number">4.</span> <span class="nav-text">冒泡排序算法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#选择排序算法"><span class="nav-number">5.</span> <span class="nav-text">选择排序算法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#快速排序算法"><span class="nav-number">6.</span> <span class="nav-text">快速排序算法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#归并排序算法"><span class="nav-number">7.</span> <span class="nav-text">归并排序算法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#归并排序算法-1"><span class="nav-number">8.</span> <span class="nav-text">归并排序算法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#写到最后"><span class="nav-number">9.</span> <span class="nav-text">写到最后</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Jack_lin</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+        
+
+<div class="busuanzi-count">
+
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv"><i class="fa fa-user"></i><span class="busuanzi-value" id="busuanzi_value_site_uv"></span></span>
+  
+
+  
+    <span class="site-pv"><i class="fa fa-eye"></i><span class="busuanzi-value" id="busuanzi_value_site_pv"></span></span>
+  
+  
+</div>
+
+
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"jacklin"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    <script src="/lib/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+<script type="text/javascript" async src="//push.zhanzhang.baidu.com/push.js">
+</script>
+
+
+</body>
+</html>
