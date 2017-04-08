@@ -1,0 +1,815 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="系统权限," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="前言上篇文章iOS开发中的这些权限，你搞懂了吗？介绍了一些常用权限的获取和请求方法，知道这些方法的使用基本上可以搞定大部分应用的权限访问的需求。但是，这些方法并不全面，不能涵盖住所有权限访问的方法。
+ So，笔者在介绍一下剩下的几种权限的访问方法和一些使用上的注意事项，希望能给大家的开发过程带来一丝便利。
+最后，笔者将经常使用的权限请求方法封装开源库JLAuthorizationManager送">
+<meta property="og:type" content="article">
+<meta property="og:title" content="再续iOS开发中的这些权限">
+<meta property="og:url" content="http://yoursite.com/2017/04/08/再续iOS开发中的这些权限/index.html">
+<meta property="og:site_name" content="最晚的开始">
+<meta property="og:description" content="前言上篇文章iOS开发中的这些权限，你搞懂了吗？介绍了一些常用权限的获取和请求方法，知道这些方法的使用基本上可以搞定大部分应用的权限访问的需求。但是，这些方法并不全面，不能涵盖住所有权限访问的方法。
+ So，笔者在介绍一下剩下的几种权限的访问方法和一些使用上的注意事项，希望能给大家的开发过程带来一丝便利。
+最后，笔者将经常使用的权限请求方法封装开源库JLAuthorizationManager送">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1713024-83437bc2f696a82c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1713024-9ea85da828de805b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1713024-576f14dca41175cb.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:updated_time" content="2017-04-08T05:37:08.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="再续iOS开发中的这些权限">
+<meta name="twitter:description" content="前言上篇文章iOS开发中的这些权限，你搞懂了吗？介绍了一些常用权限的获取和请求方法，知道这些方法的使用基本上可以搞定大部分应用的权限访问的需求。但是，这些方法并不全面，不能涵盖住所有权限访问的方法。
+ So，笔者在介绍一下剩下的几种权限的访问方法和一些使用上的注意事项，希望能给大家的开发过程带来一丝便利。
+最后，笔者将经常使用的权限请求方法封装开源库JLAuthorizationManager送">
+<meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/1713024-83437bc2f696a82c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: 'Jack_lin'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/04/08/再续iOS开发中的这些权限/"/>
+
+  <title> 再续iOS开发中的这些权限 | 最晚的开始 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">最晚的开始</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">所有的为时已晚都是开始的最好时候</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                再续iOS开发中的这些权限
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2017-04-08T12:52:48+08:00" content="2017-04-08">
+              2017-04-08
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/iOS学习记录/" itemprop="url" rel="index">
+                    <span itemprop="name">iOS学习记录</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2017/04/08/再续iOS开发中的这些权限/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/04/08/再续iOS开发中的这些权限/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+
+
+          
+          
+
+          
+              &nbsp; | &nbsp;
+              <span class="page-pv"><i class="fa fa-file-o"></i>
+              <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+              </span>
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><img src="http://upload-images.jianshu.io/upload_images/1713024-83437bc2f696a82c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="疯狂"></p>
+<h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>上篇文章<a href="http://www.jianshu.com/p/27e57922232b" target="_blank" rel="external">iOS开发中的这些权限，你搞懂了吗？</a>介绍了一些常用权限的获取和请求方法，知道这些方法的使用基本上可以搞定大部分应用的权限访问的需求。但是，这些方法并不全面，不能涵盖住所有权限访问的方法。</p>
+<p> So，笔者在介绍一下剩下的几种权限的访问方法和一些使用上的注意事项，希望能给大家的开发过程带来一丝便利。</p>
+<p>最后，笔者将经常使用的权限请求方法封装开源库<a href="https://github.com/123sunxiaolin/JLAuthorizationManager" target="_blank" rel="external">JLAuthorizationManager</a>送给大家，欢迎大家<strong>pull request</strong> 和 <strong>star</strong>~~</p>
+<h3 id="权限"><a href="#权限" class="headerlink" title="权限"></a>权限</h3><p>语音识别；</p>
+<p>媒体资料库/Apple Music;</p>
+<p>Siri;</p>
+<p>健康数据共享；</p>
+<p>蓝牙；</p>
+<p>住宅权限（HomeKit）;</p>
+<p>社交账号体系权限；</p>
+<p>活动与体能训练记录;</p>
+<p>广告标识；</p>
+<h3 id="语音识别"><a href="#语音识别" class="headerlink" title="语音识别"></a>语音识别</h3><p>引入头文件： <strong>@import Speech;</strong></p>
+<p>首先判断当前应用所处的权限状态，若当前状态为<strong>NotDetermined</strong>（未确定），此时，需要调用系统提供的请求权限方法，同时也是触发系统弹窗的所在点；</p>
+<p>该权限涉及到的类为<strong> SFSpeechRecognizer</strong>，具体代码如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line">- (void)p_requestSpeechRecognizerAccessWithAuthorizedHandler:(void(^)())authorizedHandler</div><div class="line">                                         unAuthorizedHandler:(void(^)())unAuthorizedHandler&#123;</div><div class="line">    </div><div class="line">    SFSpeechRecognizerAuthorizationStatus authStatus = [SFSpeechRecognizer authorizationStatus];</div><div class="line">    if (authStatus == SFSpeechRecognizerAuthorizationStatusNotDetermined) &#123;</div><div class="line">         //调用系统提供的权限访问的方法</div><div class="line">        [SFSpeechRecognizer requestAuthorization:^(SFSpeechRecognizerAuthorizationStatus status) &#123;</div><div class="line">            if (status == SFSpeechRecognizerAuthorizationStatusAuthorized) &#123;</div><div class="line">                dispatch_async(dispatch_get_main_queue(), ^&#123;</div><div class="line">                     //授权成功后</div><div class="line">                    authorizedHandler ? authorizedHandler() : nil;</div><div class="line">                &#125;);</div><div class="line">            &#125;else&#123;</div><div class="line">                dispatch_async(dispatch_get_main_queue(), ^&#123;</div><div class="line">                    //授权失败后</div><div class="line">                    unAuthorizedHandler ? unAuthorizedHandler() : nil;</div><div class="line">                &#125;);</div><div class="line">            &#125;</div><div class="line">        &#125;];</div><div class="line">        </div><div class="line">    &#125;else if (authStatus == SFSpeechRecognizerAuthorizationStatusAuthorized)&#123;</div><div class="line">        authorizedHandler ? authorizedHandler() : nil;</div><div class="line">    &#125;else&#123;</div><div class="line">        unAuthorizedHandler ? unAuthorizedHandler() : nil;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>需要注意的是，调用<code>requestAuthorization</code>方法的block回调是在任意的<strong>子线程</strong>中进行的，如果你需要在授权成功后刷新UI的话，需要将对应的方法置于<strong>主线程</strong>中进行，笔者将上述方法默认在主线程中进行。后续权限请求方法与此类似，不再赘述。</p>
+<p>在<strong>info.plist</strong>添加指定的配置信息，如下所示：<br><img src="http://upload-images.jianshu.io/upload_images/1713024-9ea85da828de805b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Speech Recognizer"></p>
+<h3 id="媒体资料库-Apple-Music"><a href="#媒体资料库-Apple-Music" class="headerlink" title="媒体资料库/Apple Music"></a>媒体资料库/Apple Music</h3><p> 导入头文件<strong>@import MediaPlayer;</strong></p>
+<p>使用类<strong>MPMediaLibrary</strong>进行权限访问，代码如下；</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">- (void)p_requestAppleMusicAccessWithAuthorizedHandler:(void(^)())authorizedHandler</div><div class="line">                                   unAuthorizedHandler:(void(^)())unAuthorizedHandler&#123;</div><div class="line">    MPMediaLibraryAuthorizationStatus authStatus = [MPMediaLibrary authorizationStatus];</div><div class="line">    if (authStatus == MPMediaLibraryAuthorizationStatusNotDetermined) &#123;</div><div class="line">        [MPMediaLibrary requestAuthorization:^(MPMediaLibraryAuthorizationStatus status) &#123;</div><div class="line">            if (status == MPMediaLibraryAuthorizationStatusAuthorized) &#123;</div><div class="line">                dispatch_async(dispatch_get_main_queue(), ^&#123;</div><div class="line">                    authorizedHandler ? authorizedHandler() : nil;</div><div class="line">                &#125;);</div><div class="line">            &#125;else&#123;</div><div class="line">                dispatch_async(dispatch_get_main_queue(), ^&#123;</div><div class="line">                    unAuthorizedHandler ? unAuthorizedHandler() : nil;</div><div class="line">                &#125;);</div><div class="line">            &#125;</div><div class="line">        &#125;];</div><div class="line">    &#125;else if (authStatus == MPMediaLibraryAuthorizationStatusAuthorized)&#123;</div><div class="line">         authorizedHandler ? authorizedHandler() : nil;</div><div class="line">    &#125;else&#123;</div><div class="line">        unAuthorizedHandler ? unAuthorizedHandler() : nil;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>在<strong>info.plist</strong>添加指定的配置信息，如下所示：<br><img src="http://upload-images.jianshu.io/upload_images/1713024-576f14dca41175cb.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Media"></p>
+<h3 id="Siri"><a href="#Siri" class="headerlink" title="Siri"></a>Siri</h3><p>导入头文件<strong>@import Intents;</strong>；</p>
+<p>与其他权限不同的时，使用<strong>Siri</strong>需要在Xcode中<strong>Capabilities</strong>打开<strong>Siri</strong>开关，Xcode会自动生成一个<strong>xx.entitlements</strong>文件，若没有打开该开关，项目运行时会报错。</p>
+<p>实现代码如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">- (void)p_requestSiriAccessWithAuthorizedHandler:(void(^)())authorizedHandler</div><div class="line">                             unAuthorizedHandler:(void(^)())unAuthorizedHandler&#123;</div><div class="line">    INSiriAuthorizationStatus authStatus = [INPreferences siriAuthorizationStatus];</div><div class="line">    if (authStatus == INSiriAuthorizationStatusNotDetermined) &#123;</div><div class="line">        [INPreferences requestSiriAuthorization:^(INSiriAuthorizationStatus status) &#123;</div><div class="line">            if (status == INSiriAuthorizationStatusAuthorized) &#123;</div><div class="line">                dispatch_async(dispatch_get_main_queue(), ^&#123;</div><div class="line">                     authorizedHandler ? authorizedHandler() : nil;</div><div class="line">                &#125;);</div><div class="line">            &#125;else&#123;</div><div class="line">                dispatch_async(dispatch_get_main_queue(), ^&#123;</div><div class="line">                    unAuthorizedHandler ? unAuthorizedHandler() : nil;</div><div class="line">                &#125;);</div><div class="line">            &#125;</div><div class="line">        &#125;];</div><div class="line">        </div><div class="line">    &#125;else if (authStatus == INSiriAuthorizationStatusAuthorized)&#123;</div><div class="line">        authorizedHandler ? authorizedHandler() : nil;</div><div class="line">    &#125;else&#123;</div><div class="line">        unAuthorizedHandler ? unAuthorizedHandler() : nil;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="健康数据共享"><a href="#健康数据共享" class="headerlink" title="健康数据共享"></a>健康数据共享</h3><p>导入头文件<strong>@import HealthKit;</strong></p>
+<p> 健康数据共享权限相对其他权限相对复杂一些，分为写入和读出权限.</p>
+<p> 在Xcode 8中的<code>info.plist</code>需要设置以下两种权限：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">1、Privacy - Health Update Usage Description</div><div class="line">2、Privacy - Health Share Usage Description</div></pre></td></tr></table></figure>
+<p> 具体实现代码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div></pre></td><td class="code"><pre><div class="line">//设置写入/共享的健康数据类型</div><div class="line">- (NSSet *)typesToWrite &#123;</div><div class="line">    HKQuantityType *stepType = [HKObjectType quantityTypeForIdentifier:HKQuantityTypeIdentifierStepCount];</div><div class="line">    HKQuantityType *distanceType = [HKObjectType quantityTypeForIdentifier:HKQuantityTypeIdentifierDistanceWalkingRunning];</div><div class="line">    return [NSSet setWithObjects:stepType,distanceType, nil];</div><div class="line">&#125;</div><div class="line"></div><div class="line">//设置读写以下为设置的权限类型：</div><div class="line">- (NSSet *)typesToRead &#123;</div><div class="line">   HKQuantityType *stepType = [HKObjectType quantityTypeForIdentifier:HKQuantityTypeIdentifierStepCount];</div><div class="line">    HKQuantityType *distanceType = [HKObjectType quantityTypeForIdentifier:HKQuantityTypeIdentifierDistanceWalkingRunning];</div><div class="line">    return [NSSet setWithObjects:stepType,distanceType, nil];</div><div class="line">&#125;</div><div class="line"></div><div class="line">//需要确定设备支持HealthKit</div><div class="line">if ([HKHealthStore isHealthDataAvailable]) &#123;</div><div class="line">        return;</div><div class="line">    &#125;</div><div class="line">HKHealthStore *healthStore = [[HKHealthStore alloc] init];</div><div class="line">    NSSet * typesToShare = [self typesToWrite];</div><div class="line">    NSSet * typesToRead = [self typesToRead];</div><div class="line">    [healthStore requestAuthorizationToShareTypes:typesToShare readTypes:typesToRead completion:^(BOOL success, NSError * _Nullable error) &#123;</div><div class="line">        if (success) &#123;</div><div class="line">            dispatch_async(dispatch_get_main_queue(), ^&#123;</div><div class="line">                NSLog(@&quot;Health has authorized!&quot;);</div><div class="line">            &#125;);</div><div class="line">        &#125;else&#123;</div><div class="line">            dispatch_async(dispatch_get_main_queue(), ^&#123;</div><div class="line">                NSLog(@&quot;Health has not authorized!&quot;);</div><div class="line">            &#125;);</div><div class="line">        &#125;</div><div class="line">    &#125;];</div></pre></td></tr></table></figure>
+<h3 id="蓝牙"><a href="#蓝牙" class="headerlink" title="蓝牙"></a>蓝牙</h3><p>需要导入头文件<strong>@import CoreBluetooth;</strong></p>
+<p>蓝牙的权限检测相对其他会复杂一些，需要在代理中检测蓝牙状态；</p>
+<p> 获取蓝牙权限：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">- (void)checkBluetoothAccess &#123;</div><div class="line">    CBCentralManager *cbManager = [[CBCentralManager alloc] initWithDelegate:self queue:nil];</div><div class="line">    CBManagerState state = [cbManager state];</div><div class="line">    if(state == CBManagerStateUnknown) &#123;</div><div class="line">        NSLog(@&quot;Unknown!&quot;);</div><div class="line">    &#125;</div><div class="line">    else if(state == CBManagerStateUnauthorized) &#123;</div><div class="line">         NSLog(@&quot;Unauthorized!&quot;);</div><div class="line">    &#125;</div><div class="line">    else &#123;</div><div class="line">        NSLog(@&quot;Granted!&quot;);</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">- (void)centralManagerDidUpdateState:(CBCentralManager *)central &#123;</div><div class="line">//这个代理方法会在蓝牙权限状态发生变化时被调用，并且可以根据不同的状态进行相应的修改UI或者数据访问的操作。</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p> 请求蓝牙权限</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">- (void)requestBluetoothAccess &#123;</div><div class="line">    CBCentralManager *cbManager = [[CBCentralManager alloc] initWithDelegate:self queue:nil];</div><div class="line">//该方法会显示用户同意的弹窗</div><div class="line">    [cbManager scanForPeripheralsWithServices:nil options:nil];</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="住宅权限（HomeKit）"><a href="#住宅权限（HomeKit）" class="headerlink" title="住宅权限（HomeKit）"></a>住宅权限（HomeKit）</h3><p>需导入头文件<strong>@import HomeKit;</strong></p>
+<p><code>HomeKit</code>请求权限的方法如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div></pre></td><td class="code"><pre><div class="line">- (void)requestHomeAccess &#123;</div><div class="line">    self.homeManager = [[HMHomeManager alloc] init];</div><div class="line">//当设置该代理方法后，会请求用户权限</div><div class="line">    self.homeManager.delegate = self;</div><div class="line">&#125;</div><div class="line"></div><div class="line">- (void)homeManagerDidUpdateHomes:(HMHomeManager *)manager &#123;</div><div class="line">    if (manager.homes.count &gt; 0) &#123;</div><div class="line">        // home的数量不为空，即表示用户权限已通过</div><div class="line">    &#125;</div><div class="line">    else &#123;</div><div class="line">        __weak HMHomeManager *weakHomeManager = manager; // Prevent memory leak</div><div class="line">        [manager addHomeWithName:@&quot;Test Home&quot; completionHandler:^(HMHome *home, NSError *error) &#123;</div><div class="line">            </div><div class="line">            if (!error) &#123;</div><div class="line">               //权限允许</div><div class="line">            &#125;</div><div class="line">            else &#123;</div><div class="line">                if (error.code == HMErrorCodeHomeAccessNotAuthorized) &#123;</div><div class="line">                   //权限不允许</div><div class="line">                &#125;</div><div class="line">                else &#123;</div><div class="line">                    //处理请求产生的错误</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">            </div><div class="line">            if (home) &#123;</div><div class="line">                [weakHomeManager removeHome:home completionHandler:^(NSError * _Nullable error) &#123;</div><div class="line">                    //移除Home</div><div class="line">                &#125;];</div><div class="line">            &#125;</div><div class="line">        &#125;];</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="社交账号体系权限"><a href="#社交账号体系权限" class="headerlink" title="社交账号体系权限"></a>社交账号体系权限</h3><p>导入头文件<strong>@import Accounts;</strong></p>
+<p>获取对应的权限：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">- (void)checkSocialAccountAuthorizationStatus:(NSString *)accountTypeIndentifier &#123;</div><div class="line"></div><div class="line">    ACAccountStore *accountStore = [[ACAccountStore alloc] init];</div><div class="line">    ACAccountType *socialAccount = [accountStore accountTypeWithAccountTypeIdentifier:accountTypeIndentifier];</div><div class="line">    if ([socialAccount accessGranted]) &#123;</div><div class="line">        NSLog(@&quot;权限通过了&quot;);</div><div class="line">    &#125;else&#123;</div><div class="line">         NSLog(@&quot;权限未通过！&quot;);</div><div class="line"> &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p> <code>accountTypeIndentifier</code> 可以是以下类型：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">ACCOUNTS_EXTERN NSString * const ACAccountTypeIdentifierTwitter NS_AVAILABLE(NA, 5_0);</div><div class="line">ACCOUNTS_EXTERN NSString * const ACAccountTypeIdentifierFacebook NS_AVAILABLE(NA, 6_0);</div><div class="line">ACCOUNTS_EXTERN NSString * const ACAccountTypeIdentifierSinaWeibo NS_AVAILABLE(NA, 6_0);</div><div class="line">ACCOUNTS_EXTERN NSString * const ACAccountTypeIdentifierTencentWeibo NS_AVAILABLE(NA, 7_0);</div><div class="line">ACCOUNTS_EXTERN NSString * const ACAccountTypeIdentifierLinkedIn NS_AVAILABLE(NA, NA);</div></pre></td></tr></table></figure>
+<p>请求对应的权限：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">- (void)requestTwitterAccess &#123;</div><div class="line">    ACAccountStore *accountStore = [[ACAccountStore alloc] init];</div><div class="line">    ACAccountType *accountType = [accountStore accountTypeWithAccountTypeIdentifier:accountTypeIdentifier];</div><div class="line">   </div><div class="line">    [accountStore requestAccessToAccountsWithType: accountType options:nil completion:^(BOOL granted, NSError *error) &#123;</div><div class="line">        dispatch_async(dispatch_get_main_queue(), ^&#123;</div><div class="line">           if(granted)&#123;</div><div class="line">                 NSLog(@&quot;授权通过了&quot;);</div><div class="line">            &#125;else&#123;</div><div class="line">                 NSLog(@&quot;授权未通过&quot;);</div><div class="line">            &#125;</div><div class="line">        &#125;);</div><div class="line">    &#125;];</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="活动与体能训练记录"><a href="#活动与体能训练记录" class="headerlink" title="活动与体能训练记录"></a>活动与体能训练记录</h3><p>导入头文件<strong>@import CoreMotion;</strong></p>
+<p>具体实现代码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">//访问活动与体能训练记录</div><div class="line">    CMMotionActivityManager *cmManager = [[CMMotionActivityManager alloc] init];</div><div class="line">    NSOperationQueue *queue = [[NSOperationQueue alloc] init];</div><div class="line">    [cmManager startActivityUpdatesToQueue:queue withHandler:^(CMMotionActivity *activity) &#123;</div><div class="line">        </div><div class="line">        //授权成功后，会进入Block方法内，授权失败不会进入Block方法内</div><div class="line">    &#125;];</div></pre></td></tr></table></figure>
+<h3 id="广告标识"><a href="#广告标识" class="headerlink" title="广告标识"></a>广告标识</h3><p>导入头文件<strong>@import AdSupport;</strong></p>
+<p>获取广告标识的权限状态：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">BOOL isAuthorizedForAd = [[ASIdentifierManager sharedManager] isAdvertisingTrackingEnabled];</div></pre></td></tr></table></figure>
+<p>在使用<code>advertisingIdentifier</code>属性前，必须调用上述方法判断是否支持，如果上述方法返回值为<code>NO</code>，则<code>advertising ID</code>访问将会受限。</p>
+<h3 id="小结一下"><a href="#小结一下" class="headerlink" title="小结一下"></a>小结一下</h3><p>通过以上两篇文章的整理，有关iOS系统权限问题的处理基本上涵盖完全了；</p>
+<p> 并不是所有的权限访问都有显式的调用方法，有些是在使用过程中进行访问的，比如<code>定位权限</code>、<code>蓝牙共享权限</code>、<code>Homekit权限</code>、<code>活动与体能训练权限</code>，这些权限在使用时注意回调方法中的权限处理；</p>
+<p> <code>HomeKit</code>、<code>HealthKit</code>、<code>Siri</code>需要开启<code>Capabilities</code>中的开关，即生成<code>projectName.entitlements</code>文件；</p>
+<p>开源库<a href="https://github.com/123sunxiaolin/JLAuthorization" target="_blank" rel="external">JLAuthorizationManager</a>支持集成大部分常用的权限访问，便捷使用 <strong>welcome to pull request or star</strong>；</p>
+<blockquote>
+<p>扫一扫下面的二维码，欢迎关注我的个人微信公众号攻城狮的动态（ID:iOSDevSkills），可在微信公众号进行留言，更多精彩技术文章，期待您的加入！一起讨论，一起成长！一起攻城狮！</p>
+</blockquote>
+
+      
+    </div>
+
+    <div>
+      
+        
+<div id="wechat_subscriber" style="display: block; padding: 10px 0; margin: 20px auto; width: 100%; text-align: center">
+    <img id="wechat_subscriber_qcode" src="/uploads/images/wechat-qcode.jpg" alt="Jack_lin wechat" style="width: 200px; max-width: 100%;"/>
+    <div>欢迎您扫一扫上面的微信公众号，订阅我的博客！</div>
+</div>
+
+
+      
+    </div>
+
+    <div>
+      
+        
+  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+    <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+      <span>赏</span>
+    </button>
+    <div id="QR" style="display: none;">
+      
+        <div id="wechat" style="display: inline-block">
+          <img id="wechat_qr" src="/uploads/images/wechat-reward-image.png" alt="Jack_lin WeChat Pay"/>
+          <p>微信打赏</p>
+        </div>
+      
+      
+        <div id="alipay" style="display: inline-block">
+          <img id="alipay_qr" src="/uploads/images/alipay-reward-image.png" alt="Jack_lin Alipay"/>
+          <p>支付宝打赏</p>
+        </div>
+      
+    </div>
+  </div>
+
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/系统权限/" rel="tag">#系统权限</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/03/26/[UIVIew]谈谈对drawRect的理解/" rel="next" title="谈谈对drawRect的理解">
+                <i class="fa fa-chevron-left"></i> 谈谈对drawRect的理解
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+
+      <section id="comments">
+   <!-- 多说评论框 start -->
+<div id="ds-thread" class="ds-thread" data-thread-key="2017/04/08/再续iOS开发中的这些权限/" data-title="再续iOS开发中的这些权限" data-url="http://yoursite.com/2017/04/08/再续iOS开发中的这些权限/" data-author-key="1"></div>
+<!-- 多说评论框 end -->
+<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"jacklin"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+     || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+  </script>
+<!-- 多说公共JS代码 end -->
+  </section>
+
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="Jack_lin" />
+          <p class="site-author-name" itemprop="name">Jack_lin</p>
+          <p class="site-description motion-element" itemprop="description">My goal is not write code.if we could ship products and make all this money without writing any code,we could.Your job is ship products EXACTLY on time.It doesn’t matter whether you are a developer,tester,program manager,product manager whatever.Everybody’s job is the same.</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">18</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">5</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">15</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/123sunxiaolin" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/JacklinIOS/profile?rightmod=1&wvr=6&mod=personinfo" target="_blank" title="Weibo">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  Weibo
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              Links
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.jianshu.com/users/ef991f6d241c/latest_articles" title="Jack_lin简书" target="_blank">Jack_lin简书</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#权限"><span class="nav-number">2.</span> <span class="nav-text">权限</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#语音识别"><span class="nav-number">3.</span> <span class="nav-text">语音识别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#媒体资料库-Apple-Music"><span class="nav-number">4.</span> <span class="nav-text">媒体资料库/Apple Music</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Siri"><span class="nav-number">5.</span> <span class="nav-text">Siri</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#健康数据共享"><span class="nav-number">6.</span> <span class="nav-text">健康数据共享</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#蓝牙"><span class="nav-number">7.</span> <span class="nav-text">蓝牙</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#住宅权限（HomeKit）"><span class="nav-number">8.</span> <span class="nav-text">住宅权限（HomeKit）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#社交账号体系权限"><span class="nav-number">9.</span> <span class="nav-text">社交账号体系权限</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#活动与体能训练记录"><span class="nav-number">10.</span> <span class="nav-text">活动与体能训练记录</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#广告标识"><span class="nav-number">11.</span> <span class="nav-text">广告标识</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#小结一下"><span class="nav-number">12.</span> <span class="nav-text">小结一下</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Jack_lin</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+        
+
+<div class="busuanzi-count">
+
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv"><i class="fa fa-user"></i><span class="busuanzi-value" id="busuanzi_value_site_uv"></span></span>
+  
+
+  
+    <span class="site-pv"><i class="fa fa-eye"></i><span class="busuanzi-value" id="busuanzi_value_site_pv"></span></span>
+  
+  
+</div>
+
+
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"jacklin"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    <script src="/lib/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+<script type="text/javascript" async src="//push.zhanzhang.baidu.com/push.js">
+</script>
+
+
+</body>
+</html>
