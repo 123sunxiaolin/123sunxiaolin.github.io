@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="UIView," />
+  <meta name="keywords" content="邮件," />
 
 
 
@@ -84,26 +84,41 @@
 
 
 
-<meta name="description" content="写在前面 UIView对于iOS开发来讲，再熟悉不过了。也正是因为这一点，我们可能会忽略UIView一些特有方法的理解和使用。今天，笔者主要整理一下对drawRect方法的理解和使用。
- 默认情况下，该方法在视图加载过程中不做任何人处理。当子类使用Core Graphics和UIKit绘制视图内容时就需要在该方法中添加绘制的代码。
-drawRect简介drawRect方法在UIView的使用上起">
+<meta name="description" content="前言
+邮箱对我们来说是再熟悉不过了，它与我们的生活、工作紧密联系在一起：登录、注册、往来沟通…无处不在；
+邮箱的使用很便捷，可是邮箱是如何传输、投递信息呢？电子邮件协议
+电子邮件协议主要包括IMAP、POP3、SMTP协议；
+这篇文章将给大家介绍一下邮件所用的协议、协议格式标准以及不同协议之间的区别与联系；
+
+SMTP
+SMTP的全称是Simple Mail Transfer Protocol即">
 <meta property="og:type" content="article">
-<meta property="og:title" content="谈谈对drawRect的理解">
-<meta property="og:url" content="http://yoursite.com/2017/03/26/[UIVIew]谈谈对drawRect的理解/index.html">
+<meta property="og:title" content="邮箱开发(1)之基础协议认知">
+<meta property="og:url" content="http://yoursite.com/2017/12/23/邮箱开发(1)之基础协议认知/index.html">
 <meta property="og:site_name" content="最晚的开始">
-<meta property="og:description" content="写在前面 UIView对于iOS开发来讲，再熟悉不过了。也正是因为这一点，我们可能会忽略UIView一些特有方法的理解和使用。今天，笔者主要整理一下对drawRect方法的理解和使用。
- 默认情况下，该方法在视图加载过程中不做任何人处理。当子类使用Core Graphics和UIKit绘制视图内容时就需要在该方法中添加绘制的代码。
-drawRect简介drawRect方法在UIView的使用上起">
-<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1713024-83437bc2f696a82c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1713024-374336bff0e5c456.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:description" content="前言
+邮箱对我们来说是再熟悉不过了，它与我们的生活、工作紧密联系在一起：登录、注册、往来沟通…无处不在；
+邮箱的使用很便捷，可是邮箱是如何传输、投递信息呢？电子邮件协议
+电子邮件协议主要包括IMAP、POP3、SMTP协议；
+这篇文章将给大家介绍一下邮件所用的协议、协议格式标准以及不同协议之间的区别与联系；
+
+SMTP
+SMTP的全称是Simple Mail Transfer Protocol即">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1713024-4278fa6f968be625.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1713024-5135c1f308dd6196.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1713024-14a3d919f462f399.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:updated_time" content="2017-03-26T11:34:07.000Z">
+<meta property="og:updated_time" content="2017-12-23T04:22:40.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="谈谈对drawRect的理解">
-<meta name="twitter:description" content="写在前面 UIView对于iOS开发来讲，再熟悉不过了。也正是因为这一点，我们可能会忽略UIView一些特有方法的理解和使用。今天，笔者主要整理一下对drawRect方法的理解和使用。
- 默认情况下，该方法在视图加载过程中不做任何人处理。当子类使用Core Graphics和UIKit绘制视图内容时就需要在该方法中添加绘制的代码。
-drawRect简介drawRect方法在UIView的使用上起">
-<meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/1713024-83437bc2f696a82c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta name="twitter:title" content="邮箱开发(1)之基础协议认知">
+<meta name="twitter:description" content="前言
+邮箱对我们来说是再熟悉不过了，它与我们的生活、工作紧密联系在一起：登录、注册、往来沟通…无处不在；
+邮箱的使用很便捷，可是邮箱是如何传输、投递信息呢？电子邮件协议
+电子邮件协议主要包括IMAP、POP3、SMTP协议；
+这篇文章将给大家介绍一下邮件所用的协议、协议格式标准以及不同协议之间的区别与联系；
+
+SMTP
+SMTP的全称是Simple Mail Transfer Protocol即">
+<meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/1713024-4278fa6f968be625.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 
 
 
@@ -124,9 +139,9 @@ drawRect简介drawRect方法在UIView的使用上起">
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2017/03/26/[UIVIew]谈谈对drawRect的理解/"/>
+  <link rel="canonical" href="http://yoursite.com/2017/12/23/邮箱开发(1)之基础协议认知/"/>
 
-  <title> 谈谈对drawRect的理解 | 最晚的开始 </title>
+  <title> 邮箱开发(1)之基础协议认知 | 最晚的开始 </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -266,7 +281,7 @@ drawRect简介drawRect方法在UIView的使用上起">
             
             
               
-                谈谈对drawRect的理解
+                邮箱开发(1)之基础协议认知
               
             
           </h1>
@@ -278,8 +293,8 @@ drawRect简介drawRect方法在UIView的使用上起">
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2017-03-26T19:19:14+08:00" content="2017-03-26">
-              2017-03-26
+            <time itemprop="dateCreated" datetime="2017-12-23T10:59:52+08:00" content="2017-12-23">
+              2017-12-23
             </time>
           </span>
 
@@ -308,8 +323,8 @@ drawRect简介drawRect方法在UIView的使用上起">
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2017/03/26/[UIVIew]谈谈对drawRect的理解/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/03/26/[UIVIew]谈谈对drawRect的理解/" itemprop="commentsCount"></span>
+                <a href="/2017/12/23/邮箱开发(1)之基础协议认知/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/12/23/邮箱开发(1)之基础协议认知/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -339,32 +354,68 @@ drawRect简介drawRect方法在UIView的使用上起">
       
 
       
-        <p><img src="http://upload-images.jianshu.io/upload_images/1713024-83437bc2f696a82c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="疯狂"></p>
-<h3 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h3><p> <code>UIView</code>对于iOS开发来讲，再熟悉不过了。也正是因为这一点，我们可能会忽略<code>UIView</code>一些特有方法的理解和使用。今天，笔者主要整理一下对<code>drawRect</code>方法的理解和使用。<br></p>
-<p> 默认情况下，该方法在视图加载过程中不做任何人处理。当子类使用<code>Core Graphics</code>和<code>UIKit</code>绘制视图内容时就需要在该方法中添加绘制的代码。</p>
-<h3 id="drawRect简介"><a href="#drawRect简介" class="headerlink" title="drawRect简介"></a>drawRect简介</h3><p><code>drawRect</code>方法在<code>UIView</code>的使用上起着十分关键的作用。不知道大家注意过没有，每一次创建<code>UIView</code>子类文件时候，会有自动带有已注释的<code>drawRect</code>方法，也许从这一点就能看出这个方法的重要性。</p>
-<p>该方法定义在<code>UIView(UIViewRendering)</code>分类里面，望文生义，该方法完成视图的绘制。</p>
-<h3 id="drawRect作用"><a href="#drawRect作用" class="headerlink" title="drawRect作用"></a>drawRect作用</h3><p><code>Only override drawRect: if you perform custom drawing.</code></p>
-<p>重绘作用：重写该方法以实现自定义的绘制内容</p>
-<h3 id="drawRect调用场景"><a href="#drawRect调用场景" class="headerlink" title="drawRect调用场景"></a>drawRect调用场景</h3><p>视图第一次显示的时候会调用。这个是由系统自动调用的，主要是在<code>UIViewController</code>中<code>loadView</code>和<code>viewDidLoad</code>方法调用之后；</p>
-<p>如果在<code>UIView</code>初始化时没有设置rect大小，将直接导致<code>drawRect</code>不被自动调用；</p>
-<p>该方法在调用<code>sizeThatFits</code>后被调用,所以可以先调用<code>sizeToFit</code>计算出<code>size</code>,然后系统自动调用<code>drawRect:</code>方法；</p>
-<p> 通过设置<code>contentMode</code>属性值为<code>UIViewContentModeRedraw</code>,那么将在每次设置或更改<code>frame</code>的时候自动调用<code>drawRect:</code>;</p>
-<p>直接调用<code>setNeedsDisplay</code>，或者<code>setNeedsDisplayInRect:</code>触发<code>drawRect:</code>，但是有个前提条件是<code>rect</code>不能为0;</p>
-<h3 id="drawRect重绘方法定义"><a href="#drawRect重绘方法定义" class="headerlink" title="drawRect重绘方法定义"></a>drawRect重绘方法定义</h3><p>  <code>- (void)drawRect:(CGRect)rect;</code>:重写此方法，执行重绘任务;</p>
-<p> <code>- (void)setNeedsDisplay;</code>:标记为需要重绘，异步调用drawRect，但是绘制视图的动作需要等到下一个绘制周期执行，并非调用该方法立即执行;</p>
-<p> <code>- (void)setNeedsDisplayInRect:(CGRect)rect;</code>:标记为需要局部重绘，具体调用时机同上;</p>
-<h3 id="drawRect使用注意事项"><a href="#drawRect使用注意事项" class="headerlink" title="drawRect使用注意事项"></a>drawRect使用注意事项</h3><p>如果子类直接继承自<code>UIView</code>,则在<code>drawRect</code>  方法中不需要调用<code>super</code>方法。若子类继承自其他<code>View</code>类则需要调用<code>super</code>方法以实现重绘。</p>
-<p> 若使用<code>UIView</code>绘图，只能在<code>drawRect:</code>方法中获取绘制视图的contextRef。在其他方法中获取的contextRef都是不生效的；</p>
-<p><code>drawRect:</code>方法不能手动调用，需要调用实例方法<code>setNeedsDisplay</code>或者<code>setNeedsDisplayInRect</code>,让系统自动调用该方法；</p>
-<p> 若使用<code>CALayer</code>绘图，只能在<code>drawInContext :</code>绘制，或者在<code>delegate</code>方法中进行绘制，然后调用<code>setNeedDisplay</code>方法实现最终的绘制；</p>
-<p>若要实时画图，不能使用gestureRecognizer，只能使用touchbegan等方法来掉用setNeedsDisplay实时刷新屏幕 ——这个阐述需要调整</p>
-<p><code>UIImageView</code>继承自<code>UIView</code>,但是<code>UIImageView</code>能不重写<code>drawRect</code>方法用于实现自定义绘图。具体原因如下图所示：</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/1713024-374336bff0e5c456.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Apple官方文档描述"></p>
-<h3 id="小结一下"><a href="#小结一下" class="headerlink" title="小结一下"></a>小结一下</h3><p>上面的几个问题说的有些啰嗦了，总结一下需要掌握一下几点：</p>
-<p>了解<code>drawRect</code>使用场景；<br><br>哪些方法可以调用；<br><br>了解何时进行重绘；<br></p>
-<h3 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h3><p><a href="https://developer.apple.com/reference/uikit/uiview/1622529-drawrect?language=objc" target="_blank" rel="external">drawRect参考</a></p>
-<p><a href="https://developer.apple.com/reference/uikit/uiview/1622437-setneedsdisplay" target="_blank" rel="external">setNeedsDisplay使用</a></p>
+        <p><img src="http://upload-images.jianshu.io/upload_images/1713024-4278fa6f968be625.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="初识邮箱"></p>
+<h5 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h5><ul>
+<li>邮箱对我们来说是再熟悉不过了，它与我们的生活、工作紧密联系在一起：登录、注册、往来沟通…无处不在；</li>
+<li>邮箱的使用很便捷，可是邮箱是如何传输、投递信息呢？电子邮件协议</li>
+<li>电子邮件协议主要包括<code>IMAP</code>、<code>POP3</code>、<code>SMTP</code>协议；</li>
+<li>这篇文章将给大家介绍一下邮件所用的协议、协议格式标准以及不同协议之间的区别与联系；</li>
+</ul>
+<h5 id="SMTP"><a href="#SMTP" class="headerlink" title="SMTP"></a>SMTP</h5><ul>
+<li><code>SMTP</code>的全称是<code>Simple Mail Transfer Protocol</code>即<code>简单邮件传输协议</code>，在1982年正式提出。它是一组用于从源地址到目的地址传输邮件的规范，通过它来控制邮件的中转方式。<code>SMTP</code> 协议属于 <code>TCP/IP</code>协议簇，它帮助每台计算机在发送或中转信件时找到下一个目的地。<code>SMTP</code> 服务器就是遵循 <code>SMTP</code> 协议的发送邮件服务器。</li>
+<li><code>SMTP</code>认证，简单地说就是要求必须在提供了账户名和密码之后才可以登录 <code>SMTP</code> 服务器，这就使得那些垃圾邮件的散播者无可乘之机。增加<code>SMTP</code> 认证的目的是为了使用户避免受到垃圾邮件的侵扰。</li>
+<li><code>SMTP</code>是一种应用层、基于文本格式的协议，主要用于邮件服务器间的连接、数据传输等。</li>
+</ul>
+<h5 id="POP"><a href="#POP" class="headerlink" title="POP"></a>POP</h5><ul>
+<li><code>POP</code>是<code>Post Office Protocol</code>的简称，即<code>邮局协议</code>。现在主要使用是<code>POP3</code>即<code>邮局协议</code>的第3个版本；</li>
+<li>它规定怎样将个人计算机连接到<code>Internet</code>的邮件服务器和下载电子邮件的电子协议, 是<code>TCP/IP</code>协议族中的一员(默认端口是110);</li>
+<li>它是因特网电子邮件的第一个离线协议标准,<code>POP3</code>允许用户从服务器上把邮件存储到本地主机（即自己的计算机）上,同时删除保存在邮件服务器上的邮件，而<code>POP3</code>服务器则是遵循<code>POP3</code>协议的接收邮件服务器，用来接收电子邮件的。</li>
+</ul>
+<h5 id="POP与POP3区别"><a href="#POP与POP3区别" class="headerlink" title="POP与POP3区别"></a>POP与POP3区别</h5><ul>
+<li><code>POP</code>协议支持<code>离线</code>邮件存储转发处理即客户端程序连接服务器，下载所有未阅读的电子邮件；一旦将邮件从邮件服务器端送到客户端上，邮件服务器上的邮件将会被删除；</li>
+<li>目前的<code>POP3</code>邮件服务器大都可以<code>只下载邮件，服务器端并不删除</code>，也就是改进后的<code>POP</code>协议;</li>
+<li><code>POP3</code>协议允许电子邮件客户端下载服务器上的邮件，但是在客户端的操作（如移动邮件、标记已读等），不会反馈到服务器上。比如通过客户端收取了邮箱中的3封邮件并移动到其他文件夹，邮箱服务器上的这些邮件是没有同时被移动的，本地化的操作不会同步到邮箱服务器。</li>
+</ul>
+<h5 id="IMAP"><a href="#IMAP" class="headerlink" title="IMAP"></a>IMAP</h5><ul>
+<li><code>IMAP</code>全称是<code>Internet Mail Access Protocol</code>，即<code>交互式邮件访问协议</code>，是一个应用层协议（端口是143）。用来从本地邮件客户端（Outlook Express、Foxmail、Mozilla Thunderbird等）访问远程服务器上的邮件。</li>
+</ul>
+<h5 id="IMAP和POP3的区别"><a href="#IMAP和POP3的区别" class="headerlink" title="IMAP和POP3的区别"></a>IMAP和POP3的区别</h5><ul>
+<li><code>IMAP</code>像<code>POP3</code>那样提供了方便的邮件下载服务，让用户能进行离线阅读。<code>IMAP</code>和<code>POP3</code>是邮件访问最为普遍的Internet标准协议。不同点如下所示：</li>
+<li><code>IMAP</code>提供<code>Webmail</code>与电子邮件客户端之间的双向通信，客户端收取的邮件仍然保留在服务器上，同时在客户端上的操作都会反馈到服务器上（如：<code>删除邮件</code>，<code>标记已读</code>等，服务器上的邮件也会做相应的动作。所以无论从浏览器登录邮箱或者客户端软件登录邮箱，看到的邮件以及状态都是一致的）。而<code>POP3</code>在客户端的操作不会同步到服务器上；</li>
+<li><code>IMAP</code>更好地支持了从多个不同设备中随时访问新邮件;</li>
+<li><code>IMAP</code>提供的摘要浏览功能可以让你在阅读完所有的邮件到达时间、主题、发件人、大小等信息后才作出是否下载的决定;</li>
+<li><code>POP3</code>需要下载未阅读的邮件，<code>IMAP</code>可以不用把所有的邮件全部下载，而是通过客户端直接对服务器上的邮件进行操作。所有通过<code>IMAP</code>传输的数据都会被加密，从而保证通信的安全性;</li>
+<li><code>IMAP</code> 整体上为用户带来更为便捷和可靠的体验。<code>POP3</code> 更易丢失邮件或多次下载相同的邮件。</li>
+</ul>
+<h5 id="RFC822标准"><a href="#RFC822标准" class="headerlink" title="RFC822标准"></a>RFC822标准</h5><ul>
+<li><code>RFC 822</code>是电子邮件的标准格式，电子邮件除了是由一个Internet用户传递给另一个用户的信息之外，还必须包含附加的服务信息，这两个部分加在一起叫做电子邮件的标准格式，外文简称<code>RFC 822</code>（摘录于<strong>百度百科</strong>）；</li>
+<li>该标准主要定义邮件结构和数据格式，为邮箱服务器的数据解析和数据重组提供统一的处理方式，比如：一些处理邮件代收发的第三方库都必须按照该标准处理数据。</li>
+</ul>
+<h5 id="SSL"><a href="#SSL" class="headerlink" title="SSL"></a>SSL</h5><ul>
+<li><code>SSL</code>(<code>Secure Sockets Layer</code> 安全套接层),及其继任者传输层安全（<code>Transport Layer Security</code>，TLS）是为网络通信提供安全及数据完整性的一种安全协议。<code>TLS</code>与<code>SSL</code>在传输层对网络连接进行加密;</li>
+<li><code>SSL</code>协议提供的服务主要有：</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">1、认证用户和服务器，确保数据发送到正确的客户机和服务器；</div><div class="line">2、加密数据以防止数据中途被窃取；</div><div class="line">3、维护数据的完整性，确保数据在传输过程中不被改变。</div></pre></td></tr></table></figure>
+<ul>
+<li>基于数据的安全性，笔者建议使用邮箱是设置<code>SSL</code>协议。</li>
+</ul>
+<h5 id="邮件发送的基本原理"><a href="#邮件发送的基本原理" class="headerlink" title="邮件发送的基本原理"></a>邮件发送的基本原理</h5><p><img src="http://upload-images.jianshu.io/upload_images/1713024-5135c1f308dd6196.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="截图来自谢希仁《计算机网络》"></p>
+<ul>
+<li>1.发信人在用户代理上编辑邮件，并写清楚收件人的邮箱地址；</li>
+<li>2.用户代理根据发信人编辑的信息，生成一封符合邮件格式的邮件；</li>
+<li>3.用户代理把邮件发送到发信人的的邮件服务器上，邮件服务器上面有一个缓冲队列，发送到邮件服务器上面的邮件都会加入到缓冲队列中，等待邮件服务器上的<code>SMTP</code>客户端进行发送；</li>
+<li>4.发信人的邮件服务器使用<code>SMTP</code>协议把这封邮件发送到收件人的邮件服务器上（它会自动根据收件人的邮箱来分析出收件人的邮箱服务器）；</li>
+<li>5.收件人的邮件服务器收到邮件后，把这封邮件放到收件人在这个服务器上的信箱中；</li>
+<li>6.收件人使用用户代理来收取邮件。首先用户代理使用<code>POP3</code>协议来连接收件人所在的邮件服务器，身份验证成功后，用户代理就可以把邮件服务器上面的收件人邮箱里面的邮件读取出来，并展示给收件人。</li>
+</ul>
+<h5 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h5><ul>
+<li>本文总结邮箱相关传输协议，以及不同协议之间的区别。熟悉了这些之后，就可以为后续的邮件开发提供基本的理论支持了。</li>
+</ul>
+<h5 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h5><ul>
+<li><a href="https://www.w3.org/Protocols/rfc822/" target="_blank" rel="external">RFC822文档</a></li>
+<li><a href="http://www.tutorialspoint.com/internet_technologies/e_mail_protocols.htm" target="_blank" rel="external">E-mail Protocols</a></li>
+<li><a href="https://www.techwalla.com/articles/what-is-email-protocol" target="_blank" rel="external">What Is Email Protocol?</a></li>
+</ul>
 <blockquote>
 <p>扫一扫下面的二维码，欢迎关注我的个人微信公众号攻城狮的动态（ID:iOSDevSkills），可在微信公众号进行留言，更多精彩技术文章，期待您的加入！一起讨论，一起成长！一起攻城狮！</p>
 </blockquote>
@@ -417,7 +468,7 @@ drawRect简介drawRect方法在UIView的使用上起">
       
         <div class="post-tags">
           
-            <a href="/tags/UIView/" rel="tag">#UIView</a>
+            <a href="/tags/邮件/" rel="tag">#邮件</a>
           
         </div>
       
@@ -426,17 +477,13 @@ drawRect简介drawRect方法在UIView的使用上起">
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/03/18/简谈常用算法/" rel="next" title="简谈常用算法">
-                <i class="fa fa-chevron-left"></i> 简谈常用算法
+              <a href="/2017/04/08/iOS权限完整解决/" rel="next" title="iOS权限完整解决">
+                <i class="fa fa-chevron-left"></i> iOS权限完整解决
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/04/08/再续iOS开发中的这些权限/" rel="prev" title="再续iOS开发中的这些权限">
-                再续iOS开发中的这些权限 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -465,7 +512,7 @@ drawRect简介drawRect方法在UIView的使用上起">
 
       <section id="comments">
    <!-- 多说评论框 start -->
-<div id="ds-thread" class="ds-thread" data-thread-key="2017/03/26/[UIVIew]谈谈对drawRect的理解/" data-title="谈谈对drawRect的理解" data-url="http://yoursite.com/2017/03/26/[UIVIew]谈谈对drawRect的理解/" data-author-key="1"></div>
+<div id="ds-thread" class="ds-thread" data-thread-key="2017/12/23/邮箱开发(1)之基础协议认知/" data-title="邮箱开发(1)之基础协议认知" data-url="http://yoursite.com/2017/12/23/邮箱开发(1)之基础协议认知/" data-author-key="1"></div>
 <!-- 多说评论框 end -->
 <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 <script type="text/javascript">
@@ -605,7 +652,7 @@ var duoshuoQuery = {short_name:"jacklin"};
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#写在前面"><span class="nav-number">1.</span> <span class="nav-text">写在前面</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#drawRect简介"><span class="nav-number">2.</span> <span class="nav-text">drawRect简介</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#drawRect作用"><span class="nav-number">3.</span> <span class="nav-text">drawRect作用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#drawRect调用场景"><span class="nav-number">4.</span> <span class="nav-text">drawRect调用场景</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#drawRect重绘方法定义"><span class="nav-number">5.</span> <span class="nav-text">drawRect重绘方法定义</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#drawRect使用注意事项"><span class="nav-number">6.</span> <span class="nav-text">drawRect使用注意事项</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#小结一下"><span class="nav-number">7.</span> <span class="nav-text">小结一下</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#参考文献"><span class="nav-number">8.</span> <span class="nav-text">参考文献</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-5"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#SMTP"><span class="nav-number">2.</span> <span class="nav-text">SMTP</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#POP"><span class="nav-number">3.</span> <span class="nav-text">POP</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#POP与POP3区别"><span class="nav-number">4.</span> <span class="nav-text">POP与POP3区别</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#IMAP"><span class="nav-number">5.</span> <span class="nav-text">IMAP</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#IMAP和POP3的区别"><span class="nav-number">6.</span> <span class="nav-text">IMAP和POP3的区别</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#RFC822标准"><span class="nav-number">7.</span> <span class="nav-text">RFC822标准</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#SSL"><span class="nav-number">8.</span> <span class="nav-text">SSL</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#邮件发送的基本原理"><span class="nav-number">9.</span> <span class="nav-text">邮件发送的基本原理</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#小结"><span class="nav-number">10.</span> <span class="nav-text">小结</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#参考文献"><span class="nav-number">11.</span> <span class="nav-text">参考文献</span></a></li></ol></div>
             
           </div>
         </section>
